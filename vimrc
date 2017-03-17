@@ -11,7 +11,7 @@
 "HELLO, I'm Zeko369 and this is my vim config, if you are reading this that
 "means that you use vim or are about to use vim, great choice, I like you
 "some hints are on the bottom
-"you can use it as you wish, that includes copying and distributing
+"you can use it as you wish, that includes copying and distributing if it is noted that this is my config
 "
 "NAVIGATION (relative number from this line, maybe not accurete because i adde someting)
 "1. Plugins.....................................8			
