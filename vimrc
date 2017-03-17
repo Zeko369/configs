@@ -8,9 +8,37 @@
 ""								    ""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"Plugins
+"HELLO, I'm Zeko369 and this is my vim config, if you are reading this that
+"means that you use vim or are about to use vim, great choice, I like you
+"some hints are on the bottom
+"you can use it as you wish, that includes copying and distributing
+"
+"NAVIGATION (relative number from this line, maybe not accurete because i adde someting)
+"1. Plugins.....................................8			
+"	- Powerline.............................26	
+"	- Pathongen.............................31
+"	- Vundle................................34
+"	- neocomplete...........................57
+"	- Ctrl - P..............................83
+"	- Nerdtree..............................86
+"2.  Tabs (	)...............................108
+"3.  Tabs (windows).............................111
+"4.  Leaders....................................119
+"5.  Looks......................................114
+"6.  Numbers....................................120
+"7.  Ctrl movements.............................135
+"8.  Smart movements improvements...............147
+"9.  Folds......................................154
+"10. Search.....................................164
+"11. Some my lazy features......................170
+"12. Brackets...................................175
+"13. Hell for others............................183
+"14. Touchbar...................................191
+"15. Filetyps...................................209
+"16. Some others................................213
+"17. HINTS......................................226
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Plugins
 "POWERLINE setup
 set rtp+=/home/zeko/.local/lib/python2.7/site-packages/powerline/bindings/vim/
 set laststatus=2
@@ -90,17 +118,6 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"some other commands
-set mouse=a
-set wrap
-set showcmd
-set showmatch
-set textwidth=150
-set nocompatible "vim only no vi
-set ruler "show cursor all the time
-"set lazyredraw
-set wildmenu
 
 "mother of tabs
 set tabstop=8
@@ -208,3 +225,29 @@ map <F10>		<C-E>:sleep 20ms<CR><Esc>j<F10>
 "filetypes
 autocmd Filetype python nnoremap <C-c>	0i## <Esc>
 autocmd Filetype python set tabstop=8
+
+"some other commands
+set mouse=a
+set wrap
+set showcmd
+set showmatch
+set textwidth=150
+set nocompatible "vim only no vi
+set ruler "show cursor all the time
+"set lazyredraw
+set wildmenu
+
+
+
+"USFULL STUFF
+":%s/old/new/gc for replace with confirmation
+"H, M, L - top, mid, bottom
+":w !sudo tee % make currnet file sudo editable
+"Macros
+"	qa - record macro a
+"	q  - stop recording
+"	@q - play macro a
+"zz move screen to cursor
+"fx find x
+"tx find x - 1
+"~  to make selected text toggle caps
