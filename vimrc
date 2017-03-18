@@ -26,7 +26,8 @@
 "4.  Leaders....................................119
 "5.  Looks......................................114
 "6.  Numbers....................................120
-"7.  Ctrl movements.............................135
+"7.  Smart movements1...........................135
+"8.  Splits.....................................143
 "8.  Smart movements improvements...............147
 "9.  Folds......................................154
 "10. Search.....................................164
@@ -106,7 +107,7 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 let g:NERDSpaceDelims = 1
 " Use compact syntax for prettified multi-line comments
 let g:NERDCompactSexyComs = 1
-" Align line-wise comment delimiters flush left instead of following code indentation
+autocmd vimenter * NERDTree
 let g:NERDDefaultAlign = 'left'
 " Set a language to use its alternate delimiters by default
 let g:NERDAltDelims_java = 1
@@ -148,17 +149,18 @@ set nu
 set relativenumber
 set number
 
-"when using dumb movement at last use it fast (ctrl + hjkl = 3hjkl)
-"nnoremap j gj
-"nnoremap k gk
-nnoremap <C-j>		3j
-vnoremap <C-j>		3j
-nnoremap <C-k>		3k
-vnoremap <C-k>		3k
-nnoremap <C-w>		3w
-vnoremap <C-w>		3w
-nnoremap <C-b>		3b
-vnoremap <C-b>		3b
+"speeding movement
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-e>		3<C-e>
+nnoremap <C-y>		3<C-y>
+
+"splits
+set splitbelow
+set splitright
+
 
 "vims smart movement made smarter
 nnoremap B ^
@@ -251,3 +253,5 @@ set wildmenu
 "fx find x
 "tx find x - 1
 "~  to make selected text toggle caps
+
+
