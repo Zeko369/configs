@@ -9,7 +9,7 @@ alias unity_move="gsettings set com.canonical.Unity.Launcher launcher-position"
 alias arduino="./home/zeko/arduino-1.8.1/arduino"
 
 export TERM="screen-256color"
-alias tmux="tmux -2"
+alias tmux="tmux -2";
 export TERM="xterm-256color"
 export PATH=$PATH:~/.vimpkg/bin
 
