@@ -107,7 +107,7 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 let g:NERDSpaceDelims = 1
 " Use compact syntax for prettified multi-line comments
 let g:NERDCompactSexyComs = 1
-autocmd vimenter * NERDTree
+"
 let g:NERDDefaultAlign = 'left'
 " Set a language to use its alternate delimiters by default
 let g:NERDAltDelims_java = 1
@@ -252,6 +252,6 @@ set wildmenu
 "zz move screen to cursor
 "fx find x
 "tx find x - 1
-"~  to make selected text toggle caps
+"~  TO MAKE SELECTED TEXT TOGGLE CAPS
 
 
