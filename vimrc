@@ -41,7 +41,7 @@
 
 "Plugins
 "POWERLINE setup
-set rtp+=/home/zeko/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
 set laststatus=2
 set t_Co=256
 
@@ -150,10 +150,10 @@ set relativenumber
 set number
 
 "speeding movement
-"nnoremap <C-J> <C-W><C-J>
-"nnoremap <C-K> <C-W><C-K>
-"nnoremap <C-L> <C-W><C-L>
-"nnoremap <C-H> <C-W><C-H>
+nnoremap <C-J> 3<C-J>
+nnoremap <C-K> 3<C-K>
+nnoremap <C-L> 3<C-L>
+nnoremap <C-H> 3<C-H>
 nnoremap <C-e>		3<C-e>
 nnoremap <C-y>		3<C-y>
 
@@ -174,8 +174,8 @@ set foldenable
 set foldlevel=10
 set foldnestmax=10
 filetype plugin indent on
-set foldmethod=marker
-set foldmethod=indent
+"set foldmethod=marker
+"set foldmethod=indent
 set foldmethod=syntax
 nnoremap <space> za
 
@@ -238,11 +238,15 @@ set nocompatible "vim only no vi
 set ruler "show cursor all the time
 "set lazyredraw
 set wildmenu
+set backupdir=~/.vim_backup
 
-
+"Arduino
+au BufRead,BufNewFile *.pde set filetype=arduino
+au BufRead,BufNewFile *.ino set filetype=arduino
 
 "USFULL STUFF
 ":%s/old/new/gc for replace with confirmation
+"or just use leader r for replace without comfirm
 "H, M, L - top, mid, bottom
 ":w !sudo tee % make currnet file sudo editable
 "Macros
@@ -253,5 +257,4 @@ set wildmenu
 "fx find x
 "tx find x - 1
 "~  TO MAKE SELECTED TEXT TOGGLE CAPS
-
 

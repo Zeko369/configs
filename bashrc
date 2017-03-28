@@ -121,7 +121,7 @@ alias python='python3.5'
 alias idle='idle3'
 alias space='df -h'
 alias cb='cd ..'
-alias n='nautilus'
+alias n='pantheon-files'
 alias stn='shutdown now'
 alias rsn='reboot now'
 alias quit='exit'
@@ -153,4 +153,4 @@ fi
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
-. /home/zeko/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+. /usr/local/lib/python2.7/dist-packages/powerline/bindings/bash/powerline.sh
