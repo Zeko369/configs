@@ -16,3 +16,4 @@ sudo wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-s
 sudo mv PowerlineSymbols.otf /usr/share/fonts/
 sudo fc-cache -vf /usr/share/fonts/
 sudo mv 10-powerline-symbols.conf /etc/fonts/conf.d/
+pip show powerline-status
