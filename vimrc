@@ -47,6 +47,7 @@ set t_Co=256
 
 "PATHONGEN
 execute pathogen#infect()
+let g:vim_arduino_ino_cmd = 'ano'
 
 "VUNDLE
 filetype off
@@ -67,6 +68,8 @@ Plugin 'Shougo/neosnippet-snippets'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
+
+Plugin 'jplaut/vim-arduino-ino'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -107,7 +110,7 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 let g:NERDSpaceDelims = 1
 " Use compact syntax for prettified multi-line comments
 let g:NERDCompactSexyComs = 1
-"
+
 let g:NERDDefaultAlign = 'left'
 " Set a language to use its alternate delimiters by default
 let g:NERDAltDelims_java = 1
@@ -152,8 +155,6 @@ set number
 "speeding movement
 nnoremap <C-J> 3<C-J>
 nnoremap <C-K> 3<C-K>
-nnoremap <C-L> 3<C-L>
-nnoremap <C-H> 3<C-H>
 nnoremap <C-e>		3<C-e>
 nnoremap <C-y>		3<C-y>
 
@@ -243,6 +244,12 @@ set backupdir=~/.vim_backup
 "Arduino
 au BufRead,BufNewFile *.pde set filetype=arduino
 au BufRead,BufNewFile *.ino set filetype=arduino
+autocmd Filetype arduino map <C-U> :ArduinoUpload
+autocmd Filetype arduino map <C-S-U> :ArduinoUpload
+autocmd Filetype arduino map <C-U> :ArduinoUpload
+autocmd Filetype arduino map <C-U> :ArduinoUpload
+let g:arduino_cmd = '/home/zeko/installs/arduino-1.8.1/arduino'
+let g:arduino_dir = '/home/zeko/installs/arduino-1.8.1'
 
 "USFULL STUFF
 ":%s/old/new/gc for replace with confirmation

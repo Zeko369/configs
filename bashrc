@@ -6,7 +6,6 @@ fi
 
 alias tmuxReboot="tmux source-file ~/.tmux.conf"
 alias unity_move="gsettings set com.canonical.Unity.Launcher launcher-position"
-alias arduino="./home/zeko/arduino-1.8.1/arduino"
 
 export TERM="screen-256color"
 alias tmux="tmux -2";
