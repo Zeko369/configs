@@ -123,7 +123,7 @@ let g:NERDTrimTrailingWhitespace = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"mother of tabs
+"mother of tabs(dragons)
 set tabstop=8
 set shiftwidth=8
 set softtabstop=8
@@ -153,8 +153,14 @@ set relativenumber
 set number
 
 "speeding movement
-nnoremap <C-J> 3<C-J>
-nnoremap <C-K> 3<C-K>
+nnoremap <C-j>		3j
+vnoremap <C-j>		3j
+nnoremap <C-k>		3k
+vnoremap <C-k>		3k
+nnoremap <C-w>		3w
+vnoremap <C-w>		3w
+nnoremap <C-b>		3b
+vnoremap <C-b>		3b
 nnoremap <C-e>		3<C-e>
 nnoremap <C-y>		3<C-y>
 
@@ -187,7 +193,6 @@ set smartcase
 set hlsearch
 
 "lazy features
-nnoremap <C-c>  0i//<Esc>
 nnoremap <C-L>  $a;<Esc>
 set clipboard=unnamedplus
 
@@ -226,7 +231,6 @@ map <F9>		<C-E>:sleep 50ms<CR><Esc>j<F9>
 map <F10>		<C-E>:sleep 20ms<CR><Esc>j<F10>
 
 "filetypes
-autocmd Filetype python nnoremap <C-c>	0i## <Esc>
 autocmd Filetype python set tabstop=8
 
 "some other commands
