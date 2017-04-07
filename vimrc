@@ -249,9 +249,9 @@ set backupdir=~/.vim_backup
 au BufRead,BufNewFile *.pde set filetype=arduino
 au BufRead,BufNewFile *.ino set filetype=arduino
 autocmd Filetype arduino map <C-U> :ArduinoUpload
-autocmd Filetype arduino map <C-S-U> :ArduinoUpload
-autocmd Filetype arduino map <C-U> :ArduinoUpload
-autocmd Filetype arduino map <C-U> :ArduinoUpload
+" autocmd Filetype arduino map <C-S-U> :ArduinoUpload
+" autocmd Filetype arduino map <C-U> :ArduinoUpload
+" autocmd Filetype arduino map <C-U> :ArduinoUpload
 let g:arduino_cmd = '/home/zeko/installs/arduino-1.8.1/arduino'
 let g:arduino_dir = '/home/zeko/installs/arduino-1.8.1'
 
