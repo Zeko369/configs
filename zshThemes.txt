@@ -1,0 +1,10 @@
+oh my zsh themes
+jispwoso
+pmcgee
+candy
+mikeh
+fino
+strug
+
+agnoster
+pygmalion
