@@ -1,8 +1,8 @@
 # set -o vi
 
-if [[ ! $TERM =~ screen ]]; then
-	    exec tmux
-fi
+# if [[ ! $TERM =~ screen ]]; then
+	    # exec tmux
+# fi
 
 alias tmuxReboot="tmux source-file ~/.tmux.conf"
 alias unity_move="gsettings set com.canonical.Unity.Launcher launcher-position"
