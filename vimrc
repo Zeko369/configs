@@ -157,8 +157,8 @@ nnoremap <C-j>		3j
 vnoremap <C-j>		3j
 nnoremap <C-k>		3k
 vnoremap <C-k>		3k
-nnoremap <C-w>		3w
-vnoremap <C-w>		3w
+" nnoremap <C-w>		3w
+" vnoremap <C-w>		3w
 nnoremap <C-b>		3b
 vnoremap <C-b>		3b
 nnoremap <C-e>		3<C-e>
@@ -193,7 +193,7 @@ set smartcase
 set hlsearch
 
 "lazy features
-nnoremap <C-L>  $a;<Esc>
+map <C-L>  ma$a;<Esc>`a
 set clipboard=unnamedplus
 
 "autocomplete brackets
