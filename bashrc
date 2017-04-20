@@ -1,12 +1,11 @@
 # set -o vi
 
-if [[ ! $TERM =~ screen ]]; then
-	    exec tmux
-fi
+# if [[ ! $TERM =~ screen ]]; then
+	    # exec tmux
+# fi
 
 alias tmuxReboot="tmux source-file ~/.tmux.conf"
 alias unity_move="gsettings set com.canonical.Unity.Launcher launcher-position"
-alias arduino="./home/zeko/arduino-1.8.1/arduino"
 
 export TERM="screen-256color"
 alias tmux="tmux -2";
@@ -121,7 +120,7 @@ alias python='python3.5'
 alias idle='idle3'
 alias space='df -h'
 alias cb='cd ..'
-alias n='nautilus'
+alias n='pantheon-files'
 alias stn='shutdown now'
 alias rsn='reboot now'
 alias quit='exit'
@@ -153,4 +152,4 @@ fi
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
-. /home/zeko/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+. /usr/local/lib/python2.7/dist-packages/powerline/bindings/bash/powerline.sh
