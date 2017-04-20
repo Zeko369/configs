@@ -41,12 +41,13 @@
 
 "Plugins
 "POWERLINE setup
-set rtp+=/home/zeko/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
 set laststatus=2
 set t_Co=256
 
 "PATHONGEN
 execute pathogen#infect()
+let g:vim_arduino_ino_cmd = 'ano'
 
 "VUNDLE
 filetype off
@@ -67,6 +68,8 @@ Plugin 'Shougo/neosnippet-snippets'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
+
+Plugin 'jplaut/vim-arduino-ino'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -107,7 +110,7 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 let g:NERDSpaceDelims = 1
 " Use compact syntax for prettified multi-line comments
 let g:NERDCompactSexyComs = 1
-"
+
 let g:NERDDefaultAlign = 'left'
 " Set a language to use its alternate delimiters by default
 let g:NERDAltDelims_java = 1
@@ -120,7 +123,7 @@ let g:NERDTrimTrailingWhitespace = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"mother of tabs
+"mother of tabs(dragons)
 set tabstop=8
 set shiftwidth=8
 set softtabstop=8
@@ -150,10 +153,14 @@ set relativenumber
 set number
 
 "speeding movement
-"nnoremap <C-J> <C-W><C-J>
-"nnoremap <C-K> <C-W><C-K>
-"nnoremap <C-L> <C-W><C-L>
-"nnoremap <C-H> <C-W><C-H>
+nnoremap <C-j>		3j
+vnoremap <C-j>		3j
+nnoremap <C-k>		3k
+vnoremap <C-k>		3k
+" nnoremap <C-w>		3w
+" vnoremap <C-w>		3w
+nnoremap <C-b>		3b
+vnoremap <C-b>		3b
 nnoremap <C-e>		3<C-e>
 nnoremap <C-y>		3<C-y>
 
@@ -174,8 +181,8 @@ set foldenable
 set foldlevel=10
 set foldnestmax=10
 filetype plugin indent on
-set foldmethod=marker
-set foldmethod=indent
+"set foldmethod=marker
+"set foldmethod=indent
 set foldmethod=syntax
 nnoremap <space> za
 
@@ -186,8 +193,7 @@ set smartcase
 set hlsearch
 
 "lazy features
-nnoremap <C-c>  0i//<Esc>
-nnoremap <C-L>  $a;<Esc>
+map <C-L>  ma$a;<Esc>`a
 set clipboard=unnamedplus
 
 "autocomplete brackets
@@ -225,7 +231,6 @@ map <F9>		<C-E>:sleep 50ms<CR><Esc>j<F9>
 map <F10>		<C-E>:sleep 20ms<CR><Esc>j<F10>
 
 "filetypes
-autocmd Filetype python nnoremap <C-c>	0i## <Esc>
 autocmd Filetype python set tabstop=8
 
 "some other commands
@@ -238,11 +243,21 @@ set nocompatible "vim only no vi
 set ruler "show cursor all the time
 "set lazyredraw
 set wildmenu
+set backupdir=~/.vim_backup
 
-
+"Arduino
+au BufRead,BufNewFile *.pde set filetype=arduino
+au BufRead,BufNewFile *.ino set filetype=arduino
+autocmd Filetype arduino map <C-U> :ArduinoUpload
+" autocmd Filetype arduino map <C-S-U> :ArduinoUpload
+" autocmd Filetype arduino map <C-U> :ArduinoUpload
+" autocmd Filetype arduino map <C-U> :ArduinoUpload
+let g:arduino_cmd = '/home/zeko/installs/arduino-1.8.1/arduino'
+let g:arduino_dir = '/home/zeko/installs/arduino-1.8.1'
 
 "USFULL STUFF
 ":%s/old/new/gc for replace with confirmation
+"or just use leader r for replace without comfirm
 "H, M, L - top, mid, bottom
 ":w !sudo tee % make currnet file sudo editable
 "Macros
@@ -253,5 +268,4 @@ set wildmenu
 "fx find x
 "tx find x - 1
 "~  TO MAKE SELECTED TEXT TOGGLE CAPS
-
 
