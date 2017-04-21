@@ -48,11 +48,11 @@ alias ethip="cat /var/lib/misc/dnsmasq.leases"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="candy"
-# ZSH_THEME="jispwoso"
+ZSH_THEME="jispwoso"
 # ZSH_THEME="strug"
 #
 # ZSH_THEME="pygmalion"
-ZSH_THEME="agnoster"
+# ZSH_THEME="agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
