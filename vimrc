@@ -41,9 +41,13 @@
 
 "Plugins
 "POWERLINE setup
-set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
 set laststatus=2
-set t_Co=256
+" set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+" set t_Co=256
+"Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='powerlineish'
 
 "PATHONGEN
 execute pathogen#infect()
@@ -68,8 +72,11 @@ Plugin 'Shougo/neosnippet-snippets'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
+Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 Plugin 'jplaut/vim-arduino-ino'
+Plugin 'majutsushi/tagbar'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -78,7 +85,7 @@ filetype plugin indent on    " required
 let g:acp_enableAtStartup = 0
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#sources#syntax#min_keyword_length = 1
 let g:neosnippet#enable_snipmate_compatibility = 1
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-arduino-snippets/Ultisnips/'
@@ -102,6 +109,12 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 "CTRL P
 let g:ctrlp_map = '<c-f>'
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_clear_cache_on_exit = 0
 
 "Nerdtree
 let g:NERDTreeDirArrowExpandable = '▸'
@@ -110,7 +123,6 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 let g:NERDSpaceDelims = 1
 " Use compact syntax for prettified multi-line comments
 let g:NERDCompactSexyComs = 1
-
 let g:NERDDefaultAlign = 'left'
 " Set a language to use its alternate delimiters by default
 let g:NERDAltDelims_java = 1
@@ -174,15 +186,14 @@ nnoremap B ^
 nnoremap E $
 map Y      y$
 inoremap jk <ESC>
-vnoremap jk <ESC>
 
 "folds
 set foldenable
 set foldlevel=10
 set foldnestmax=10
 filetype plugin indent on
-"set foldmethod=marker
-"set foldmethod=indent
+" set foldmethod=marker
+" set foldmethod=indent
 set foldmethod=syntax
 nnoremap <space> za
 
@@ -197,12 +208,12 @@ map <C-L>  ma$a;<Esc>`a
 set clipboard=unnamedplus
 
 "autocomplete brackets
-inoremap {      {}<Left>
-"inoremap [      []<Left>
-"inoremap (      ()<Left>
-"inoremap "      ""<Left>
-"inoremap '      ''<Left>
-"inoremap <      <><Left>
+" inoremap {      {}<Left>
+" inoremap [      []<Left>
+" inoremap (      ()<Left>
+" inoremap "      ""<Left>
+" inoremap '      ''<Left>
+" inoremap <      <><Left>
 
 "make vim hell for non vim users (remove arrow keys)
 inoremap <Up>   <Esc>
@@ -268,4 +279,3 @@ let g:arduino_dir = '/home/zeko/installs/arduino-1.8.1'
 "fx find x
 "tx find x - 1
 "~  TO MAKE SELECTED TEXT TOGGLE CAPS
-
