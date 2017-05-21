@@ -47,7 +47,9 @@ set laststatus=2
 "Airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='powerlineish'
+" let g:airline_theme='powerlineish'
+" let g:airline_theme='solarized'
+let g:airline_theme='luna'
 
 "PATHONGEN
 execute pathogen#infect()
@@ -77,6 +79,7 @@ Plugin 'vim-airline/vim-airline-themes'
 
 Plugin 'jplaut/vim-arduino-ino'
 Plugin 'majutsushi/tagbar'
+" Bundle 'edkolev/tmuxline.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -196,6 +199,10 @@ filetype plugin indent on
 " set foldmethod=indent
 set foldmethod=syntax
 nnoremap <space> za
+
+
+set autoindent              " automatically set indent of new line
+set smartindent
 
 "serach
 set incsearch
