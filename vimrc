@@ -176,8 +176,8 @@ vnoremap <C-k>		3k
 " vnoremap <C-w>		3w
 nnoremap <C-b>		3b
 vnoremap <C-b>		3b
-nnoremap <C-e>		3<C-e>
-nnoremap <C-y>		3<C-y>
+" nnoremap <C-e>		3<C-e>
+" nnoremap <C-y>		3<C-y>
 
 "splits
 set splitbelow
@@ -241,12 +241,12 @@ map <C-H>		I
 map <F6>		:nohlsearch<CR>
 map <F12>		:NERDTreeToggle<CR>
 map <Leader><F12>	:NERDTreeFind<CR>
-map <Leader><F8>		<C-Y>:sleep 150ms<CR><Esc>k<Leader><F8>
-map <Leader><F9>		<C-Y>:sleep 50ms<CR><Esc>k<Leader><F9>
-map <Leader><F10>		<C-Y>:sleep 20ms<CR><Esc>k<Leader><F10>
-map <F8>		<C-E>:sleep 150ms<CR><Esc>j<F8>
-map <F9>		<C-E>:sleep 50ms<CR><Esc>j<F9>
-map <F10>		<C-E>:sleep 20ms<CR><Esc>j<F10>
+map <Leader><F8>		<C-Y>:sleep 300ms<CR><Esc>k<Leader><F8>
+map <Leader><F9>		<C-Y>:sleep 150ms<CR><Esc>k<Leader><F9>
+map <Leader><F10>		<C-Y>:sleep 100ms<CR><Esc>k<Leader><F10>
+map <F8>		<C-E>:sleep 300ms<CR><Esc>j<F8>
+map <F9>		<C-E>:sleep 150ms<CR><Esc>j<F9>
+map <F10>		<C-E>:sleep 100ms<CR><Esc>j<F10>
 
 "filetypes
 autocmd Filetype python set tabstop=8
