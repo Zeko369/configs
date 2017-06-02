@@ -1,3 +1,10 @@
+:function Pero(name)
+:	execute "/a:nama"
+:endfunction
+
+
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""		__      _______ __  __ _____   _____ 		    ""
 ""		\ \    / /_   _|  \/  |  __ \ / ____|               ""
@@ -72,17 +79,21 @@ Plugin 'Shougo/neocomplete'
 Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neosnippet-snippets'
 Plugin 'scrooloose/nerdcommenter'
-" Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
-Plugin 'jplaut/vim-arduino-ino'
 Plugin 'majutsushi/tagbar'
+
+Plugin 'jplaut/vim-arduino-ino'
 " Bundle 'edkolev/tmuxline.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+"tagbar
+nmap <F7> :TagbarToggle<CR>
 
 "neocomplete
 let g:acp_enableAtStartup = 0
@@ -178,6 +189,7 @@ nnoremap <C-b>		3b
 vnoremap <C-b>		3b
 " nnoremap <C-e>		3<C-e>
 " nnoremap <C-y>		3<C-y>
+"
 
 "splits
 set splitbelow
@@ -250,6 +262,7 @@ map <F10>		<C-E>:sleep 100ms<CR><Esc>j<F10>
 
 "filetypes
 autocmd Filetype python set tabstop=8
+autocmd Filetype cpp nnoremap <C-M> /main()<Enter> zz <C-E> :nohlsearch <Enter> 
 
 "some other commands
 set mouse=a
@@ -262,6 +275,7 @@ set ruler "show cursor all the time
 "set lazyredraw
 set wildmenu
 set backupdir=~/.vim_backup
+cmap w!! w !sudo tee > /dev/null %
 
 "Arduino
 au BufRead,BufNewFile *.pde set filetype=arduino
