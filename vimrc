@@ -85,7 +85,7 @@ Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
 Plugin 'majutsushi/tagbar'
-
+Plugin 'benmills/vimux'
 Plugin 'jplaut/vim-arduino-ino'
 " Bundle 'edkolev/tmuxline.vim'
 
