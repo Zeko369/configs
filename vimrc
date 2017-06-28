@@ -265,6 +265,7 @@ autocmd Filetype python set tabstop=8
 autocmd Filetype cpp nnoremap <C-M> /main()<Enter> zz <C-E> :nohlsearch <Enter> 
 
 "some other commands
+set whichwrap+=<,>,[,]
 set mouse=a
 set wrap
 set showcmd
