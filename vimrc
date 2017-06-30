@@ -235,12 +235,12 @@ set clipboard=unnamedplus
 " inoremap <      <><Left>
 
 "make vim hell for non vim users (remove arrow keys)
-inoremap <Up>   <Esc>
-inoremap <Down> <Esc>
-inoremap <Left> <Esc>
-inoremap <Right> <Esc>
-noremap <Left>  <Esc>
-noremap <Right> <Esc>
+" inoremap <Up>   <Esc>
+" inoremap <Down> <Esc>
+" inoremap <Left> <Esc>
+" inoremap <Right> <Esc>
+" noremap <Left>  <Esc>
+" noremap <Right> <Esc>
 
 "'touchbar' (functions row) mapings
 map <F1>                :help<Enter>
@@ -262,7 +262,8 @@ map <F10>		<C-E>:sleep 100ms<CR><Esc>j<F10>
 
 "filetypes
 autocmd Filetype python set tabstop=8
-autocmd Filetype cpp nnoremap <C-M> /main()<Enter> zz <C-E> :nohlsearch <Enter> 
+autocmd Filetype cpp nnoremap <C-M> /int main()<Enter> zz <C-E> :nohlsearch <Enter> 
+autocmd Filetype arduino nnoremap <C-M> /void loop<Enter> zz <C-E> :nohlsearch <Enter> 
 
 "some other commands
 set whichwrap+=<,>,[,]
