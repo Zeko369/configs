@@ -3,8 +3,6 @@
 :endfunction
 
 
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""		__      _______ __  __ _____   _____ 		    ""
 ""		\ \    / /_   _|  \/  |  __ \ / ____|               ""
@@ -123,12 +121,12 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 "CTRL P
 let g:ctrlp_map = '<c-f>'
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+" let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 let g:ctrlp_show_hidden = 1
-let g:ctrlp_clear_cache_on_exit = 0
+" let g:ctrlp_clear_cache_on_exit = 0
 
 "Nerdtree
 let g:NERDTreeDirArrowExpandable = '▸'
@@ -234,9 +232,10 @@ set clipboard=unnamedplus
 " inoremap '      ''<Left>
 " inoremap <      <><Left>
 
-"make vim hell for non vim users (remove arrow keys)
+"make vim hell for non vim users (remove arrow keys) 
+"or be a decent human ?
 " inoremap <Up>   <Esc>
-" inoremap <Down> <Esc>
+" inoremai <Down> <Esc>
 " inoremap <Left> <Esc>
 " inoremap <Right> <Esc>
 " noremap <Left>  <Esc>
