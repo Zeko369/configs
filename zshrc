@@ -118,7 +118,7 @@ alias glog="git l"
 
 alias fuck='sudo'
 alias python='python3.5'
-alias idle='idle3'
+# alias idle='idle3'
 alias space='df -h'
 alias cb='cd ..'
 alias n='nautilus'
@@ -126,7 +126,7 @@ alias stn='shutdown now'
 alias srn='reboot now'
 alias quit='exit'
 
-# if [[ ! $TERM =~ screen ]]; then
+# if [[ ! $TERM =~ screen ]]; then	##dummer version of the code bellow
 	    # exec tmux
 # fi
 
@@ -143,9 +143,6 @@ export PATH=$PATH:~/.vimpkg/bin
 alias terminal="gnome-terminal"
 alias rm="rm -r"
 alias mypi="ssh pi@192.168.5.14"
-
-alias keylights="sudo g810-led -p g810-led/orangeAll"
-alias key="sudo g810-led -fx-cycle 10"
 
 alias c="clear"
 alias ethip="cat /var/lib/misc/dnsmasq.leases"
