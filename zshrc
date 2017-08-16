@@ -93,8 +93,8 @@ function mdc() {
     mkdir -p "$@" && cd "$@"
 }
 
-alias ll='ls -alF'
-alias la='ls -hl'
+alias ll='ls -l'
+alias la='ls -alF'
 alias l='ls -CF'
 alias c="clear"
 

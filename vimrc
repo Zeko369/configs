@@ -66,26 +66,35 @@ set nocompatible
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'davidhalter/jedi-vim'
+Plugin 'a.vim'
+
+Plugin 'plasticboy/vim-markdown'
+
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'honza/vim-snippets'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
+
 Plugin 'kien/ctrlp.vim'
+
 Plugin 'sudar/vim-arduino-snippets'
 Plugin 'sudar/vim-arduino-syntax'
+
 Plugin 'Shougo/neocomplete'
 Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neosnippet-snippets'
+
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
+
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
 Plugin 'majutsushi/tagbar'
 Plugin 'benmills/vimux'
 Plugin 'jplaut/vim-arduino-ino'
-" Bundle 'edkolev/tmuxline.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
