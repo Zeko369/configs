@@ -163,8 +163,6 @@ set softtabstop=8
 
 "other kind of tabs
 map <C-t>	:tabnew<CR>
-noremap <Up>    gT
-noremap <Down>  gt
 inoremap <S-Tab>	gT
 noremap <S-Tab>		gT
 let notabs = 0
