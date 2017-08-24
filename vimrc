@@ -66,6 +66,8 @@ set nocompatible
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'easymotion/vim-easymotion'
+
 Plugin 'davidhalter/jedi-vim'
 Plugin 'a.vim'
 
@@ -286,6 +288,8 @@ set backupdir=~/.vim_backup
 cmap w!! w !sudo tee > /dev/null %
 
 "Arduino
+au BufNewFile,BufRead *.pde   setf pde
+au BufNewFile,BufRead *.ino   setf ino
 au BufRead,BufNewFile *.pde set filetype=arduino
 au BufRead,BufNewFile *.ino set filetype=arduino
 autocmd Filetype arduino map <C-U> :ArduinoUpload
@@ -294,6 +298,21 @@ autocmd Filetype arduino map <C-U> :ArduinoUpload
 " autocmd Filetype arduino map <C-U> :ArduinoUpload
 let g:arduino_cmd = '/home/zeko/installs/arduino-1.8.1/arduino'
 let g:arduino_dir = '/home/zeko/installs/arduino-1.8.1'
+
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 "USFULL STUFF
 ":%s/old/new/gc for replace with confirmation

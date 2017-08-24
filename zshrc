@@ -1,6 +1,3 @@
-if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
-  exec startx
-fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -118,6 +115,10 @@ alias gmv='git mv'
 alias grm='git rm'
 alias grn='git-rename'
 alias glog="git l"
+alias gch="git checkout"
+
+alias gitAll="ga * ; gc -m 'something' ; gp"
+alias pioAll="pio run -t upload ; pio device monitor -b 115200"
 
 alias fuck='sudo'
 alias python='python3.5'
