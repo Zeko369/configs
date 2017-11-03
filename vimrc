@@ -150,7 +150,7 @@ let g:NERDDefaultAlign = 'left'
 " Set a language to use its alternate delimiters by default
 let g:NERDAltDelims_java = 1
 " Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+" let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
 " Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
@@ -160,6 +160,7 @@ let g:NERDTrimTrailingWhitespace = 1
 
 "mother of tabs(dragons)
 set tabstop=8
+" set tabstop=4
 set shiftwidth=8
 set softtabstop=8
 
@@ -209,6 +210,8 @@ nnoremap E $
 map Y      y$
 inoremap jk <ESC>
 
+map <C-F5> source ~/.vimrc
+
 "folds
 set foldenable
 set foldlevel=10
@@ -217,8 +220,9 @@ filetype plugin indent on
 " set foldmethod=marker
 " set foldmethod=indent
 set foldmethod=syntax
-nnoremap <space> za
 
+map <Leader>t o<++><Esc><Leader>cc
+nnoremap <space><space> /<++><Enter>:nohlsearch<Enter>
 
 set autoindent              " automatically set indent of new line
 set smartindent
@@ -251,7 +255,7 @@ set clipboard=unnamedplus
 " noremap <Right> <Esc>
 
 "'touchbar' (functions row) mapings
-map <F1>                :help<Enter>
+" map <F1>                :help<Enter>
 map <F2>                :w<Enter>
 map <C-F2>              :w
 map <F3>                :wq<Enter>
@@ -293,9 +297,9 @@ au BufNewFile,BufRead *.ino   setf ino
 au BufRead,BufNewFile *.pde set filetype=arduino
 au BufRead,BufNewFile *.ino set filetype=arduino
 autocmd Filetype arduino map <C-U> :ArduinoUpload
-" autocmd Filetype arduino map <C-S-U> :ArduinoUpload
-" autocmd Filetype arduino map <C-U> :ArduinoUpload
-" autocmd Filetype arduino map <C-U> :ArduinoUpload
+autocmd Filetype arduino map <C-S-U> :ArduinoUpload
+autocmd Filetype arduino map <C-U> :ArduinoUpload
+autocmd Filetype arduino map <C-U> :ArduinoUpload
 let g:arduino_cmd = '/home/zeko/installs/arduino-1.8.1/arduino'
 let g:arduino_dir = '/home/zeko/installs/arduino-1.8.1'
 
@@ -305,6 +309,7 @@ nmap <Leader>f <Plug>(easymotion-overwin-f)
 
 " s{char}{char} to move to {char}{char}
 nmap s <Plug>(easymotion-overwin-f2)
+nmap s <Plug>(easymotion-overwin-f)
 
 " Move to line
 map <Leader>L <Plug>(easymotion-bd-jk)
@@ -313,6 +318,26 @@ nmap <Leader>L <Plug>(easymotion-overwin-line)
 " Move to word
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+" Gif config
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+
+" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
+" Without these mappings, `n` & `N` works fine. (These mappings just provide
+" different highlight method and have some other features )
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+
+let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_do_mapping = 0 
+
 
 "USFULL STUFF
 ":%s/old/new/gc for replace with confirmation
@@ -327,3 +352,5 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 "fx find x
 "tx find x - 1
 "~  TO MAKE SELECTED TEXT TOGGLE CAPS
+"
+"
