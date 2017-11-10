@@ -135,6 +135,7 @@ alias quit='exit'
 # fi
 
 source ~/.zsh/config.sh
+if [[ $TERM == xterm ]]; then TERM=xterm-256color; fi
 
 alias tmuxReboot="tmux source-file ~/.tmux.conf"
 alias unity_move="gsettings set com.canonical.Unity.Launcher launcher-position"
@@ -143,6 +144,7 @@ export TERM="screen-256color"
 alias tmux="tmux -2";
 export TERM="xterm-256color"
 export PATH=$PATH:~/.vimpkg/bin
+
 
 alias terminal="gnome-terminal"
 alias rm="rm -r"
@@ -161,5 +163,11 @@ alias fucking='sudo'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 alias keyboard="g410-led -fx cycle all 55"
+
+# alias h="builtin cd"
+
+function cd {
+    builtin cd "$@" && ls -l
+    }
 
 neofetch

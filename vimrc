@@ -18,7 +18,7 @@
 "some hints are on the bottom
 "you can use it as you wish, that includes copying and distributing if it is noted that this is my config
 "
-"NAVIGATION (relative number from this line, maybe not accurete because i adde someting)
+"NAVIGATION (relative number from this line, maybe not accurete because i adde something)
 "1. Plugins.....................................8			
 "	- Powerline.............................26	
 "	- Pathongen.............................31
@@ -54,7 +54,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 " let g:airline_theme='powerlineish'
 " let g:airline_theme='solarized'
-let g:airline_theme='luna'
+" let g:airline_theme='luna'
+let g:airline_theme='onedark'
 
 "PATHONGEN
 execute pathogen#infect()
@@ -94,15 +95,20 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
+Plugin 'joshdick/onedark.vim'
+Plugin 'joshdick/airline-onedark.vim'
+
 Plugin 'majutsushi/tagbar'
 Plugin 'benmills/vimux'
 Plugin 'jplaut/vim-arduino-ino'
+
+Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 "tagbar
-nmap <F7> :TagbarToggle<CR>
+nmap <F7> :SyntasticToggleMode<CR>
 
 "neocomplete
 let g:acp_enableAtStartup = 0
@@ -131,7 +137,7 @@ smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 "CTRL P
-let g:ctrlp_map = '<c-f>'
+let g:ctrlp_map = '<c-d>'
 " let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
@@ -155,6 +161,7 @@ let g:NERDAltDelims_java = 1
 let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
+let g:NERDCustomDelimiters = { 'c': { 'left': '//','right': '' } }
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -165,9 +172,11 @@ set shiftwidth=8
 set softtabstop=8
 
 "other kind of tabs
-map <C-t>	:tabnew<CR>
+map <C-t>	:tabnew<CR><Esc>:NERDTreeToggle<CR>
 inoremap <S-Tab>	gT
-noremap <S-Tab>		gT
+nnoremap <S-Tab>		gT
+nnoremap j gj
+nnoremap k gk
 let notabs = 0
 
 "leader mappings
@@ -176,9 +185,19 @@ map w<leader> :w<Enter>
 map <leader>r :%s/
 
 "looks
+" if (empty($TMUX))
+"   if (has("nvim"))
+"     let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+"   endif
+"   if (has("termguicolors"))
+"     set termguicolors
+"   endif
+" endif
+
 syntax on
+colorscheme onedark
 set t_Co=256                        " force vim to use 256 colors
-let g:solarized_termcolors=256      " use solarized 256 fallback
+" let g:solarized_termcolors=256      " use solarized 256 fallback
 set background=dark
 
 "numbers
@@ -193,11 +212,10 @@ nnoremap <C-k>		3k
 vnoremap <C-k>		3k
 " nnoremap <C-w>		3w
 " vnoremap <C-w>		3w
-nnoremap <C-b>		3b
-vnoremap <C-b>		3b
-" nnoremap <C-e>		3<C-e>
-" nnoremap <C-y>		3<C-y>
-"
+" nnoremap <C-b>		3b
+" vnoremap <C-b>		3b
+nnoremap <C-e>		3<C-e>
+nnoremap <C-y>		3<C-y>
 
 "splits
 set splitbelow
@@ -275,12 +293,12 @@ map <F10>		<C-E>:sleep 100ms<CR><Esc>j<F10>
 "filetypes
 autocmd Filetype python set tabstop=8
 autocmd Filetype cpp nnoremap <C-M> /int main()<Enter> zz <C-E> :nohlsearch <Enter> 
-autocmd Filetype arduino nnoremap <C-M> /void loop<Enter> zz <C-E> :nohlsearch <Enter> 
+autocmd Filetype ino nnoremap <C-M> /void loop<Enter> zz <C-E> :nohlsearch <Enter> 
 
 "some other commands
-set whichwrap+=<,>,[,]
+" set whichwrap+=<,>,[,]
 set mouse=a
-set wrap
+" set wrap
 set showcmd
 set showmatch
 set textwidth=150
@@ -294,12 +312,12 @@ cmap w!! w !sudo tee > /dev/null %
 "Arduino
 au BufNewFile,BufRead *.pde   setf pde
 au BufNewFile,BufRead *.ino   setf ino
-au BufRead,BufNewFile *.pde set filetype=arduino
-au BufRead,BufNewFile *.ino set filetype=arduino
-autocmd Filetype arduino map <C-U> :ArduinoUpload
-autocmd Filetype arduino map <C-S-U> :ArduinoUpload
-autocmd Filetype arduino map <C-U> :ArduinoUpload
-autocmd Filetype arduino map <C-U> :ArduinoUpload
+" au BufRead,BufNewFile *.pde set filetype=arduino
+" au BufRead,BufNewFile *.ino set filetype=arduino
+" autocmd Filetype arduino map <C-U> :ArduinoUpload
+" autocmd Filetype arduino map <C-S-U> :ArduinoUpload
+" autocmd Filetype arduino map <C-U> :ArduinoUpload
+" autocmd Filetype arduino map <C-U> :ArduinoUpload
 let g:arduino_cmd = '/home/zeko/installs/arduino-1.8.1/arduino'
 let g:arduino_dir = '/home/zeko/installs/arduino-1.8.1'
 
@@ -320,16 +338,17 @@ map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 " Gif config
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
+" map  / <Plug>(easymotion-sn)
+" omap / <Plug>(easymotion-tn)
 
 " These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
 " Without these mappings, `n` & `N` works fine. (These mappings just provide
 " different highlight method and have some other features )
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
+" map  n <Plug>(easymotion-next)
+" map  N <Plug>(easymotion-prev)
 
 map <Leader>l <Plug>(easymotion-lineforward)
+
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map <Leader>h <Plug>(easymotion-linebackward)
@@ -352,5 +371,3 @@ let g:EasyMotion_do_mapping = 0
 "fx find x
 "tx find x - 1
 "~  TO MAKE SELECTED TEXT TOGGLE CAPS
-"
-"
