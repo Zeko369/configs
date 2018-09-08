@@ -59,6 +59,7 @@ let g:airline_theme='onedark'
 
 "PATHONGEN
 execute pathogen#infect()
+filetype plugin indent on
 let g:vim_arduino_ino_cmd = 'ano'
 
 "VUNDLE
@@ -74,9 +75,12 @@ Plugin 'a.vim'
 
 Plugin 'plasticboy/vim-markdown'
 
+Plugin 'slim-template/vim-slim.git'
+
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'honza/vim-snippets'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-surround'
 
 Plugin 'kien/ctrlp.vim'
@@ -137,13 +141,14 @@ smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 "CTRL P
-let g:ctrlp_map = '<c-d>'
+let g:ctrlp_map = '<c-p>'
 " let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 let g:ctrlp_show_hidden = 1
-" let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_use_caching = 1
+let g:ctrlp_clear_cache_on_exit = 0
 
 "Nerdtree
 let g:NERDTreeDirArrowExpandable = '▸'
@@ -166,13 +171,13 @@ let g:NERDCustomDelimiters = { 'c': { 'left': '//','right': '' } }
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "mother of tabs(dragons)
-set tabstop=8
+set tabstop=2
 " set tabstop=4
-set shiftwidth=8
-set softtabstop=8
+set shiftwidth=2
+set softtabstop=2
 
 "other kind of tabs
-map <C-t>	:tabnew<CR><Esc>:NERDTreeToggle<CR>
+map <C-t>	:tabnew<CR>
 inoremap <S-Tab>	gT
 nnoremap <S-Tab>		gT
 nnoremap j gj
@@ -201,8 +206,7 @@ set t_Co=256                        " force vim to use 256 colors
 set background=dark
 
 "numbers
-set nu
-set relativenumber
+" set relativenumber
 set number
 
 "speeding movement
@@ -253,7 +257,7 @@ set hlsearch
 
 "lazy features
 map <C-L>  ma$a;<Esc>`a
-set clipboard=unnamedplus
+" set clipboard=unnamedplus
 
 "autocomplete brackets
 " inoremap {      {}<Left>
@@ -298,6 +302,8 @@ autocmd Filetype ino nnoremap <C-M> /void loop<Enter> zz <C-E> :nohlsearch <Ente
 "some other commands
 " set whichwrap+=<,>,[,]
 set mouse=a
+vnoremap <C-c> :w !pbcopy<CR><CR> 
+" noremap <C-v> :r !pbpaste<CR><CR>
 " set wrap
 set showcmd
 set showmatch
@@ -356,6 +362,21 @@ map <Leader>h <Plug>(easymotion-linebackward)
 let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_do_mapping = 0 
+
+map <C-1> 1gt
+map <C-2> 2gt
+map <C-3> 3gt
+map <C-4> 4gt
+map <C-5> 5gt
+map <C-6> 6gt
+map <C-7> 7gt
+map <C-8> 8gt
+map <C-9> 9gt
+
+nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
+
+set backspace=indent,eol,start
 
 
 "USFULL STUFF

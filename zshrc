@@ -2,17 +2,18 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/zeko/.oh-my-zsh
+export ZSH=/Users/fran/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="candy"
-# ZSH_THEME="jispwoso"
-ZSH_THEME="strug"
+ZSH_THEME="jispwoso"
+# ZSH_THEME="strug"
 #
 # ZSH_THEME="pygmalion"
 # ZSH_THEME="agnoster"
+# ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -89,85 +90,44 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-function mdc() {
-    mkdir -p "$@" && cd "$@"
-}
+# function mdc() {
+#     mkdir -p "$@" && cd "$@"
+# }
 
-alias ll='ls -l'
-alias la='ls -alF'
-alias l='ls -CF'
-alias c="clear"
-
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-
-alias gb='git branch'
-alias gl='git pull'
-alias gp='git push'
-alias gd='git diff'
-alias gdc='git diff --cached'
-alias gs='git status'
-alias gss='git stash save'
-alias gsp='git stash pop'
-alias gmv='git mv'
-alias grm='git rm'
-alias grn='git-rename'
-alias glog="git l"
-alias gch="git checkout"
-
-alias gitAll="ga * ; gc -m 'something' ; gp"
-alias pioAll="pio run -t upload ; pio device monitor -b 115200"
+# alias ll='ls -l'
+alias ll='exa --long --header --git'
+alias la='exa --long --header --git -a'
 
 alias fuck='sudo'
-alias python='python3.5'
 # alias idle='idle3'
-alias space='df -h'
-alias cb='cd ..'
-alias n='nautilus'
-alias stn='shutdown now'
-alias srn='reboot now'
 alias quit='exit'
 
 # if [[ ! $TERM =~ screen ]]; then	##dummer version of the code bellow
 	    # exec tmux
 # fi
 
-source ~/.zsh/config.sh
-if [[ $TERM == xterm ]]; then TERM=xterm-256color; fi
+# if [[ $TERM == xterm ]]; then TERM=xterm-256color; fi
 
-alias tmuxReboot="tmux source-file ~/.tmux.conf"
-alias unity_move="gsettings set com.canonical.Unity.Launcher launcher-position"
+# alias tmuxReboot="tmux source-file ~/.tmux.conf"
 
 export TERM="screen-256color"
-alias tmux="tmux -2";
 export TERM="xterm-256color"
+alias tmux="tmux -2";
 export PATH=$PATH:~/.vimpkg/bin
-
-
-alias terminal="gnome-terminal"
-alias rm="rm -r"
-alias mypi="ssh pi@192.168.5.14"
-
-alias c="clear"
-alias ethip="cat /var/lib/misc/dnsmasq.leases"
-
-alias ta='tmux attach'
-alias tls='tmux ls'
-alias tat='tmux attach -t'
-alias tns='tmux new-session -s'
-
-alias fucking='sudo'
 
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-alias keyboard="g410-led -fx cycle all 55"
-
 # alias h="builtin cd"
 
-function cd {
-    builtin cd "$@" && ls -l
-    }
+# function cd {
+#     builtin cd "$@" && ls -l
+#     }
 
-neofetch
+# export ANDROID_HOME=$HOME/Library/Android/sdk
+# export PATH=$PATH:$ANDROID_HOME/tools
+# export PATH=$PATH:$ANDROID_HOME/tools/bin
+# export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# compctl -g '~/.itermocil/*(:t:r)' itermocil
+
+eval "$(rbenv init -)"
