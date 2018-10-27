@@ -171,10 +171,15 @@ let g:NERDCustomDelimiters = { 'c': { 'left': '//','right': '' } }
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "mother of tabs(dragons)
-set tabstop=2
-" set tabstop=4
-set shiftwidth=2
-set softtabstop=2
+" set tabstop=2 " set tabstop=4
+" set shiftwidth=2
+" set softtabstop=2
+
+
+set tabstop=8
+set softtabstop=0
+set expandtab
+set shiftwidth=2 smarttab
 
 "other kind of tabs
 map <C-t>	:tabnew<CR>

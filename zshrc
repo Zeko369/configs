@@ -131,3 +131,13 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # compctl -g '~/.itermocil/*(:t:r)' itermocil
 
 eval "$(rbenv init -)"
+
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+alias code="code-insiders"
+
+alias todo="vim todo"
+
+alias up="python -m SimpleHTTPServer 8000"
+alias upp="php -S 0.0.0.0:8080"
