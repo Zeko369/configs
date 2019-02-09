@@ -93,7 +93,7 @@ Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neosnippet-snippets'
 
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 
 Plugin 'bling/vim-airline'
@@ -112,8 +112,6 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 "tagbar
-nmap <F7> :SyntasticToggleMode<CR>
-
 "neocomplete
 let g:acp_enableAtStartup = 0
 let g:neocomplete#enable_at_startup = 1
@@ -205,9 +203,9 @@ map <leader>r :%s/
 " endif
 
 syntax on
-colorscheme onedark
+" colorscheme onedark
 set t_Co=256                        " force vim to use 256 colors
-" let g:solarized_termcolors=256      " use solarized 256 fallback
+let g:solarized_termcolors=256      " use solarized 256 fallback
 set background=dark
 
 "numbers

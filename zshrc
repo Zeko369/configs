@@ -141,3 +141,14 @@ alias todo="vim todo"
 
 alias up="python -m SimpleHTTPServer 8000"
 alias upp="php -S 0.0.0.0:8080"
+
+export PATH=$HOME/circuitmess/esp/xtensa-esp32-elf/bin:$PATH
+alias get_esp32="export PATH=$HOME/circuitmess/esp/xtensa-esp32-elf/bin:$PATH"
+
+export PATH=$PATH:~/.platformio/penv/bin
+
+autoload bashcompinit && bashcompinit
+eval "$(_PLATFORMIO_COMPLETE=source platformio)"
+eval "$(_PIO_COMPLETE=source pio)"
+
+alias iterm="open /Applications/iTerm.app"
