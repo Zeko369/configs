@@ -1,0 +1,6 @@
+source ~/repos/configs/zshrc
+source ~/repos/configs/aliases
+
+export ZSH="/home/fran/.oh-my-zsh"
+
+ZSH_THEME="jispwoso"

@@ -1,0 +1,20 @@
+alias ll='exa --long --header --git'
+alias la='exa --long --header --git -a'
+
+alias quit="exit"
+alias code=$CODE
+alias c="clear"
+alias n="nautilus"
+alias open=$BROWSER
+
+alias up="python -m SimpleHTTPServer 8000 & open http://localhost:8000 ; fg"
+alias upp="php -S 0.0.0.0:8080 & open http://localhost:8080 ; fg"
+alias upmd="livedown start $2 --port 4242 & open http://localhost:4242 ; fg"
+
+alias emulator="$HOME/Android/Sdk/emulator/emulator -avd Nexus_5X_API_29_x86"
+
+alias log-ios="react-native log-android"
+alias run-ios="react-native run-android"
+alias gradele="cd android ; sudo ./gradlew clean ; cd .."
+
+alias zshrc="vim ~/repos/configs/zshrc"

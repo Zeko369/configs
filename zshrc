@@ -107,35 +107,15 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
-alias ll='exa --long --header --git'
-alias la='exa --long --header --git -a'
-
 export CODE=code
 export EDITOR=vim
 export BROWSER=firefox
-
-alias quit="exit"
-alias code=$CODE
-alias c="clear"
-alias n="nautilus"
-alias open=$BROWSER
-
-# Web servers
-alias up="python -m SimpleHTTPServer 8000 & open http://localhost:8000 ; fg"
-alias upp="php -S 0.0.0.0:8080 & open http://localhost:8080 ; fg"
-alias upmd="livedown start $2 --port 4242 & open http://localhost:4242 ; fg"
 
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-alias emulator="$HOME/Android/Sdk/emulator/emulator -avd Nexus_5X_API_29_x86"
-
-alias log-ios="react-native log-android"
-alias run-ios="react-native run-android"
-alias gradele="cd android ; sudo ./gradlew clean ; cd .."
 
 export PATH="$PATH:/opt/ReactNativeDebugger"
 
