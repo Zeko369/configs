@@ -122,3 +122,39 @@ export PATH="$PATH:/opt/ReactNativeDebugger"
 export GOROOT=$HOME/go
 export PATH=$PATH:$GOROOT/bin
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+autoload -U add-zsh-hook
+
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ] ; then
+    local nvm_node_version=$(nvm version "$(cat "$nvmrc_path")")
+    local nvmrc_version="$(cat "$nvmrc_path")"
+
+    if [ "$nvm_node_version" = "N/A" ] ; then
+      printf "You don't have $nvmrc_version installed do you want to install? (y/N)"
+      read -s -n 1 yesNo
+      case $yesNo in
+        n|N)
+          echo "No"
+          ;;
+        y|Y|"")
+          nvm install
+          echo ""
+          ;;
+      esac
+    elif [ "$nvm_node_version" != "$node_version" ] ; then
+      echo "Switching from $node_version to $nvm_node_version"
+      nvm use > /dev/null
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ] ; then
+    echo "Switching to default ($(nvm version default))"
+    nvm use default > /dev/null
+  fi
+}
+
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+

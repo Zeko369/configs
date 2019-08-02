@@ -18,3 +18,5 @@ alias run-ios="react-native run-android"
 alias gradele="cd android ; sudo ./gradlew clean ; cd .."
 
 alias zshrc="vim ~/repos/configs/zshrc"
+
+alias gs="git status"
