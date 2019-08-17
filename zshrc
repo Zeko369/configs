@@ -123,6 +123,10 @@ export GOROOT=$HOME/go
 export PATH=$PATH:$GOROOT/bin
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
+scripts() {
+  cat package.json | jq '{scripts} | .["scripts"]'
+}
+
 autoload -U add-zsh-hook
 
 load-nvmrc() {
