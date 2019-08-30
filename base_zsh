@@ -4,3 +4,8 @@ source ~/repos/configs/aliases
 export ZSH="/home/fran/.oh-my-zsh"
 
 ZSH_THEME="jispwoso"
+
+alias term="gnome-terminal"
+alias terminal="gnome-terminal"
+
+alias be="bundle exec"
