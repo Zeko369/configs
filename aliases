@@ -27,3 +27,4 @@ alias terminal="gnome-terminal"
 alias be="bundle exec"
 alias py="ipython3"
 
+alias kill_puma="pkill -9 -f puma"
