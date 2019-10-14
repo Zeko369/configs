@@ -28,3 +28,5 @@ alias be="bundle exec"
 alias py="ipython3"
 
 alias kill_puma="pkill -9 -f puma"
+
+alias space="df -h | grep -v -E '/dev/loop|udev|tmpfs'"

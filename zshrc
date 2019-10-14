@@ -109,7 +109,7 @@ eval "$(rbenv init -)"
 
 export CODE=code
 export EDITOR=vim
-export BROWSER=firefox
+# export BROWSER=google-chrome
 
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
