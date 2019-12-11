@@ -11,3 +11,6 @@ export UJPROG_PATH=/home/fran/faculty/FER_1st_semester/digLog/tools/ujprog
 
 alias fpga="sudo $UJPROG_PATH *.jed"
 
+export FILES="dolphin"
+
+alias n="$FILES"
