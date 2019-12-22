@@ -1,9 +1,8 @@
+export ZSH="/home/fran/.oh-my-zsh"
+ZSH_THEME="jispwoso"
+
 source ~/repos/configs/zshrc
 source ~/repos/configs/aliases
-
-export ZSH="/home/fran/.oh-my-zsh"
-
-ZSH_THEME="jispwoso"
 
 export PATH=$PATH:/home/fran/faculty/FER_1st_semester/digLog/tools
 export PATH=$PATH:/home/fran/faculty/FER_1st_semester/racfor/tools/volatility_2.6_lin64_standalone
