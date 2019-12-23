@@ -5,7 +5,7 @@ alias quit="exit"
 alias code=$CODE
 alias c="clear"
 alias n="nautilus"
-alias open=$BROWSER
+# alias open=$BROWSER
 
 alias up="python -m SimpleHTTPServer 8000 & open http://localhost:8000 ; fg"
 alias upp="php -S 0.0.0.0:8080 & open http://localhost:8080 ; fg"
