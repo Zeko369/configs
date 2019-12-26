@@ -1,15 +1,16 @@
-export ZSH="/home/fran/.oh-my-zsh"
+export ZSH="/Users/franzekan/.oh-my-zsh"
+
 ZSH_THEME="jispwoso"
 
 source ~/repos/configs/zshrc
 source ~/repos/configs/aliases
 
-export PATH=$PATH:/home/fran/faculty/FER_1st_semester/digLog/tools
-export PATH=$PATH:/home/fran/faculty/FER_1st_semester/racfor/tools/volatility_2.6_lin64_standalone
-export UJPROG_PATH=/home/fran/faculty/FER_1st_semester/digLog/tools/ujprog
+# export PATH=$PATH:/home/fran/faculty/FER_1st_semester/digLog/tools
+# export PATH=$PATH:/home/fran/faculty/FER_1st_semester/racfor/tools/volatility_2.6_lin64_standalone
+# export UJPROG_PATH=/home/fran/faculty/FER_1st_semester/digLog/tools/ujprog
 
 alias fpga="sudo $UJPROG_PATH *.jed"
 
-export FILES="dolphin"
+export FILES="open"
 
 alias n="$FILES"
