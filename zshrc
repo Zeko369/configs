@@ -67,7 +67,7 @@
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git bundler dotenv osx rake zsh-syntax-highlighting)
+plugins=(git bundler osx rake zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
