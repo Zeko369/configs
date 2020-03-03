@@ -37,6 +37,8 @@ sudo apt install yarn -y
 sudo apt install xclip
 
 # Gen ssh keys
+# ssh-keygen -b 2048 -t rsa -f foo123 -q -N ""
+
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
