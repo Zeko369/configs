@@ -71,6 +71,8 @@ plugins=(git bundler osx rake zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
+export configs="$HOME/repos/configs"
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -162,3 +164,4 @@ load-nvmrc() {
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
+source "$configs/functions.sh"
