@@ -1,4 +1,5 @@
 export ZSH="/Users/franzekan/.oh-my-zsh"
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 ZSH_THEME="jispwoso"
 
@@ -14,3 +15,35 @@ alias fpga="sudo $UJPROG_PATH *.jed"
 export FILES="open"
 
 alias n="$FILES"
+
+sshrc() {
+	ssh -R 12345:127.0.0.1:12345 -t ${*:1} 'bash -c "bash --rcfile <(curl -s http://127.0.0.1:12345/sshrc)"'
+}
+
+# This function checks whether we have a given program on the system.
+#
+_have()
+{
+    # Completions for system administrator commands are installed as well in
+    # case completion is attempted via `sudo command ...'.
+    PATH=$PATH:/usr/sbin:/sbin:/usr/local/sbin type $1 &>/dev/null
+}
+
+# Backwards compatibility for compat completions that use have().
+# @deprecated should no longer be used; generally not needed with dynamically
+#             loaded completions, and _have is suitable for runtime use.
+have()
+{
+    unset -v have
+    _have $1 && have=yes
+}
+
+source /Users/franzekan/Library/Preferences/org.dystroy.broot/launcher/bash/br
+
+LANG="en_US.UTF-8"
+
+alias py="ipython"
+
+export PATH=$PATH:/usr/local/go/bin
+export GOROOT=/usr/local/go
+
