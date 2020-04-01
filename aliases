@@ -31,6 +31,6 @@ alias kill_puma="pkill -9 -f puma"
 
 alias space="df -h | grep -v -E '/dev/loop|udev|tmpfs'"
 
-alias cra="npx create-react-app --template typescript"
+alias cra="npx create-react-app --template zeko369"
 
 alias weather="curl -4 http://wttr.in/Zagreb"
