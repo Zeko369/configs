@@ -34,3 +34,8 @@ alias space="df -h | grep -v -E '/dev/loop|udev|tmpfs'"
 alias cra="npx create-react-app --template zeko369"
 
 alias weather="curl -4 http://wttr.in/Zagreb"
+
+alias dc="docker-compose"
+alias dcu="dc up"
+alias dcd="dc down"
+alias dcb="dc build"
