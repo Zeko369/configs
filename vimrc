@@ -209,7 +209,7 @@ let g:solarized_termcolors=256      " use solarized 256 fallback
 set background=dark
 
 "numbers
-" set relativenumber
+set relativenumber
 set number
 
 "speeding movement
