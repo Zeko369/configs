@@ -52,3 +52,7 @@ export GOROOT=/usr/local/go
 # Decrypt:
 # openssl aes-256-cbc -d -a -in secrets.txt.enc -out secrets.txt.new
 
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+alias fuck="sudo !!"

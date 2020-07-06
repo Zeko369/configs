@@ -2,6 +2,12 @@
 :	execute "/a:nama"
 :endfunction
 
+nnoremap <M-Up> :m .-2<CR>==
+nnoremap <M-Down> :m .+1<CR>==
+inoremap <M-Down> <Esc>:m .+1<CR>==gi
+inoremap <M-Up> <Esc>:m .-2<CR>==gi
+vnoremap <M-Down> :m '>+1<CR>gv=gv
+vnoremap <M-Up> :m '<-2<CR>gv=gv
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""		__      _______ __  __ _____   _____ 		    ""
@@ -395,3 +401,10 @@ set backspace=indent,eol,start
 "fx find x
 "tx find x - 1
 "~  TO MAKE SELECTED TEXT TOGGLE CAPS
+
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
