@@ -101,6 +101,13 @@ vim /etc/mysql/mysql.cnf
 default-authentication-plugin=mysql_native_password
 ```
 
+Setup PSQL
+```sh
+sudo apt install postgres postgres-contrib
+sudo su -i postgres
+createuser USER
+createdb USER
+```
 
 ## GIT DEPLOY KEYS
 
