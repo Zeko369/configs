@@ -9,15 +9,13 @@ source ~/repos/configs/aliases
 # export PATH=$PATH:/home/fran/faculty/FER_1st_semester/digLog/tools
 # export PATH=$PATH:/home/fran/faculty/FER_1st_semester/racfor/tools/volatility_2.6_lin64_standalone
 # export UJPROG_PATH=/home/fran/faculty/FER_1st_semester/digLog/tools/ujprog
-
-alias fpga="sudo $UJPROG_PATH *.jed"
+# alias fpga="sudo $UJPROG_PATH *.jed"
 
 export FILES="open"
-
 alias n="$FILES"
 
 sshrc() {
-	ssh -R 12345:127.0.0.1:12345 -t ${*:1} 'bash -c "bash --rcfile <(curl -s http://127.0.0.1:12345/sshrc)"'
+  ssh -R 12345:127.0.0.1:12345 -t ${*:1} 'bash -c "bash --rcfile <(curl -s http://127.0.0.1:12345/sshrc)"'
 }
 
 # This function checks whether we have a given program on the system.
@@ -51,7 +49,6 @@ export GOROOT=/usr/local/go
 # openssl aes-256-cbc -a -salt -in secrets.txt -out secrets.txt.enc
 # Decrypt:
 # openssl aes-256-cbc -d -a -in secrets.txt.enc -out secrets.txt.new
-
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 

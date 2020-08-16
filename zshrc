@@ -1,7 +1,6 @@
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -116,6 +115,7 @@ export CODE=code
 export EDITOR=vim
 export BROWSER=google-chrome
 
+# React native STUFF
 # export ANDROID_HOME=$HOME/Android/Sdk
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
@@ -125,15 +125,10 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 export PATH="$PATH:/opt/ReactNativeDebugger"
 
+# GO stuff
 export GOROOT=$HOME/go
 export PATH=$PATH:$GOROOT/bin
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-
-scripts() {
-  cat package.json | jq '{scripts} | .["scripts"]'
-}
-
-autoload -U add-zsh-hook
 
 load-nvmrc() {
   local node_version="$(nvm version)"
@@ -164,6 +159,8 @@ load-nvmrc() {
     nvm use default > /dev/null
   fi
 }
+
+autoload -U add-zsh-hook
 
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
