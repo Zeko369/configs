@@ -61,7 +61,6 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 sudo apt update && sudo apt install --no-install-recommends yarn
 ```
 
-
 ## Setup LAMP
 
 ```sh
@@ -107,6 +106,13 @@ sudo apt install postgres postgres-contrib
 sudo su -i postgres
 createuser USER
 createdb USER
+
+psql
+
+/password USER
+# -> password
+# -> password
+/q
 ```
 
 ## GIT DEPLOY KEYS
