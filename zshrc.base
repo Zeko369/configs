@@ -22,9 +22,9 @@ sshrc() {
 #
 _have()
 {
-    # Completions for system administrator commands are installed as well in
-    # case completion is attempted via `sudo command ...'.
-    PATH=$PATH:/usr/sbin:/sbin:/usr/local/sbin type $1 &>/dev/null
+  # Completions for system administrator commands are installed as well in
+  # case completion is attempted via `sudo command ...'.
+  PATH=$PATH:/usr/sbin:/sbin:/usr/local/sbin type $1 &>/dev/null
 }
 
 # Backwards compatibility for compat completions that use have().
@@ -32,8 +32,8 @@ _have()
 #             loaded completions, and _have is suitable for runtime use.
 have()
 {
-    unset -v have
-    _have $1 && have=yes
+  unset -v have
+  _have $1 && have=yes
 }
 
 source /Users/franzekan/Library/Preferences/org.dystroy.broot/launcher/bash/br
@@ -53,3 +53,5 @@ export GOROOT=/usr/local/go
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 alias fuck="sudo !!"
+alias j8="export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home; java -version"
+
