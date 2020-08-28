@@ -39,3 +39,8 @@ alias dc="docker-compose"
 alias dcu="dc up"
 alias dcd="dc down"
 alias dcb="dc build"
+
+alias pm="pio device monitor"
+alias pl="pio device list"
+alias pr="pio run"
+alias pru="pio run -t upload"
