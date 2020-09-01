@@ -34,11 +34,18 @@ alias space="df -h | grep -v -E '/dev/loop|udev|tmpfs'"
 alias cra="npx create-react-app --template zeko369"
 
 alias wth="curl -4 http://wttr.in/Zagreb"
+alias wth2="curl -4 http://v2.wttr.in/Zagreb"
 
+alias d="docker"
 alias dc="docker-compose"
 alias dcu="dc up"
 alias dcd="dc down"
 alias dcb="dc build"
+
+alias gph="git push heroku"
+alias gphm="gph master"
+alias hopen="heroku open"
+alias hlogs="heroku logs --tail"
 
 alias pm="pio device monitor"
 alias pl="pio device list"
