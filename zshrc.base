@@ -3,6 +3,8 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 ZSH_THEME="jispwoso"
 
+USE_RUBY=true
+
 source ~/repos/configs/zshrc
 source ~/repos/configs/aliases
 
