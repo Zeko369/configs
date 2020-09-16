@@ -5,6 +5,7 @@ alias quit="exit"
 alias code=$CODE
 alias c="clear"
 alias n="nautilus"
+alias s="scripts"
 # alias open=$BROWSER
 
 alias up="python -m SimpleHTTPServer 8000 & open http://localhost:8000 ; fg"
