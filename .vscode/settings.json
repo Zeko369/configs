@@ -1,6 +1,8 @@
 {
   "files.associations": {
-    "*": "shellscript",
-    "*vimrc*": "viml"
+    "!(*.*)": "shellscript",
+    "zshrc.base": "shellscript",
+    "*vimrc*": "viml",
+    "*.js": "javascript"
   }
 }

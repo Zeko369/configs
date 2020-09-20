@@ -1,5 +1,5 @@
-"git branch -r" // list remote
-"git rev-parse --abbrev-ref HEAD" // current branch
+// "git branch -r"; // list remote
+// "git rev-parse --abbrev-ref HEAD"; // current branch
 
 /* PSEUDOCODE
  * if $current not in remote
@@ -8,4 +8,3 @@
  *   git push
  * end
  */
-

@@ -5,8 +5,8 @@ ZSH_THEME="jispwoso"
 
 USE_RUBY=true
 
-source ~/repos/configs/zshrc
-source ~/repos/configs/aliases
+source ~/repos/configs/shell/zshrc
+source ~/repos/configs/shell/aliases
 
 # export PATH=$PATH:/home/fran/faculty/FER_1st_semester/digLog/tools
 # export PATH=$PATH:/home/fran/faculty/FER_1st_semester/racfor/tools/volatility_2.6_lin64_standalone
