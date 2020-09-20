@@ -16,7 +16,7 @@ const base = `export EDITOR=vim`;
   out = out.replace(/#!\/bin\/sh/g, "");
   out = out.replace(/\n\n\n/g, "\n");
 
-  console.log(out);
+  fs.writeFile(join(__dirname, "../shell/basic"), out);
 })()
   .catch(console.error)
   .finally(() => console.log("Done"));

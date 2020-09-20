@@ -1,0 +1,48 @@
+export EDITOR=vim
+# List yarn scripts from package.json
+function scripts() {
+  FILE=./package.json
+  if [ ! -f "$FILE" ]; then
+    echo "Can't find package.json"
+    return 1
+  fi
+
+  if ! command -v jq &> /dev/null; then
+    FIRST_LINE=$(cat $FILE | grep -n "\"scripts\": {" | cut -f1 -d:)
+    OFFSET=$(tail -n +$FIRST_LINE $FILE | grep -n "}" | head -n 1 | cut -f1 -d:)
+    LAST_LINE="$(($FIRST_LINE + $OFFSET - 2))"
+
+    sed -n "$(($FIRST_LINE +1)),$LAST_LINE"p $FILE | awk '$1=$1'
+  else
+    cat $FILE | jq '{scripts} | .["scripts"]'
+  fi
+}
+
+function _ls() {
+  if command -v exa &> /dev/null; then
+    if [ -n "$NO_GIT" ]; then
+      exa --long --header "$@"
+    else
+      exa --long --header --git "$@"
+    fi
+  elif command -v lsd &> /dev/null; then
+    lsd "$@"
+  else
+    ls "$@"
+  fi
+}
+
+function exaToggleGit() {
+  if [ -n "$NO_GIT" ]; then
+    unset NO_GIT
+    echo "Git enabled in exa"
+  else
+    export NO_GIT=true
+    echo "Git disabled in exa"
+  fi
+}
+
+alias etg="exaToggleGit"
+
+alias ll='_ls -lh'
+alias la='_ls -lha'
