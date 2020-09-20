@@ -1,8 +1,0 @@
-oh my zsh themes
-jispwoso
-candy
-mikeh
-strug
-
-agnoster
-pygmalion
