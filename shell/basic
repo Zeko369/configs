@@ -1,4 +1,5 @@
 export EDITOR=vim
+
 # List yarn scripts from package.json
 function scripts() {
   FILE=./package.json

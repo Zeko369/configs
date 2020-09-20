@@ -1,0 +1,5 @@
+{
+  "hooks": {
+    "pre-commit": "node src/commands/buildSimple.js"
+  }
+}
