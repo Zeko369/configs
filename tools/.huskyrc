@@ -1,5 +1,5 @@
 {
   "hooks": {
-    "pre-commit": "node src/commands/buildSimple.js"
+    "pre-commit": "node dist/commands/buildSimple.js"
   }
 }

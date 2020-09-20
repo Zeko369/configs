@@ -1,14 +1,13 @@
-const { promises: fs } = require("fs");
-const { join, add } = require("../util");
+import { promises as fs } from "fs";
+import { join, add } from "../util";
 
 const OUT_FILE = join("shell/basic");
 const f = ["functions.sh", "ls.sh"];
 const base = `export EDITOR=vim\n`;
 
 (async () => {
-  const files = await Promise.all(
-    f.map((name) => fs.readFile(join("shell/", name), "utf-8"))
-  );
+  const fp = f.map((name) => fs.readFile(join("shell/", name), "utf-8"));
+  const files = await Promise.all(fp);
 
   let out = base + "\n" + files.join("\n");
   out = out.replace(/#!\/bin\/sh/g, "");
