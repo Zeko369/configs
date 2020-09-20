@@ -1,0 +1,6 @@
+{
+  "files.associations": {
+    "*": "shellscript",
+    "*vimrc*": "viml"
+  }
+}
