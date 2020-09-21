@@ -112,6 +112,8 @@ Plugin 'majutsushi/tagbar'
 Plugin 'benmills/vimux'
 Plugin 'jplaut/vim-arduino-ino'
 
+Plugin 'wakatime/vim-wakatime'
+
 Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
 
 call vundle#end()            " required
