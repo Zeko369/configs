@@ -15,12 +15,17 @@ function _ls() {
 }
 
 function exaToggleGit() {
-  if [ -n "$NO_GIT" ]; then
-    unset NO_GIT
-    echo "Git enabled in exa"
+  if command -v exa &> /dev/null; then
+    if [ -n "$NO_GIT" ]; then
+      unset NO_GIT
+      echo "Git enabled in exa"
+    else
+      export NO_GIT=true
+      echo "Git disabled in exa"
+    fi
   else
-    export NO_GIT=true
-    echo "Git disabled in exa"
+    echo "No exa on system"
+    echo "Install exa first"
   fi
 }
 
