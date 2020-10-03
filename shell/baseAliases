@@ -8,7 +8,10 @@ alias up="python -m SimpleHTTPServer 8000 & open http://localhost:8000 ; fg"
 alias upp="php -S 0.0.0.0:8080 & open http://localhost:8080 ; fg"
 alias upmd="livedown start $2 --port 4242 & open http://localhost:4242 ; fg"
 
-alias zshrc="vim ~/repos/configs/zshrc"
+alias zshrc="vim ~/repos/configs/zshrc.base.local"
+alias configs="vim ~/repos/configs"
+
+# Don't run ghost script on old ununtu versions
 alias gs="git status"
 
 alias term="gnome-terminal"
@@ -17,26 +20,39 @@ alias terminal="gnome-terminal"
 alias be="bundle exec"
 alias py="ipython3"
 
+function py {
+  if ! command -v ipython &> /dev/null; then
+    ipython
+  elif command -v ipython3 &> /dev/null; then
+    ipython3
+  else
+    echo "No ipython starting regular python"
+    python3
+  fi
+}
+
 alias kill_puma="pkill -9 -f puma"
 
 alias space="df -h | grep -v -E '/dev/loop|udev|tmpfs'"
-
 alias cra="npx create-react-app --template zeko369"
 
 alias wth="curl -4 http://wttr.in/Zagreb"
 alias wth2="curl -4 http://v2.wttr.in/Zagreb"
 
+# Docker stuff
 alias d="docker"
 alias dc="docker-compose"
 alias dcu="dc up"
 alias dcd="dc down"
 alias dcb="dc build"
 
+# Heroku stuff
 alias gph="git push heroku"
 alias gphm="gph master"
 alias hopen="heroku open"
 alias hlogs="heroku logs --tail"
 
+# Platformio
 alias pm="pio device monitor"
 alias pl="pio device list"
 alias pr="pio run"
