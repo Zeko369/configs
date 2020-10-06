@@ -6,9 +6,7 @@
   "scripts": {
     "build": "tsc"
   },
-  "dependencies": {
-    "mdx": "^0.3.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^14.11.1",
     "husky": "^4.3.0",
