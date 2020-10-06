@@ -168,6 +168,9 @@ add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
 source "$configs/shell/functions.sh"
+
+alias s="scripts"
+
 source "$configs/shell/ls.sh"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
