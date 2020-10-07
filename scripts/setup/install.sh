@@ -14,9 +14,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 sudo apt install vim vim-gtk -y
 
 # NVM
-curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh -o install_nvm.sh
-bash install_nvm.sh
-rm install_nvm.sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh)"
 
 # RBENV
 sudo apt install autoconf bison build-essential libssl-dev libyaml-dev libreadline-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev
