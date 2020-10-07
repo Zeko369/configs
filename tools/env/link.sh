@@ -1,7 +1,11 @@
 #!/bin/sh
 
-ln -s ~/repos/configs/vimrc ~/.vimrc
-ln -s ~/repos/configs/tmux.conf ~/.tmux.conf
+[ -f ~/.vimrc ] && cp ~/.vimrc ~/.vimrc.bak
+[ -f ~/.tmux.conf ] && cp ~/.tmux.conf ~/.tmux.conf.bak
 
-cp ~/repos/configs/zshrc.base ~/repos/configs/zshrc.base.local
-ln -s ~/repos/configs/zshrc.base.local ~/.zshrc
+ln -fs ~/repos/configs/vimrc ~/.vimrc
+ln -fs ~/repos/configs/tmux.conf ~/.tmux.conf
+
+[ -f ~/repos/configs/shell/zshrc.base.local ] && cp ~/repos/configs/shell/zshrc.base.local ~/repos/configs/shell/zshrc.base.local.bak
+cp ~/repos/configs/shell/zshrc.base ~/repos/configs/shell/zshrc.base.local
+ln -fs ~/repos/configs/shell/zshrc.base.local ~/.zshrc
