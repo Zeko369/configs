@@ -1,0 +1,43 @@
+{
+  "workbench.colorTheme": "Gruvbox Dark Hard",
+  "workbench.startupEditor": "welcomePageInEmptyWorkbench",
+  "workbench.iconTheme": "material-icon-theme",
+  "window.zoomLevel": 1,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "php-cs-fixer.executablePath": "${extensionPath}/php-cs-fixer.phar",
+  "editor.fontLigatures": true,
+  "editor.fontFamily": "Fira Code",
+  "editor.renderWhitespace": "all",
+  "editor.formatOnSave": true,
+  "explorer.confirmDragAndDrop": false,
+  "cSpell.userWords": [
+    "Chakra",
+    "MAILGUN",
+    "Rerender",
+    "browserslist",
+    "circuitmess",
+    "cond",
+    "createdb",
+    "dropdb",
+    "gcal",
+    "immer",
+    "rehype",
+    "shortcode",
+    "signup",
+    "todos"
+  ],
+  "explorer.compactFolders": false,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "explorer.confirmDelete": false,
+  "scm.defaultViewMode": "tree",
+  "editor.tabSize": 2,
+  "cSpell.enableFiletypes": [
+    "!typescript"
+  ],
+  "php-cs-fixer.lastDownload": 1601503290200
+}
+
