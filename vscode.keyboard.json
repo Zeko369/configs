@@ -1,48 +1,50 @@
-// Place your key bindings in this file to override the defaults
 [
-  { "key": "alt+1", "command": "workbench.view.explorer" },
-  { "key": "alt+2", "command": "workbench.view.search" },
-  { "key": "alt+3", "command": "workbench.view.scm" },
-  { "key": "alt+4", "command": "workbench.view.debug" },
-  { "key": "alt+5", "command": "workbench.view.extensions" },
-  { "key": "alt+6", "command": "workbench.view.remote" },
-  { "key": "alt+7", "command": "workbench.view.extension.dockerView" },
-  { "key": "alt+8", "command": "workbench.view.extension.gitlens" },
-  { "key": "alt+9", "command": "workbench.view.extension.project-manager" },
+  { "key": "alt+shift+1", "command": "workbench.view.explorer" },
+  { "key": "alt+shift+2", "command": "workbench.view.search" },
+  { "key": "alt+shift+3", "command": "workbench.view.scm" },
+  { "key": "alt+shift+4", "command": "workbench.view.debug" },
+  { "key": "alt+shift+5", "command": "workbench.view.extensions" },
+  { "key": "alt+shift+6", "command": "workbench.view.remote" },
+  { "key": "alt+shift+7", "command": "workbench.view.extension.dockerView" },
+  { "key": "alt+shift+8", "command": "workbench.view.extension.gitlens" },
   {
-    "key": "cmd+1",
+    "key": "alt+shift+9",
+    "command": "workbench.view.extension.project-manager"
+  },
+  {
+    "key": "alt+1",
     "command": "workbench.action.openEditorAtIndex1"
   },
   {
-    "key": "cmd+2",
+    "key": "alt+2",
     "command": "workbench.action.openEditorAtIndex2"
   },
   {
-    "key": "cmd+3",
+    "key": "alt+3",
     "command": "workbench.action.openEditorAtIndex3"
   },
   {
-    "key": "cmd+4",
+    "key": "alt+4",
     "command": "workbench.action.openEditorAtIndex4"
   },
   {
-    "key": "cmd+5",
+    "key": "alt+5",
     "command": "workbench.action.openEditorAtIndex5"
   },
   {
-    "key": "cmd+6",
+    "key": "alt+6",
     "command": "workbench.action.openEditorAtIndex6"
   },
   {
-    "key": "cmd+7",
+    "key": "alt+7",
     "command": "workbench.action.openEditorAtIndex7"
   },
   {
-    "key": "cmd+8",
+    "key": "alt+8",
     "command": "workbench.action.openEditorAtIndex8"
   },
   {
-    "key": "cmd+9",
+    "key": "alt+9",
     "command": "workbench.action.openEditorAtIndex9"
   },
   {
@@ -92,4 +94,3 @@
     "when": "editorTextFocus"
   }
 ]
-
