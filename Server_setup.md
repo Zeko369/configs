@@ -44,12 +44,12 @@ sudo apt install tmux zsh git vim vim-gtk curl wget -y
 OH MY ZSH
 
 Create new user
+
 ```sh
 adduser user
 usermod -aG sudo user
 usermod -aG wheel user
 ```
-
 
 ## Setup NODE
 
@@ -109,9 +109,9 @@ default-authentication-plugin=mysql_native_password
 Setup PSQL
 
 ```sh
-sudo apt install postgres postgres-contrib
-sudo su -i postgres
-createuser USER
+sudo apt install postgresql postgresql-contrib
+sudo su postgres
+createuser -s USER
 createdb USER
 
 psql
