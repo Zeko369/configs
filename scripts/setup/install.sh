@@ -31,6 +31,9 @@ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.zshrc
 
+# PSQL stuff
+sudo apt-get install libpq-dev
+
 # Yarn
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
