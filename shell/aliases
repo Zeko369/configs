@@ -3,6 +3,7 @@ alias upp="php -S 0.0.0.0:8080 & open http://localhost:8080 ; fg"
 alias upmd="livedown start $2 --port 4242 & open http://localhost:4242 ; fg"
 
 alias zshrc="vim ~/repos/configs/zshrc.base.local"
+alias term-conf=" vim /mnt/c/Users/zekan/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
 alias configs="vim ~/repos/configs"
 
 if [[ "$OSTYPE" != "darwin"* ]]; then
