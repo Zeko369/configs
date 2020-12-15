@@ -16,6 +16,9 @@ alias c="clear"
 alias quit="exit"
 alias n="$FILES" # Nautilus/Nemo on linux, open on MacOS
 
+alias venvinit="python3 -m venv ./venv"
+alias venv="source ./venv/bin/activate"
+
 # Don't run ghost script on old ununtu versions
 alias gs="git status"
 
