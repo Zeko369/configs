@@ -43,6 +43,8 @@ alias dcu="dc up"
 alias dcd="dc down"
 alias dcb="dc build"
 
+alias gcopr="gh pr checkout"
+
 alias gph="git push heroku"
 alias gphm="gph master"
 alias hopen="heroku open"
