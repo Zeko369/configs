@@ -18,3 +18,11 @@ function scripts() {
     cat $FILE | jq '{scripts} | .["scripts"]'
   fi
 }
+
+function venvinit() {
+  if [ $# -eq 0 ]; then
+      python3 -m venv ./venv
+  else
+      python3 -m venv $1
+  fi 
+}
