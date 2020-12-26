@@ -2,7 +2,7 @@
 
 sudo pacman -Sy
 
-sudo pacman -S vim git tmux zsh curl wget
+sudo pacman -S vim git tmux zsh curl wget jq
 
 curl -o- -L https://yarnpkg.com/install.sh | bash
 
