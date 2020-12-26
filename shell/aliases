@@ -15,6 +15,7 @@ fi
 alias c="clear"
 alias quit="exit"
 alias n="$FILES" # Nautilus/Nemo on linux, open on MacOS
+alias code="$CODE"
 
 # function venvinit
 alias venv="source ./venv/bin/activate"

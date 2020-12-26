@@ -108,12 +108,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # RBENV
-if [ $USE_RUBY ]; then
+if [ ! -z $USE_RUBY ]; then
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
 fi
 
-export CODE=code
+export CODE=code-insiders
 export EDITOR=vim
 export BROWSER=google-chrome
 
