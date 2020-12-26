@@ -1,3 +1,4 @@
 node_modules/
 tools/dist
 shell/zshrc.base.local*
+vim/vimrc.local
