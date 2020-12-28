@@ -115,7 +115,7 @@ fi
 
 export CODE=code-insiders
 export EDITOR=vim
-export BROWSER=google-chrome
+export BROWSER=chromium
 
 # React native STUFF
 export ANDROID_HOME=$HOME/Library/Android/sdk
@@ -169,6 +169,8 @@ load-nvmrc
 source "$configs/shell/functions.sh"
 
 alias s="scripts"
+alias p="packages"
+alias pd="packages --dev"
 
 source "$configs/shell/ls.sh"
 
