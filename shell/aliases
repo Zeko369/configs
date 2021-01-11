@@ -19,6 +19,7 @@ alias code="$CODE"
 
 # function venvinit
 alias venv="source ./venv/bin/activate"
+alias deac="deactivate"
 
 # Don't run ghost script on old ununtu versions
 alias gs="git status"
