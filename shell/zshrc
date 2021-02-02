@@ -113,7 +113,7 @@ if [ ! -z $USE_RUBY ]; then
   eval "$(rbenv init -)"
 fi
 
-export CODE=code-insiders
+export CODE=code
 export EDITOR=vim
 export BROWSER=chromium
 

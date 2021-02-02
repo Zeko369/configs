@@ -1,7 +1,6 @@
 export EDITOR=vim
 
 function readPkg {
-  KEY=$1
   FILE=./package.json
   if [ ! -f "$FILE" ]; then
     echo "Can't find package.json"
@@ -21,17 +20,17 @@ function readPkg {
 }
 
 # List yarn scripts from package.json
-function scripts() {
-  $1="scripts"
+function scripts {
+  KEY="scripts"
   readPkg
 }
 
-function packages() {
-  if [ $1 -eq "--dev" || $1 -eq "-d" ]; then
-    $1="devDependencies"
+function packages {
+  if [ $# -eq 1 ]; then
+    KEY="devDependencies"
     readPkg
   else
-    $1="dependencies"
+    KEY="dependencies"
     readPkg
   fi
 }
