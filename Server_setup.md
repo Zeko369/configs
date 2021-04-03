@@ -41,7 +41,10 @@ Essentials
 sudo apt install tmux zsh git vim vim-gtk curl wget -y
 ```
 
-OH MY ZSH
+OH MY ZSH on root and normal user, make sure to use different themes to distinguish 
+```sh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
 
 Create new user
 
