@@ -3,6 +3,11 @@
 
 function rpsql() {
   brew services stop postgresql
-  rm /usr/local/var/postgres/postmaster.pid
+	if [[ -f "/usr/local/var/postgres/postmaster.pid" ]]; then
+		rm /usr/local/var/postgres/postmaster.pid
+	else
+		rm /opt/homebrew/var/postgres/postmaster.pid
+	fi
+
   brew services start postgresql
 }
