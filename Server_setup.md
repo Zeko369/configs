@@ -119,10 +119,10 @@ createdb USER
 
 psql
 
-/password USER
+\password USER
 # -> password
 # -> password
-/q
+\q
 ```
 
 ## GIT DEPLOY KEYS
