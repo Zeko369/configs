@@ -38,7 +38,7 @@ ssh name
 Essentials
 
 ```sh
-sudo apt install tmux zsh git vim vim-gtk curl wget -y
+sudo apt install tmux zsh git vim vim-gtk curl wget tig jq -y
 ```
 
 OH MY ZSH on root and normal user, make sure to use different themes to distinguish 
