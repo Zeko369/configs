@@ -31,7 +31,7 @@ ssh name
 `vim /etc/ssh/sshd_config`
 `#Port 22`
 
-sudo service ssh restart
+`sudo service ssh restart`
 
 ## Once logged in
 
