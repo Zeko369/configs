@@ -31,14 +31,14 @@ ssh name
 `vim /etc/ssh/sshd_config`
 `#Port 22`
 
-sudo service ssh restart
+`sudo service ssh restart`
 
 ## Once logged in
 
 Essentials
 
 ```sh
-sudo apt install tmux zsh git vim vim-gtk curl wget -y
+sudo apt install tmux zsh git vim vim-gtk curl wget tig jq -y
 ```
 
 OH MY ZSH on root and normal user, make sure to use different themes to distinguish 
@@ -119,10 +119,10 @@ createdb USER
 
 psql
 
-/password USER
+\password USER
 # -> password
 # -> password
-/q
+\q
 ```
 
 ## GIT DEPLOY KEYS
