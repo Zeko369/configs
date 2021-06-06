@@ -115,7 +115,8 @@ fi
 
 export CODE=code
 export EDITOR=vim
-export BROWSER=chromium
+# export BROWSER=safari
+export BROWSER=chrome
 
 # React native STUFF
 export ANDROID_HOME=$HOME/Library/Android/sdk
@@ -163,14 +164,16 @@ load-nvmrc() {
 
 autoload -U add-zsh-hook
 
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
+# add-zsh-hook chpwd load-nvmrc
+# load-nvmrc
 
 source "$configs/shell/functions.sh"
 
 alias s="scripts"
 alias p="packages"
 alias pd="packages --dev"
+
+alias sip="$configs/shell/ssh.py"
 
 source "$configs/shell/ls.sh"
 
