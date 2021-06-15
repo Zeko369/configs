@@ -1,3 +1,6 @@
+HISTSIZE=500000
+SAVEHIST=100000
+
 export ZSH="/Users/franzekan/.oh-my-zsh"
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
