@@ -12,12 +12,7 @@ export FILES="open"
 source ~/repos/configs/shell/zshrc
 source ~/repos/configs/shell/aliases
 
-source /Users/franzekan/Library/Preferences/org.dystroy.broot/launcher/bash/br
-
 LANG="en_US.UTF-8"
-
-export PATH=$PATH:/usr/local/go/bin
-export GOROOT=/usr/local/go
 
 # Encrypt:
 # openssl aes-256-cbc -a -salt -in secrets.txt -out secrets.txt.enc
@@ -27,5 +22,25 @@ export GOROOT=/usr/local/go
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 alias fuck="sudo !!"
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+export HOMEBREW_NO_AUTO_UPDATE=1
+
+
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
 alias j8="export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home; java -version"
+
+
+#### FIG ENV VARIABLES ####
+[[ -s ~/.fig/fig.sh ]] && source ~/.fig/fig.sh
+#### END FIG ENV VARIABLES ####
+
 
