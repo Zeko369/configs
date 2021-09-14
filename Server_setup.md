@@ -31,6 +31,8 @@ ssh name
 `vim /etc/ssh/sshd_config`
 `#Port 22`
 
+`sudo ufw allow NEW_PORT`
+
 `sudo service ssh restart`
 
 ## Once logged in
@@ -41,7 +43,8 @@ Essentials
 sudo apt install tmux zsh git vim vim-gtk curl wget tig jq -y
 ```
 
-OH MY ZSH on root and normal user, make sure to use different themes to distinguish 
+OH MY ZSH on root and normal user, make sure to use different themes to distinguish
+
 ```sh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
@@ -85,6 +88,8 @@ sudo apt install php php-{bcmath,bz2,intl,gd,mbstring,mysql,zip,fpm,curl,dom} -y
 sudo a2enmod rewrite
 sudo a2enmod php7.4
 systemctl restart apache2
+
+sudo chown -R www-data:www-data /var/www/page
 ```
 
 ```sh
@@ -130,3 +135,30 @@ psql
 ## Additional user
 
 sudo apt install tig
+
+## UFW
+
+### List all
+
+```bash
+sudo ufw app list
+```
+
+### Allow Apache
+
+```bash
+sudo ufw allow in "Apache"
+```
+
+### Allow PORT
+
+```bash
+sudo ufw allow 22
+```
+
+## Lets encrypt
+
+```bash
+sudo apt install certbot python3-certbot-apache
+sudo certbot --apache -d url.com
+```
