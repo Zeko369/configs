@@ -26,6 +26,12 @@ Host name
 ssh name
 ```
 
+### Setup Vim
+```
+curl -L zekan.tk/vimrc > .vimrc
+sudo cp .vimrc /root/.vimrc
+```
+
 ### Change ssh port
 
 `vim /etc/ssh/sshd_config`
