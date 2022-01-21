@@ -2,7 +2,7 @@ alias up="python -m SimpleHTTPServer 8000 & open http://localhost:8000 ; fg"
 alias upp="php -S 0.0.0.0:8080 & open http://localhost:8080 ; fg"
 alias upmd="livedown start $2 --port 4242 & open http://localhost:4242 ; fg"
 
-alias circuitPy='screen "$(ls /dev/cu.usb*)" 115200'
+alias circuitPy='screen "$(ls /dev/cu.usb* | head -n 1)" 115200'
 
 alias zshrc="vim ~/repos/configs/zshrc.base.local"
 alias term-conf=" vim /mnt/c/Users/zekan/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
