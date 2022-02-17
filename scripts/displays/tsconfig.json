@@ -1,0 +1,12 @@
+{
+  "extends": "./node_modules/zeko369-tsconfig/configs/js/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist/",
+    "module": "ES2022",
+    "target": "esnext",
+    "moduleResolution": "node",
+    "paths": {
+      "zx": ["./node_modules/zx"]
+    }
+  }
+}
