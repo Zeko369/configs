@@ -1,0 +1,23 @@
+set showmode
+set so=5
+set nu
+
+set incsearch
+set hlserach
+
+set ideajoin
+set surround
+
+inoremap jk <Esc>
+
+nnoremap B ^
+vnoremap B ^
+nnoremap E $
+vnoremap E $
+
+nnoremap Y y$
+
+map r <Nop>
+map rn <Action>(RenameElement)
+
+"set whichwrap+=<,>,[,]
