@@ -6,7 +6,7 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 ZSH_THEME="jispwoso"
 
-USE_RUBY=true
+USE_RUBY=
 export FILES="open"
 
 source ~/repos/configs/shell/zshrc
@@ -43,4 +43,8 @@ alias j8="export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/
 [[ -s ~/.fig/fig.sh ]] && source ~/.fig/fig.sh
 #### END FIG ENV VARIABLES ####
 
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="/Users/franzekan/Library/Python/3.8/bin:$PATH"
 
+alias speakers="node Desktop/Logitech-G560-LED-Controller/index.js"
+alias ga.="git add ."
