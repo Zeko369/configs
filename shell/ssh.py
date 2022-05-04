@@ -1,4 +1,4 @@
-#!/opt/homebrew/bin/python3
+#!/usr/bin/python3
 
 from os import path, environ
 from pprint import pprint
