@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 
-from os import path, environ
+import os
+import sys
 from pprint import pprint
 
-FILE_PATH = f'{environ["HOME"]}/.ssh/config'
+FILE_PATH = f'{os.environ["HOME"]}/.ssh/config'
 
-if not path.exists(FILE_PATH):
+if not os.path.exists(FILE_PATH):
     print('Not config file')
 
 with open(FILE_PATH, 'r') as file:
@@ -17,7 +18,7 @@ with open(FILE_PATH, 'r') as file:
         if len(line) == 0:
             continue
 
-        if line[0] == '#':
+        if line[0] not in [' ', 'H']:
             continue
 
         if line.startswith('Host '):
@@ -27,9 +28,14 @@ with open(FILE_PATH, 'r') as file:
 
         key, value = line.split(' ')
         hosts[last_host][key] = value
-
-
-    for host in hosts:
-        hostname = hosts[host].get('HostName')
-        if hostname:
-            print(hostname + ' ' * (20 - len(hostname)), host)
+    
+    if len(sys.argv) == 2:
+        try:
+            print(hosts[sys.argv[1]])
+        except KeyError:
+            print('Host not found')
+    else:
+        for host in hosts:
+            hostname = hosts[host].get('HostName')
+            if hostname:
+                print(hostname + ' ' * (20 - len(hostname)), host)
