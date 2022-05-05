@@ -2,7 +2,7 @@
 
 import os
 import sys
-from pprint import pprint
+from typing import Dict
 
 FILE_PATH = f'{os.environ["HOME"]}/.ssh/config'
 
@@ -10,7 +10,7 @@ if not os.path.exists(FILE_PATH):
     print('Not config file')
 
 with open(FILE_PATH, 'r') as file:
-    hosts = {}
+    hosts: Dict[str, Dict[str, str]] = {}
     last_host = ''
 
     for line in file.readlines():
@@ -28,14 +28,13 @@ with open(FILE_PATH, 'r') as file:
 
         key, value = line.split(' ')
         hosts[last_host][key] = value
-    
-    if len(sys.argv) == 2:
-        try:
-            print(hosts[sys.argv[1]])
-        except KeyError:
-            print('Host not found')
-    else:
-        for host in hosts:
-            hostname = hosts[host].get('HostName')
-            if hostname:
-                print(hostname + ' ' * (20 - len(hostname)), host)
+
+    for host in hosts:
+        hostname = hosts[host].get('HostName')
+        if not hostname:
+            continue
+
+        if len(sys.argv) == 2 and not host.startswith(sys.argv[1]):
+            continue
+
+        print(hostname + ' ' * (20 - len(hostname)), host)
