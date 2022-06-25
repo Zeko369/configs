@@ -13,7 +13,8 @@ const configs = [
   },
   {
     name: "Home",
-    displayUUID: "2A9F7159-CE93-954E-0857-D6964E3302DB",
+    // displayUUID: "2A9F7159-CE93-954E-0857-D6964E3302DB",
+    displayUUID: "37D8832A-2D66-02CA-B9F7-8F30A301B230",
     macPosition: "(-1280,498)",
   },
 ];
