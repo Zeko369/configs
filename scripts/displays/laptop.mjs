@@ -8,7 +8,8 @@ import { getConfig } from "./shared/get.mjs";
 const configs = [
   {
     name: "Work",
-    displayUUID: "58A2CDA4-CD64-CCFA-0857-D6964E3302DB",
+    // displayUUID: "58A2CDA4-CD64-CCFA-0857-D6964E3302DB",
+    displayUUID: 'DB21CC67-E67C-4AB6-9A18-26F417B0398C',
     macPosition: "(1055,1440)",
   },
   {
