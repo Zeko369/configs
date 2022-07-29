@@ -3,9 +3,9 @@
 function _ls() {
   if command -v exa &> /dev/null; then
     if [ -n "$NO_GIT" ]; then
-      exa --long --header "$@"
+      exa --long --header --icons "$@"
     else
-      exa --long --header --git "$@"
+      exa --long --header --icons --git "$@"
     fi
   elif command -v lsd &> /dev/null; then
     lsd "$@"
