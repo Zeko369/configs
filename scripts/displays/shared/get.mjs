@@ -21,8 +21,8 @@ export const getConfig = async (configs) => {
 
   const args = [
     `id:${config.displayUUID} res:${display.resolution} hz:${display.refresh} color_depth:${display.colorDepth} scaling:off origin:(0,0) degree:0`,
-    // `id:${MAC_DISPLAY_UUID} res:1280x800 hz:60 color_depth:8 scaling:on origin:${config.macPosition} degree:0`, // mbp13 m1
-    `id:${MAC_DISPLAY_UUID} res:1512x982 hz:120 color_depth:8 scaling:on origin:${config.macPosition} degree:0`,  // mpb14 m1 pro
+    `id:${MAC_DISPLAY_UUID} res:1280x800 hz:60 color_depth:8 scaling:on origin:${config.macPosition} degree:0`, // mbp13 m1
+    // `id:${MAC_DISPLAY_UUID} res:1512x982 hz:120 color_depth:8 scaling:on origin:${config.macPosition} degree:0`,  // mpb14 m1 pro
   ];
 
   return [args, config];
