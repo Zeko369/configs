@@ -47,4 +47,3 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="/Users/franzekan/Library/Python/3.8/bin:$PATH"
 
 alias speakers="node Desktop/Logitech-G560-LED-Controller/index.js"
-alias ga.="git add ."

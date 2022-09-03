@@ -13,6 +13,7 @@ alias configs="vim ~/repos/configs"
 
 # Don't run ghost script on old ununtu versions
 alias gs="git status"
+alias ga.="git add ."
 
 alias term="gnome-terminal"
 alias terminal="gnome-terminal"
