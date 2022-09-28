@@ -21,6 +21,8 @@ alias code="$CODE"
 alias ci="code"
 alias ci="code-insiders"
 
+alias rm-rf="rm -rf"
+
 # function venvinit
 alias venv="source ./venv/bin/activate"
 alias deac="deactivate"
