@@ -4,7 +4,7 @@ alias c="clear"
 alias n="nautilus"
 alias s="scripts"
 
-alias up="python -m SimpleHTTPServer 8000 & open http://localhost:8000 ; fg"
+alias up="python3 -m http.server 8000 & open http://localhost:8000 ; fg"
 alias upp="php -S 0.0.0.0:8080 & open http://localhost:8080 ; fg"
 alias upmd="livedown start $2 --port 4242 & open http://localhost:4242 ; fg"
 
