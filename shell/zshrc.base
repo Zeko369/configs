@@ -40,7 +40,7 @@ alias j8="export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/
 
 
 #### FIG ENV VARIABLES ####
-[[ -s ~/.fig/fig.sh ]] && source ~/.fig/fig.sh
+# [[ -s ~/.fig/fig.sh ]] && source ~/.fig/fig.sh
 #### END FIG ENV VARIABLES ####
 
 export PATH="$HOME/.local/bin:$PATH"
