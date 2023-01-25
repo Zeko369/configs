@@ -25,6 +25,14 @@ function scripts {
   readPkg
 }
 
+function scriptsSimple {
+	if ! command -v jq &> /dev/null; then
+		echo "This requires jq, you can use regular scripts without jq"
+	else
+		
+	fi
+}
+
 function packages {
   if [ $# -eq 1 ]; then
     KEY="devDependencies"
