@@ -2,4 +2,4 @@
 
 eval "$(fnm env)"
 
-zx ~/repos/configs/scripts/displays/side.mj
+zx ~/repos/configs/scripts/displays/side.mjs
