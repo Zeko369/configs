@@ -47,3 +47,17 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="/Users/franzekan/Library/Python/3.8/bin:$PATH"
 
 alias speakers="node Desktop/Logitech-G560-LED-Controller/index.js"
+
+alias jsc="/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers/jsc"
+
+alias ga.="git add ."
+alias code.="code ."
+
+# bun completions
+[ -s "/Users/franzekan/.bun/_bun" ] && source "/Users/franzekan/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+alias npx="nx"
