@@ -1,4 +1,14 @@
-HISTSIZE=500000
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
+export UPDATE_ZSH_DAYS=31
+
+# zmodload zsh/zprof
+
+eval "$(fnm env --use-on-cd)"
+
+alias exa="exa --icons"
+
+# HISTSIZE=500000
 SAVEHIST=100000
 
 export ZSH="/Users/franzekan/.oh-my-zsh"
@@ -6,7 +16,7 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 ZSH_THEME="jispwoso"
 
-USE_RUBY=
+USE_RUBY=true
 export FILES="open"
 
 source ~/repos/configs/shell/zshrc
@@ -39,19 +49,27 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 alias j8="export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home; java -version"
 
 
-#### FIG ENV VARIABLES ####
-# [[ -s ~/.fig/fig.sh ]] && source ~/.fig/fig.sh
-#### END FIG ENV VARIABLES ####
-
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="/Users/franzekan/Library/Python/3.8/bin:$PATH"
-
-alias speakers="node Desktop/Logitech-G560-LED-Controller/index.js"
-
 alias jsc="/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers/jsc"
 
 alias ga.="git add ."
 alias code.="code ."
+
+alias b="bundle"
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+
+# heroku autocomplete setup
+HEROKU_AC_ZSH_SETUP_PATH=/Users/franzekan/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
+
+# export PATH=$PATH:/Applications/MAMP/bin/php/php7.1.33/bin
+export PATH=$PATH:/Applications/MAMP/bin/php/php7.4.21/bin
+export PATH=$PATH:~/jetbrains-scripts
+
+# pnpm
+export PNPM_HOME="/Users/franzekan/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
+
+# zprof
 
 # bun completions
 [ -s "/Users/franzekan/.bun/_bun" ] && source "/Users/franzekan/.bun/_bun"
@@ -60,4 +78,24 @@ alias code.="code ."
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-alias npx="nx"
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+export PATH=~/.composer/vendor/bin:$PATH
+
+
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/liberica-jdk-8-full.jdk/Contents/Home"
+export NODE_NO_WARNINGS=1 
+
+# alias npx="nx"
+# alias yarn="echo \"Use ni\""
+
+function _wasp {
+				    wasp completion:list
+		}
+
+		complete -o default -o nospace -C _wasp wasp
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
