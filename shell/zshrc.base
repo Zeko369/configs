@@ -1,6 +1,11 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
+# zmodload zsh/zprof
+
+# export PATH="/opt/homebrew/anaconda3/bin:$PATH"  # commented out by conda initialize
+
 export UPDATE_ZSH_DAYS=31
 
-# zmodload zsh/zprof
 
 eval "$(fnm env --use-on-cd)"
 
@@ -64,10 +69,11 @@ export PATH=$PATH:~/jetbrains-scripts
 
 # pnpm
 export PNPM_HOME="/Users/franzekan/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
 # pnpm end
-
-# zprof
 
 # bun completions
 [ -s "/Users/franzekan/.bun/_bun" ] && source "/Users/franzekan/.bun/_bun"
@@ -89,8 +95,33 @@ export NODE_NO_WARNINGS=1
 # alias npx="nx"
 # alias yarn="echo \"Use ni\""
 
-function _wasp {
-	wasp completion:list
-}
+function _wasp { wasp completion:list }
 
 complete -o default -o nospace -C _wasp wasp
+
+export PATH="$PATH:$(brew --prefix llvm@15)/bin"
+export LDFLAGS="$LDFLAGS -L$(brew --prefix llvm@15)/lib"
+export CPPFLAGS="$CPPFLAGS -I$(brew --prefix llvm@15)/include"
+
+# zprof
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+    # eval "$__conda_setup"
+# else
+    #if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
+    #    . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
+    #else
+        #export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+    #fi
+#fi
+#unset __conda_setup
+# <<< conda initialize <<<
+
+
+[ -f "/Users/franzekan/.ghcup/env" ] && source "/Users/franzekan/.ghcup/env" # ghcup-env
