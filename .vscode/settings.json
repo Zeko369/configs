@@ -4,5 +4,5 @@
     "*vimrc*": "viml",
     "*.js": "javascript",
     ".huskyrc": "json"
-  }
+  },
 }
