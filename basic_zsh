@@ -117,6 +117,7 @@ eval "$(rbenv init - zsh)"
 
 alias ll="exa -l --git --icons"
 alias n="open"
+alias ga.="git add ."
 
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
