@@ -5,6 +5,10 @@ inoremap jk <Esc>
 nnoremap B ^
 nnoremap E $
 
+set visualbell t_vb=
+set listchars=tab:>-,trail:~
+set list
+
 set nu
 set relativenumber
 
@@ -18,3 +22,4 @@ map <F2>                :w<Enter>
 map <C-F2>              :w
 map <F3>                :wq<Enter>
 map <F4>                :q!<Enter>
+
