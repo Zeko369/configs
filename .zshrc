@@ -1,5 +1,6 @@
 # Fig pre block. Keep at the top of this file.
 [[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -115,7 +116,25 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 alias ci="code-insiders"
 eval "$(rbenv init - zsh)"
 
+alias ll="exa -l --git --icons"
+alias n="open"
+alias ga.="git add ."
+
+export EDITOR="vim"
+
+bindkey "\e\eOD" beginning-of-line
+bindkey "\e\eOC" end-of-line
+
+# pnpm
+export PNPM_HOME="/Users/franzekan/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+alias be="bundle exec"
+alias dc="docker compose"
+
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
-
-alias ll="exa -l --git --icons"
