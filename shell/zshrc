@@ -181,3 +181,5 @@ source "$configs/shell/ls.sh"
 if [[ "$OSTYPE" == "darwin"* ]]; then
   source "$configs/shell/functions.macos.sh"
 fi
+
+alias ci.="ci ."
