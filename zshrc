@@ -136,6 +136,7 @@ esac
 alias be="bundle exec"
 alias dc="docker compose"
 alias pr="gh pr view --web"
+alias repo="gh repo view --web"
 
 alias gu="git reset --soft HEAD~1"
 
