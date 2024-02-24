@@ -139,6 +139,8 @@ alias pr="gh pr view --web"
 alias repo="gh repo view --web"
 
 alias gu="git reset --soft HEAD~1"
+alias glo="git pull origin"
+alias gco.="git checkout ."
 
 [ -f "/Users/franzekan/.ghcup/env" ] && source "/Users/franzekan/.ghcup/env" # ghcup-env
 
