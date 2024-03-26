@@ -116,7 +116,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 alias ci="code-insiders"
 eval "$(rbenv init - zsh)"
 
-alias ll="exa -l --git --icons"
+alias ll="eza -l --git --icons"
 alias n="open"
 alias ga.="git add ."
 
