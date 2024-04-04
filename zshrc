@@ -143,12 +143,16 @@ alias gu="git reset --soft HEAD~1"
 alias glo="git pull origin"
 alias gco.="git checkout ."
 
+alias gs="echo \"You're dumb\"; gst"
+
 alias gtco="gt co"
 alias gtm="gt m"
 alias gtmm="gt m -c -m"
 alias gtss="gt ss"
 
 [ -f "/Users/franzekan/.ghcup/env" ] && source "/Users/franzekan/.ghcup/env" # ghcup-env
+
+source "$HOME/.rye/env"
 
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
