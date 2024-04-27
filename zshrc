@@ -142,6 +142,8 @@ alias pr="gh pr view --web"
 alias repo="gh repo view --web"
 alias cm='open "$(git remote get-url origin | sed "s/git@github.com:/https:\/\/github.com\//" | sed "s/.git$//")/commit/$(git rev-parse HEAD)"'
 
+alias ro="railway open"
+
 alias gu="git reset --soft HEAD~1"
 alias glo="git pull origin"
 alias gco.="git checkout ."
