@@ -145,6 +145,7 @@ alias cm='open "$(git remote get-url origin | sed "s/git@github.com:/https:\/\/g
 alias ro="railway open"
 
 alias gu="git reset --soft HEAD~1"
+alias grs="git restore --staged"
 alias glo="git pull origin"
 alias gco.="git checkout ."
 
@@ -154,6 +155,9 @@ alias gtco="gt co"
 alias gtm="gt m"
 alias gtmm="gt m -c -m"
 alias gtss="gt ss"
+alias gtgo="gt add -A && gt continue"
+alias yeet="gtss"
+alias yeetpr="gh pr create -a @me -f"
 
 [ -f "/Users/franzekan/.ghcup/env" ] && source "/Users/franzekan/.ghcup/env" # ghcup-env
 
