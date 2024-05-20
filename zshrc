@@ -134,8 +134,9 @@ esac
 # pnpm end
 
 alias be="bundle exec"
-alias rr="rails routes | fzf"
-alias rc="rails c"
+alias r="bin/rails"
+alias rr="r routes | fzf"
+alias rc="r c"
 
 alias dc="docker compose"
 alias pr="gh pr view --web"
