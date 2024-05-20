@@ -135,7 +135,8 @@ esac
 
 alias be="bundle exec"
 alias r="bin/rails"
-alias rr="r routes | fzf"
+alias rr="r routes"
+alias rrr="r routes | fzf"
 alias rc="r c"
 
 alias dc="docker compose"
