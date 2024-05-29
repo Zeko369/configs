@@ -142,7 +142,7 @@ alias rc="r c"
 alias dc="docker compose"
 alias pr="gh pr view --web"
 alias repo="gh repo view --web"
-alias cm='open "$(git remote get-url origin | sed "s/git@github.com:/https:\/\/github.com\//" | sed "s/.git$//")/commit/$(git rev-parse HEAD)"'
+alias ocm='open "$(git remote get-url origin | sed "s/git@github.com:/https:\/\/github.com\//" | sed "s/.git$//")/commit/$(git rev-parse HEAD)"'
 
 alias ro="railway open"
 alias fwd="readlink -f"
@@ -150,6 +150,7 @@ alias fwd="readlink -f"
 alias gu="git reset --soft HEAD~1"
 alias grs="git restore --staged"
 alias glo="git pull origin"
+alias gcb="git checkout -b "
 alias gco.="git checkout ."
 
 alias gs="echo \"You're dumb\"; gst"
