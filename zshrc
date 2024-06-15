@@ -114,6 +114,8 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 alias ci="code-insiders"
+alias ci.="ci ."
+
 eval "$(rbenv init - zsh)"
 
 alias ll="eza -l --git --icons"
@@ -166,6 +168,7 @@ alias yeetpr="gh pr create -a @me -f"
 [ -f "/Users/franzekan/.ghcup/env" ] && source "/Users/franzekan/.ghcup/env" # ghcup-env
 
 source "$HOME/.rye/env"
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
