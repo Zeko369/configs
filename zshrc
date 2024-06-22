@@ -134,12 +134,15 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+#
+alias cd.='cd $(readlink -f .)' # Go to real dir (i.e. if current dir is linked)
 
 alias be="bundle exec"
 alias r="bin/rails"
 alias rr="r routes"
 alias rrr="r routes | fzf"
 alias rc="r c"
+alias rs="r s"
 
 alias dc="docker compose"
 alias pr="gh pr view --web"
@@ -164,6 +167,10 @@ alias gtss="gt ss"
 alias gtgo="gt add -A && gt continue"
 alias yeet="gtss"
 alias yeetpr="gh pr create -a @me -f"
+
+alias aliases="alias | sed 's/=.*//'"
+alias paths='echo -e ${PATH//:/\\n}'
+
 
 [ -f "/Users/franzekan/.ghcup/env" ] && source "/Users/franzekan/.ghcup/env" # ghcup-env
 
