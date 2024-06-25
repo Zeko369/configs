@@ -73,7 +73,7 @@ ZSH_THEME="candy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(rails git ruby zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -179,3 +179,5 @@ export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
+
+eval "$(atuin init zsh)"
