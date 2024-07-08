@@ -167,6 +167,32 @@ alias gtss="gt ss"
 alias gtgo="gt add -A && gt continue"
 alias yeet="gtss"
 alias yeetpr="gh pr create -a @me -f"
+yeetfix() {
+  # Merge all arguments into a single string with spaces
+  local commit_message="$*"
+  # Replace spaces in the commit message with dashes for the branch name
+  local branch_name=$(echo "$*" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')
+
+  # Create a new branch
+  git checkout -b "$branch_name"
+
+  # Add all changes and commit with the provided message
+  git add .
+  git commit -m "$commit_message"
+
+  # Push the branch to origin
+  git push -u origin "$branch_name"
+
+  # Open a PR on GitHub, assigning @me and using -f to fill the PR description
+  local out=$(gh pr create --fill --assignee "@me")
+
+  # Copy the PR URL to the clipboard
+  echo "$out" | tail -n 1 | pbcopy
+
+  echo "Branch '$branch_name' created, changes committed, and PR opened with message: '$commit_message' and copied to clipboard"
+}
+
+alias ocd="OVERCOMMIT_DISABLE=1"
 
 alias aliases="alias | sed 's/=.*//'"
 alias paths='echo -e ${PATH//:/\\n}'
