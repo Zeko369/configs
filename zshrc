@@ -180,7 +180,7 @@ alias gtmm="gt m -c -m"
 alias gtss="gt ss"
 alias gtgo="gt add -A && gt continue"
 alias yeet="gtss"
-alias yeetpr="gh pr create -a @me -f"
+alias yeetpr="git push && gh pr create -a @me -f"
 yeetfix() {
   # Merge all arguments into a single string with spaces
   local commit_message="$*"
