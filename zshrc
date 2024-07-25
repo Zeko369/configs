@@ -144,6 +144,21 @@ alias rrr="r routes | fzf"
 alias rc="r c"
 alias rs="r s"
 
+# TODO: Warn me before commiting if the last commit message is this
+GIT_TMP_MESSAGE="THIS IS A TEMPORARY COMMIT, ROLL IT BACK"
+alias gtmp="git commit -m '$GIT_TMP_MESSAGE'"
+alias gtmpa="git add . && gtmp"
+alias gs="echo \"You're dumb\"; gst"
+
+check_tmp() {
+  last_message=$(git log -1 --format=%s)
+
+  if [[ $last_message = $GIT_TMP_MESSAGE && $SKIP_TMP_CHECK != '1' ]]; then
+    echo "Your last commit was a TMP commit, check it out or rerun with SKIP_TMP_CHECK=1, i.e. 'SKIP_TMP_CHECK=1 !!'"
+    exit 1
+  fi
+}
+
 alias dc="docker compose"
 alias pr="gh pr view --web"
 alias repo="gh repo view --web"
@@ -157,8 +172,7 @@ alias grs="git restore --staged"
 alias glo="git pull origin"
 alias gcb="git checkout -b "
 alias gco.="git checkout ."
-
-alias gs="echo \"You're dumb\"; gst"
+alias gpm="git pull origin $(git_main_branch)"
 
 alias gtco="gt co"
 alias gtm="gt m"
