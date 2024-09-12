@@ -114,6 +114,8 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 alias ci="code-insiders"
 alias ci.="ci ."
+alias cs="cursor"
+alias cs.="cs ."
 
 eval "$(rbenv init - zsh)"
 
