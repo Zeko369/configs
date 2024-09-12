@@ -1,6 +1,5 @@
-# Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
-
+# Amazon Q pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -174,9 +173,11 @@ alias gcb="git checkout -b "
 alias gco.="git checkout ."
 alias gpm="git pull origin $(git_main_branch)"
 
-alias gtco="gt co"
 alias gtm="gt m"
-alias gtmm="gt m -c -m"
+function gtmm() { gt m -c -m "$*" }
+function gcmm() { gc -m "$*" }
+
+alias gtco="gt co"
 alias gtss="gt ss"
 alias gtgo="gt add -A && gt continue"
 alias yeet="gtss"
@@ -217,7 +218,7 @@ alias paths='echo -e ${PATH//:/\\n}'
 source "$HOME/.rye/env"
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
-
 eval "$(atuin init zsh)"
+
+# Amazon Q post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
