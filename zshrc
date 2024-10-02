@@ -180,9 +180,10 @@ function gtmm() { gt m -c -m "$*" }
 function gcmm() { gc -m "$*" }
 
 alias gtco="gt co"
-alias gtss="gt ss"
 alias gtgo="gt add -A && gt continue"
-alias yeet="gtss"
+alias gtss="gt ss"
+
+alias yeet="gt ss"
 alias yeetpr="git push && gh pr create -a @me -f"
 yeetfix() {
   # Merge all arguments into a single string with spaces
