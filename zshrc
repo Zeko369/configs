@@ -171,18 +171,32 @@ alias fwd="readlink -f"
 
 alias gu="git reset --soft HEAD~1"
 alias grs="git restore --staged"
+alias grs.="grs ."
 alias glo="git pull origin"
 alias gcb="git checkout -b "
 alias gco.="git checkout ."
+alias gco-="git checkout -"
 alias gpm="git pull origin $(git_main_branch)"
 
 alias gtm="gt m"
 function gtmm() { gt m -c -m "$*" }
-function gcmm() { gc -m "$*" }
+function gcmm() {
+  if git diff --cached --quiet; then
+    echo "No staged files. Adding all files..."
+    git add .
+  else
+    echo "Only using staged files"
+  fi
+
+  gc -m "$*"
+}
 
 alias gtco="gt co"
 alias gtgo="gt add -A && gt continue"
 alias gtss="gt ss"
+alias gtup="gt up"
+alias gtdn="gt down"
+alias gtt="gt top"
 
 alias yeet="gt ss"
 alias yeetpr="git push && gh pr create -a @me -f"
@@ -196,7 +210,16 @@ yeetfix() {
   git checkout -b "$branch_name"
 
   # Add all changes and commit with the provided message
-  git add .
+  # Check for staged files
+  if git diff --cached --quiet; then
+    # No staged files
+    echo "No staged files. Adding all files..."
+    git add .
+  else
+    # There are staged files
+    echo "Only using staged files"
+  fi
+
   git commit -m "$commit_message"
 
   # Push the branch to origin
