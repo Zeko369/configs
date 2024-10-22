@@ -247,5 +247,11 @@ export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 
 eval "$(atuin init zsh)"
 
+function lt() {
+  eza --tree --level=2 --long --icons --git --ignore-glob="node_modules|.git|vendor" $argv
+}
+
 # Amazon Q post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
+
+. "$HOME/.cargo/env"
