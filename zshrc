@@ -103,7 +103,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 eval "$(fnm env --use-on-cd)"
-
+real_npx=$(which npx)
+alias _npx="$real_npx"
+alias npx="bunx"
 
 # bun completions
 [ -s "/Users/franzekan/.bun/_bun" ] && source "/Users/franzekan/.bun/_bun"
