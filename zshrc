@@ -181,7 +181,14 @@ alias gco-="git checkout -"
 alias gpm="git pull origin $(git_main_branch)"
 
 alias gtm="gt m"
-function gtmm() { gt m -c -m "$*" }
+function gtmm() {
+  if git diff --cached --quiet; then
+    echo "No staged files. Adding all files..."
+    git add .
+  fi
+
+  gt m -c -m "$*"
+}
 function gcmm() {
   if git diff --cached --quiet; then
     echo "No staged files. Adding all files..."
