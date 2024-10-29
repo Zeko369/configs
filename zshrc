@@ -243,6 +243,42 @@ yeetfix() {
   echo "Branch '$branch_name' created, changes committed, and PR opened with message: '$commit_message' and copied to clipboard"
 }
 
+yeetrepo() {
+  local repo_name=""
+  local private_flag="--public"
+
+  # Check for the first argument
+  if [[ $# -gt 0 ]]; then
+    if [[ $1 == "--private" ]]; then
+      private_flag="--private"
+    else
+      repo_name="$1"
+    fi
+  fi
+
+  # If --private was passed, shift arguments to check for additional repo name
+  if [[ $private_flag == "--private" ]]; then
+    if [[ $# -gt 1 ]]; then
+      repo_name="$2"
+    fi
+  fi
+
+  # Build the gh repo create command
+  local command=("gh" "repo" "create")
+
+  if [[ -n $repo_name ]]; then
+    command+=("$repo_name")
+  fi
+
+  command+=("--push" "--source" "." "$private_flag")
+
+  # Remove empty params from command array
+  command=("${command[@]/#/}")
+
+  # Execute the command
+  "${command[@]}"
+}
+
 alias ocd="OVERCOMMIT_DISABLE=1"
 
 alias aliases="alias | sed 's/=.*//'"
