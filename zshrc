@@ -145,6 +145,7 @@ esac
 alias cd.='cd $(readlink -f .)' # Go to real dir (i.e. if current dir is linked)
 
 alias be="bundle exec"
+alias br="bundle exec" # not because of bundle run, but because I'm an idiot who can't type
 alias r="bin/rails"
 alias rr="r routes"
 alias rrr="r routes | fzf"
