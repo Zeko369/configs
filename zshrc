@@ -230,7 +230,7 @@ yeetfix() {
   # if not args print error and exit
   if [ -z "$*" ]; then
     echo "Error: No arguments provided"
-    exit 1
+    return 1
   fi
 
   # Merge all arguments into a single string with spaces
