@@ -205,6 +205,18 @@ function gcmm() {
   gc -m "$*"
 }
 
+function yeetm() {
+  if git diff --cached --quiet; then
+    echo "No staged files. Adding all files..."
+    git add .
+  else
+    echo "Only using staged files"
+  fi
+
+  gc -m "$*"
+  git push
+}
+
 alias gtco="gt co"
 alias gtgo="gt add -A && gt continue"
 alias gtss="gt ss"
@@ -215,6 +227,12 @@ alias gtt="gt top"
 alias yeet="gt ss"
 alias yeetpr="git push && gh pr create -a @me -f"
 yeetfix() {
+  # if not args print error and exit
+  if [ -z "$*" ]; then
+    echo "Error: No arguments provided"
+    exit 1
+  fi
+
   # Merge all arguments into a single string with spaces
   local commit_message="$*"
   # Replace spaces in the commit message with dashes for the branch name
