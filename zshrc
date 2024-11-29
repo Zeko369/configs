@@ -152,7 +152,7 @@ alias rrr="r routes | fzf"
 alias rc="r c"
 alias rs="r s"
 
-# TODO: Warn me before commiting if the last commit message is this
+# TODO: Warn me before committing if the last commit message is this
 GIT_TMP_MESSAGE="THIS IS A TEMPORARY COMMIT, ROLL IT BACK"
 alias gtmp="git commit -m '$GIT_TMP_MESSAGE'"
 alias gtmpa="git add . && gtmp"
@@ -171,6 +171,7 @@ alias dc="docker compose"
 alias pr="gh pr view --web"
 alias prcp="gh pr view --json 'url' | jq -r '.url' | pbcopy"
 alias repo="gh repo view --web"
+alias acts="gh pr checks -w"
 alias ocm='open "$(git remote get-url origin | sed "s/git@github.com:/https:\/\/github.com\//" | sed "s/.git$//")/commit/$(git rev-parse HEAD)"'
 
 alias ro="railway open"
@@ -205,6 +206,7 @@ function gcmm() {
   gc -m "$*"
 }
 
+alias gcmmp="yeetm"
 function yeetm() {
   if git diff --cached --quiet; then
     echo "No staged files. Adding all files..."
@@ -233,10 +235,22 @@ yeetfix() {
     return 1
   fi
 
-  # Merge all arguments into a single string with spaces
-  local commit_message="$*"
+  local commit_message=""
+  local pr_body=""
+  local body_flag="--body"
+
+  # Split the input at --body
+  if [[ $* == *"$body_flag"* ]]; then
+    # Get everything before --body for commit message
+    commit_message="${${*%%$body_flag*}%% }"
+    # Get everything after --body for PR body
+    pr_body="${${*#*$body_flag}## }"
+  else
+    commit_message="$*"
+  fi
+
   # Replace spaces in the commit message with dashes for the branch name
-  local branch_name=$(echo "$*" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')
+  local branch_name=$(echo "$commit_message" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')
 
   # Create a new branch
   git checkout -b "$branch_name"
@@ -257,8 +271,14 @@ yeetfix() {
   # Push the branch to origin
   git push -u origin "$branch_name"
 
-  # Open a PR on GitHub, assigning @me and using -f to fill the PR description
-  local out=$(gh pr create --fill --assignee "@me")
+  # Open a PR on GitHub, using either --fill or the provided body
+  if [ -n "$pr_body" ]; then
+    # Use provided body
+    local out=$(gh pr create --assignee "@me" --title "$commit_message" --body "$pr_body")
+  else
+    # Use --fill if no body provided
+    local out=$(gh pr create --fill --assignee "@me")
+  fi
 
   # Copy the PR URL to the clipboard
   echo "$out" | tail -n 1 | pbcopy
