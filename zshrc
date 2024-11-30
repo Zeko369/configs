@@ -151,6 +151,7 @@ alias rr="r routes"
 alias rrr="r routes | fzf"
 alias rc="r c"
 alias rs="r s"
+alias lint="be rubocop"
 
 # TODO: Warn me before committing if the last commit message is this
 GIT_TMP_MESSAGE="THIS IS A TEMPORARY COMMIT, ROLL IT BACK"
