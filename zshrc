@@ -208,13 +208,8 @@ function gcmm() {
   gc -m "$*"
 }
 
+alias yeetm="yeet" # yeet now supports message
 alias gcmmp="yeetm"
-function yeetm() {
-  add_unless_staged
-
-  gc -m "$*"
-  git push
-}
 
 alias gtco="gt co"
 alias gtgo="gt add -A && gt continue"
