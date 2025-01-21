@@ -1,3 +1,5 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/Users/franzekan/completions:"* ]]; then export FPATH="/Users/franzekan/completions:$FPATH"; fi
 if [ -n "${ZSH_DEBUGRC+1}" ]; then
     zmodload zsh/zprof
 fi
@@ -187,34 +189,28 @@ alias gco.="git checkout ."
 alias gco-="git checkout -"
 alias gpm="git pull origin $(git_main_branch)"
 
-alias gtm="gt m"
-function gtmm() {
-  if git diff --cached --quiet; then
-    echo "No staged files. Adding all files..."
-    git add .
-  fi
-
-  gt m -c -m "$*"
-}
-function gcmm() {
+function add_unless_staged() {
   if git diff --cached --quiet; then
     echo "No staged files. Adding all files..."
     git add .
   else
     echo "Only using staged files"
   fi
+}
 
+alias gtm="gt m"
+function gtmm() {
+  add_unless_staged
+  gt m -c -m "$*"
+}
+function gcmm() {
+  add_unless_staged
   gc -m "$*"
 }
 
 alias gcmmp="yeetm"
 function yeetm() {
-  if git diff --cached --quiet; then
-    echo "No staged files. Adding all files..."
-    git add .
-  else
-    echo "Only using staged files"
-  fi
+  add_unless_staged
 
   gc -m "$*"
   git push
@@ -226,10 +222,27 @@ alias gtss="gt ss"
 alias gtup="gt up"
 alias gtdn="gt down"
 alias gtt="gt top"
+alias gtc="gt c"
 
-alias yeet="gt ss"
 alias yeetpr="git push && gh pr create -a @me -f"
-yeetfix() {
+function yeet() {
+  # if there is any git config with graphite then use graphite
+  if [ -n "$(git config --list | grep graphite)" ]; then
+    gt ss
+  else
+    add_unless_staged
+
+    message="yolo"
+    if [ -n "$*" ]; then
+      message="$*"
+    fi
+
+    git commit -m "$message"
+
+    git push
+  fi
+}
+function yeetfix() {
   # if not args print error and exit
   if [ -z "$*" ]; then
     echo "Error: No arguments provided"
@@ -348,3 +361,4 @@ function lt() {
 if [ -n "${ZSH_DEBUGRC+1}" ]; then
     zprof
 fi
+. "/Users/franzekan/.deno/env"
