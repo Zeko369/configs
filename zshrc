@@ -127,7 +127,7 @@ alias cs.="cs ."
 
 eval "$(rbenv init - zsh)"
 
-alias ll="eza -l --git --icons"
+alias ll="eza -l --git --icons always"
 alias n="open"
 alias ga.="git add ."
 
@@ -343,6 +343,31 @@ source "$HOME/.rye/env"
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 
 eval "$(atuin init zsh)"
+
+notif() {
+    # Save the command as a string
+    local cmd="$*"
+
+    # Run the command passed to the function
+    "$@"  # This runs the command you provide as an argument
+
+    # Check the exit status of the command
+    if [ $? -eq 0 ]; then
+        osascript -e "display notification \"Task completed successfully: $cmd\" with title \"Notification\""
+    else
+        osascript -e "display notification \"Task failed: $cmd\" with title \"Notification\""
+    fi
+}
+
+# kamal override for local in repo + make it work with fig autocomplete
+kamal() {
+    if [[ -x "./bin/kamal" ]]; then
+        "./bin/kamal" "$@"
+    else
+        command kamal "$@"
+    fi
+}
+
 
 function lt() {
   eza --tree --level=2 --long --icons --git --ignore-glob="node_modules|.git|vendor" $argv
