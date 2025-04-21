@@ -17,3 +17,5 @@ brew install lsusb
 # TODO: add script to automate macos
 
 change
+
+blah blah
