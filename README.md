@@ -15,3 +15,5 @@ git config --global init.defaultBranch main
 brew install lsusb
 
 # TODO: add script to automate macos
+
+change
