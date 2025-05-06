@@ -130,6 +130,7 @@ eval "$(rbenv init - zsh)"
 alias ll="eza -l --git --icons always"
 alias n="open"
 alias ga.="git add ."
+alias lg="lazygit"
 
 export EDITOR="vim"
 
@@ -175,7 +176,8 @@ alias pr="gh pr view --web"
 alias prcp="gh pr view --json 'url' | jq -r '.url' | pbcopy"
 alias repo="gh repo view --web"
 alias acts="gh pr checks -w"
-alias ocm='open "$(git remote get-url origin | sed "s/git@github.com:/https:\/\/github.com\//" | sed "s/.git$//")/commit/$(git rev-parse HEAD)"'
+alias ocm='open $(git remote get-url origin | sed "s/git@github.com:/https:\/\/github.com\//" | sed "s/.git$//")/commit/$(git rev-parse HEAD)'
+alias cmcp='echo "$(git remote get-url origin | sed "s/git@github.com:/https:\/\/github.com\//" | sed "s/.git$//")/commit/$(git rev-parse HEAD)" | pbcopy'
 
 alias ro="railway open"
 alias fwd="readlink -f"
