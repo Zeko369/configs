@@ -370,6 +370,7 @@ kamal() {
     fi
 }
 
+export OP_ACCOUNT=unidygmbh.1password.com
 
 function lt() {
   eza --tree --level=2 --long --icons --git --ignore-glob="node_modules|.git|vendor" $argv
