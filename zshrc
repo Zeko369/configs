@@ -209,8 +209,11 @@ function gcmm() {
   gc -m "$*"
 }
 function gcob() {
-  git checkout -b "$*"
-}
+  # Replace spaces in the commit message with dashes for the branch name
+  local branch_name=$(echo "$*" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')
+
+  # Create a new branch
+  git checkout -b "$branch_name"
 }
 
 alias yeetm="yeet" # yeet now supports message
