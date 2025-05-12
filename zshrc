@@ -186,7 +186,6 @@ alias gu="git reset --soft HEAD~1"
 alias grs="git restore --staged"
 alias grs.="grs ."
 alias glo="git pull origin"
-alias gcb="git checkout -b "
 alias gco.="git checkout ."
 alias gco-="git checkout -"
 alias gpm="git pull origin $(git_main_branch)"
@@ -208,6 +207,10 @@ function gtmm() {
 function gcmm() {
   add_unless_staged
   gc -m "$*"
+}
+function gcob() {
+  git checkout -b "$*"
+}
 }
 
 alias yeetm="yeet" # yeet now supports message
