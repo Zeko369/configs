@@ -1,0 +1,17 @@
+font-family = "FiraCode Nerd Font Mono"
+
+theme = light:atomonelight,dark:Ghostty Default StyleDark
+
+window-height = 30
+window-width = 100
+
+unfocused-split-opacity = 0.9
+
+font-size = 14
+
+macos-titlebar-style = "native"
+
+auto-update = "download"
+auto-update-channel = "tip"
+
+keybind = super+enter=unbind
