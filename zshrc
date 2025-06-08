@@ -255,15 +255,27 @@ function yeetfix() {
   local commit_message=""
   local pr_body=""
   local body_flag="--body"
+  local draft_flag="--draft"
+  local is_draft=false
+
+  # Check if ends with --draft flag
+  if [[ $* == *"$draft_flag" ]]; then
+    is_draft=true
+    # Remove --draft from args
+    local args="${*%$draft_flag}"
+    args="${args%% }"
+  else
+    local args="$*"
+  fi
 
   # Split the input at --body
-  if [[ $* == *"$body_flag"* ]]; then
+  if [[ $args == *"$body_flag"* ]]; then
     # Get everything before --body for commit message
-    commit_message="${${*%%$body_flag*}%% }"
+    commit_message="${${args%%$body_flag*}%% }"
     # Get everything after --body for PR body
-    pr_body="${${*#*$body_flag}## }"
+    pr_body="${${args#*$body_flag}## }"
   else
-    commit_message="$*"
+    commit_message="$args"
   fi
 
   # Replace spaces in the commit message with dashes for the branch name
@@ -289,12 +301,18 @@ function yeetfix() {
   git push -u origin "$branch_name"
 
   # Open a PR on GitHub, using either --fill or the provided body
+  local pr_args=("--assignee" "@me")
+  
+  if [ "$is_draft" = true ]; then
+    pr_args+=("--draft")
+  fi
+
   if [ -n "$pr_body" ]; then
     # Use provided body
-    local out=$(gh pr create --assignee "@me" --title "$commit_message" --body "$pr_body")
+    local out=$(gh pr create "${pr_args[@]}" --title "$commit_message" --body "$pr_body")
   else
     # Use --fill if no body provided
-    local out=$(gh pr create --assignee "@me" --fill)
+    local out=$(gh pr create "${pr_args[@]}" --fill)
   fi
 
   # Copy the PR URL to the clipboard
@@ -353,6 +371,10 @@ source "$HOME/.rye/env"
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 
 eval "$(atuin init zsh)"
+
+alias reload="source ~/.zshrc"
+alias reload!="cp ~/repos/configs/zshrc ~/.zshrc && reload"
+
 
 notif() {
     # Save the command as a string
