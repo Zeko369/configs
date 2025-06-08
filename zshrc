@@ -344,6 +344,8 @@ alias ocd="OVERCOMMIT_DISABLE=1"
 alias aliases="alias | sed 's/=.*//'"
 alias paths='echo -e ${PATH//:/\\n}'
 
+alias cdgr="cd $(git rev-parse --show-toplevel)" # https://x.com/anthonysheww/status/1923346656205926722
+
 
 [ -f "/Users/franzekan/.ghcup/env" ] && source "/Users/franzekan/.ghcup/env" # ghcup-env
 
