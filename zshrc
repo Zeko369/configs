@@ -188,7 +188,7 @@ alias grs.="grs ."
 alias glo="git pull origin"
 alias gco.="git checkout ."
 alias gco-="git checkout -"
-alias gpm="git pull origin $(git_main_branch)"
+function gpm() { git pull origin $(git_main_branch) }
 
 function add_unless_staged() {
   if git diff --cached --quiet; then
@@ -415,3 +415,6 @@ if [ -n "${ZSH_DEBUGRC+1}" ]; then
     zprof
 fi
 . "/Users/franzekan/.deno/env"
+
+# opencode
+export PATH=/Users/franzekan/.opencode/bin:$PATH
