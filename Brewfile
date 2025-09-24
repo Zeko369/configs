@@ -1,0 +1,65 @@
+cask_args appdir: '/Applications', require_sha: true
+
+brew 'git'
+brew 'mise'
+brew 'bat'
+brew 'eza'
+brew 'jq'
+brew 'gh'
+brew 'tig'
+brew 'fastfetch'
+brew 'atuin'
+
+brew 'postgresql'
+brew 'valkey'
+brew 'imagemagick'
+
+brew 'libyaml'
+brew 'libpq'
+brew 'openssl'
+
+brew 'fzf'
+brew 'ripgrep'
+brew 'zoxide'
+brew 'fd'
+brew 'diff-so-fancy'
+brew 'hyperfine'
+brew 'just'
+brew 'btop'
+brew 'trash-cli'
+brew 'lazygit'
+brew 'lazydocker'
+brew 'doctl'
+brew 'cloudflared'
+
+cask 'font-fira-code-nerd-font'
+
+cask 'google-chrome', args: { require_sha: false }
+cask 'google-chrome@dev', args: { require_sha: false }
+cask 'ghostty'
+cask 'slack'
+cask 'spotify', args: { require_sha: false }
+cask '1password'
+cask '1password-cli'
+cask 'raycast'
+cask 'keka'
+cask 'yaak'
+cask 'voiceink'
+cask 'orbstack'
+cask 'daisydisk', args: { require_sha: false }
+cask 'discord'
+cask 'scroll-reverser'
+cask 'linear-linear'
+cask 'cleanshot'
+cask 'cursor'
+cask 'obs'
+cask 'alt-tab'
+cask 'beeper'
+cask 'jetbrains-toolbox'
+cask 'jordanbaird-ice'
+cask 'amazon-q'
+cask 'sizzy', args: { require_sha: false }
+cask 'readdle-spark'
+cask 'notion-calendar'
+cask 'notion'
+cask 'flux-app'
