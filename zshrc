@@ -1,11 +1,11 @@
+# Amazon Q pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 # Add deno completions to search path
 if [[ ":$FPATH:" != *":/Users/franzekan/completions:"* ]]; then export FPATH="/Users/franzekan/completions:$FPATH"; fi
 if [ -n "${ZSH_DEBUGRC+1}" ]; then
     zmodload zsh/zprof
 fi
 
-# Amazon Q pre block. Keep at the top of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -17,6 +17,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="candy"
+
+DISABLE_AUTO_UPDATE="true"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -108,7 +110,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-eval "$(fnm env --use-on-cd)"
+# eval "$(fnm env --use-on-cd)"
 real_npx=$(which npx)
 alias _npx="$real_npx"
 alias npx="bunx"
@@ -125,7 +127,7 @@ alias ci.="ci ."
 alias cs="cursor"
 alias cs.="cs ."
 
-eval "$(rbenv init - zsh)"
+# eval "$(rbenv init - zsh)"
 
 alias ll="eza -l --git --icons always"
 alias n="open"
@@ -172,12 +174,13 @@ check_tmp() {
 }
 
 alias dc="docker compose"
+alias dcup="docker compose up"
 alias pr="gh pr view --web"
 alias prcp="gh pr view --json 'url' | jq -r '.url' | pbcopy"
 alias repo="gh repo view --web"
 alias acts="gh pr checks -w"
-alias ocm='open $(git remote get-url origin | sed "s/git@github.com:/https:\/\/github.com\//" | sed "s/.git$//")/commit/$(git rev-parse HEAD)'
-alias cmcp='echo "$(git remote get-url origin | sed "s/git@github.com:/https:\/\/github.com\//" | sed "s/.git$//")/commit/$(git rev-parse HEAD)" | pbcopy'
+function ocm() { open '$(git remote get-url origin | sed "s/git@github.com:/https:\/\/github.com\//" | sed "s/.git$//")/commit/$(git rev-parse HEAD)' }
+function cmcp() { echo "$(git remote get-url origin | sed "s/git@github.com:/https:\/\/github.com\//" | sed "s/.git$//")/commit/$(git rev-parse HEAD)" | pbcopy }
 
 alias ro="railway open"
 alias fwd="readlink -f"
@@ -302,7 +305,7 @@ function yeetfix() {
 
   # Open a PR on GitHub, using either --fill or the provided body
   local pr_args=("--assignee" "@me")
-  
+
   if [ "$is_draft" = true ]; then
     pr_args+=("--draft")
   fi
@@ -362,19 +365,21 @@ alias ocd="OVERCOMMIT_DISABLE=1"
 alias aliases="alias | sed 's/=.*//'"
 alias paths='echo -e ${PATH//:/\\n}'
 
-alias cdgr="cd $(git rev-parse --show-toplevel)" # https://x.com/anthonysheww/status/1923346656205926722
+function cdgr() { cd "$(git rev-parse --show-toplevel)" } # https://x.com/anthonysheww/status/1923346656205926722
 
 
 [ -f "/Users/franzekan/.ghcup/env" ] && source "/Users/franzekan/.ghcup/env" # ghcup-env
 
-source "$HOME/.rye/env"
-export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+# source "$HOME/.rye/env"
+# export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 
 eval "$(atuin init zsh)"
 
 alias reload="source ~/.zshrc"
 alias reload!="cp ~/repos/configs/zshrc ~/.zshrc && reload"
 
+export HOMEBREW_BUNDLE_FILE_GLOBAL="~/repos/configs/Brewfile"
+alias rebrew="brew bundle install --global"
 
 notif() {
     # Save the command as a string
@@ -406,15 +411,17 @@ function lt() {
   eza --tree --level=2 --long --icons --git --ignore-glob="node_modules|.git|vendor" $argv
 }
 
-# Amazon Q post block. Keep at the bottom of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
-
 . "$HOME/.cargo/env"
 
 if [ -n "${ZSH_DEBUGRC+1}" ]; then
     zprof
 fi
-. "/Users/franzekan/.deno/env"
+# . "/Users/franzekan/.deno/env"
+
+eval "$(mise activate zsh)"
 
 # opencode
 export PATH=/Users/franzekan/.opencode/bin:$PATH
+
+# Amazon Q post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
