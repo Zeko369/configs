@@ -378,6 +378,39 @@ eval "$(atuin init zsh)"
 alias reload="source ~/.zshrc"
 alias reload!="cp ~/repos/configs/zshrc ~/.zshrc && reload"
 
+# Safe rm function that uses trash instead of permanent deletion
+function rm() {
+  # Get the real rm command path
+  local real_rm=$(which rm)
+  
+  # Check if trash command exists
+  if ! command -v trash &> /dev/null; then
+    echo "Warning: 'trash' command not found. Install it with 'brew install trash' or use 'realrm' for permanent deletion."
+    return 1
+  fi
+  
+  # Filter out rm-specific flags and keep only file/directory arguments
+  local files=()
+  for arg in "$@"; do
+    # Skip rm flags (starting with -)
+    if [[ ! "$arg" =~ ^- ]]; then
+      files+=("$arg")
+    fi
+  done
+  
+  # If no files were provided after filtering, show usage
+  if [[ ${#files[@]} -eq 0 ]]; then
+    echo "No files or directories specified"
+    return 1
+  fi
+  
+  # Use trash for the filtered file arguments
+  trash "${files[@]}"
+}
+
+# Alias for the real rm command when you need permanent deletion
+alias realrm="$(which rm)"
+
 export HOMEBREW_BUNDLE_FILE_GLOBAL="~/repos/configs/Brewfile"
 alias rebrew="brew bundle install --global"
 
