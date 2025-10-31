@@ -285,7 +285,7 @@ function yeetfix() {
   local branch_name=$(echo "$commit_message" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')
 
   # Create a new branch
-  git checkout -b "$branch_name"
+  git checkout -b "$branch_name" "origin/$(git_main_branch)"
 
   # Add all changes and commit with the provided message
   # Check for staged files
