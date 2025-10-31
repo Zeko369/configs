@@ -37,6 +37,7 @@ brew 'tmux'
 brew 'transmission-cli'
 brew 'trash-cli'
 brew 'zoxide'
+brew 'nmap'
 
 # Browsers
 cask 'firefox'
