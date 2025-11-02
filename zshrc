@@ -389,11 +389,20 @@ function rm() {
     return 1
   fi
   
-  # Filter out rm-specific flags and keep only file/directory arguments
+  # Check if -f flag is present (force, ignore non-existent files)
+  local force_flag=false
   local files=()
+  
   for arg in "$@"; do
-    # Skip rm flags (starting with -)
-    if [[ ! "$arg" =~ ^- ]]; then
+    # Check if this is a flag (starting with -)
+    if [[ "$arg" =~ ^- ]]; then
+      # Check if -f is in the flags (could be -f, -rf, -fr, -Rf, etc.)
+      if [[ "$arg" =~ f ]]; then
+        force_flag=true
+      fi
+      # Skip all flags (we're just using them to determine behavior)
+    else
+      # This is a file/directory argument
       files+=("$arg")
     fi
   done
@@ -402,6 +411,22 @@ function rm() {
   if [[ ${#files[@]} -eq 0 ]]; then
     echo "No files or directories specified"
     return 1
+  fi
+  
+  # If -f flag is present, filter out non-existent files
+  if [[ "$force_flag" == true ]]; then
+    local existing_files=()
+    for file in "${files[@]}"; do
+      if [[ -e "$file" ]]; then
+        existing_files+=("$file")
+      fi
+    done
+    files=("${existing_files[@]}")
+    
+    # If no files exist after filtering, silently succeed (like rm -f does)
+    if [[ ${#files[@]} -eq 0 ]]; then
+      return 0
+    fi
   fi
   
   # Use trash for the filtered file arguments
@@ -413,6 +438,8 @@ alias realrm="$(which rm)"
 
 export HOMEBREW_BUNDLE_FILE_GLOBAL="~/repos/configs/Brewfile"
 alias rebrew="brew bundle install --global"
+
+alias ca="cursor-agent"
 
 notif() {
     # Save the command as a string
