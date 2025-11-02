@@ -51,8 +51,6 @@ cask 'discord'
 cask 'readdle-spark'
 cask 'slack'
 
-cask 'spotify', args: { require_sha: false }
-
 # Tools
 cask '1password-cli'
 cask '1password'
@@ -65,21 +63,25 @@ cask 'cyberduck'
 cask 'daisydisk', args: { require_sha: false }
 cask 'flux-app'
 cask 'font-fira-code-nerd-font'
-cask 'iina'
 cask 'jordanbaird-ice'
 cask 'keka'
 cask 'linear-linear'
 cask 'notion-calendar'
 cask 'notion'
-cask 'obs'
 cask 'ollama-app'
 cask 'raycast'
 cask 'scroll-reverser'
 cask 'tailscale-app'
 cask 'transmission'
 cask 'utm'
-cask 'vlc@nightly'
 cask 'voiceink'
+
+# Media
+cask 'iina'
+cask 'multiviewer'
+cask 'obs'
+cask 'spotify', args: { require_sha: false }
+cask 'vlc@nightly'
 
 # Devtools
 cask 'amazon-q'
