@@ -11,7 +11,7 @@
   // Font
   // ============================================
   "buffer_font_family": "FiraCode Nerd Font",
-  "buffer_font_size": 15,
+  "buffer_font_size": 13.0,
   "ui_font_size": 16,
 
   // ============================================
@@ -20,7 +20,7 @@
   "theme": {
     "mode": "system",
     "light": "Ayu Light",
-    "dark": "Ayu Dark"
+    "dark": "Ayu Dark",
   },
   "icon_theme": "Material Icon Theme",
 
@@ -34,7 +34,7 @@
   "ensure_final_newline_on_save": true,
   "show_edit_predictions": true,
   "gutter": {
-    "line_numbers": true
+    "line_numbers": true,
   },
 
   // ============================================
@@ -43,24 +43,24 @@
   "git": {
     "inline_blame": {
       "enabled": true,
-      "show_commit_summary": true
-    }
+      "show_commit_summary": true,
+    },
   },
   "git_panel": {
     "collapse_untracked_diff": false,
     "tree_view": true,
     "status_style": "icon",
-    "sort_by_path": true
+    "sort_by_path": true,
   },
 
   // ============================================
   // Project
   // ============================================
   "project_panel": {
-    "auto_fold_dirs": false
+    "auto_fold_dirs": false,
   },
   "session": {
-    "trust_all_worktrees": true
+    "trust_all_worktrees": true,
   },
 
   // ============================================
@@ -69,7 +69,13 @@
   "terminal": {
     "env": {
       "Q_NEW_SESSION": "1",
-      "FIG_NEW_SESSION": "1"
-    }
-  }
+      "FIG_NEW_SESSION": "1",
+    },
+  },
+
+  "languages": {
+    "Ruby": {
+      "language_servers": ["ruby-lsp", "!solargraph", "!steep"],
+    },
+  },
 }
