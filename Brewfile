@@ -1,48 +1,87 @@
 cask_args appdir: '/Applications', require_sha: true
 
-# Services
+# ============================================
+# Services / Databases
+# ============================================
 brew 'postgresql@14'
 brew 'postgresql@15'
 brew 'postgresql@16'
 brew 'valkey'
 
-# Utils
+# ============================================
+# Build dependencies
+# ============================================
 brew 'imagemagick'
 brew 'libpq'
 brew 'libyaml'
 brew 'openssl'
 brew 'vips'
 
-# CLI
-brew 'atuin'
-brew 'bat'
-brew 'btop'
-brew 'cloudflared'
-brew 'diff-so-fancy'
-brew 'dive'
-brew 'doctl'
-brew 'eza'
-brew 'fastfetch'
-brew 'fd'
-brew 'fzf'
-brew 'gh'
+# ============================================
+# Core CLI tools
+# ============================================
 brew 'git'
-brew 'hyperfine'
-brew 'jq'
-brew 'just'
-brew 'lazydocker'
-brew 'lazygit'
-brew 'mise'
-brew 'overmind'
-brew 'ripgrep'
-brew 'tig'
+brew 'gh'                    # GitHub CLI
 brew 'tmux'
-brew 'transmission-cli'
-brew 'trash-cli'
-brew 'zoxide'
-brew 'nmap'
-brew 'helm'
+brew 'mise'                  # Runtime version manager
+brew 'fzf'                   # Fuzzy finder
+brew 'ripgrep'               # Better grep
+brew 'fd'                    # Better find
+brew 'bat'                   # Better cat
+brew 'eza'                   # Better ls
+brew 'zoxide'                # Better cd
+brew 'atuin'                 # Better shell history
+brew 'jq'                    # JSON processor
+brew 'yq'                    # YAML processor
+brew 'trash-cli'             # Safe rm
+
+# ============================================
+# Modern CLI replacements
+# ============================================
+brew 'btop'                  # Better top/htop
+brew 'duf'                   # Better df
+brew 'dust'                  # Better du
+brew 'procs'                 # Better ps
+brew 'delta'                 # Better git diff
+brew 'tldr'                  # Simplified man pages
+brew 'glow'                  # Markdown viewer
+
+# ============================================
+# Git tools
+# ============================================
+brew 'lazygit'               # Git TUI
+brew 'tig'                   # Git history TUI
+brew 'diff-so-fancy'         # Diff highlighter
+brew 'git-lfs'               # Large file storage
+
+# ============================================
+# Dev tools
+# ============================================
+brew 'just'                  # Task runner
+brew 'overmind'              # Procfile manager
+brew 'hyperfine'             # Benchmarking
+brew 'tokei'                 # Code statistics
+brew 'dive'                  # Docker image explorer
+brew 'lazydocker'            # Docker TUI
 brew 'watch'
+brew 'entr'                  # File watcher
+
+# ============================================
+# Cloud / Infra
+# ============================================
+brew 'doctl'                 # DigitalOcean CLI
+brew 'cloudflared'           # Cloudflare tunnel
+brew 'rclone'                # Cloud storage sync
+brew 'helm'                  # Kubernetes package manager
+brew 'nmap'                  # Network scanner
+
+# ============================================
+# Media / Files
+# ============================================
+brew 'ffmpeg'                # Video processing
+brew 'wget'                  # Download files
+brew 'transmission-cli'
+brew 'fastfetch'             # System info
 
 # Browsers
 cask 'firefox'

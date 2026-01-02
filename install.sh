@@ -57,6 +57,7 @@ copy_template() {
 copy_template ".zshrc"
 copy_template ".vimrc"
 copy_template ".tmux.conf"
+copy_template ".gitconfig"
 copy_template "ghostty.local"
 
 # ============================================
@@ -90,6 +91,7 @@ create_symlink() {
 create_symlink "$LOCAL_DIR/.zshrc" "$HOME/.zshrc"
 create_symlink "$LOCAL_DIR/.vimrc" "$HOME/.vimrc"
 create_symlink "$LOCAL_DIR/.tmux.conf" "$HOME/.tmux.conf"
+create_symlink "$LOCAL_DIR/.gitconfig" "$HOME/.gitconfig"
 
 # ============================================
 # Step 4: Optional configs (direct symlinks, no local wrapper needed)
@@ -134,6 +136,13 @@ if [ -d "$CONFIGS_DIR/zed" ]; then
   create_optional_symlink "$CONFIGS_DIR/zed/keymap.json" "$ZED_DIR/keymap.json"
 fi
 
+# mise config
+if [ -f "$CONFIGS_DIR/mise.toml" ]; then
+  MISE_DIR="$HOME/.config/mise"
+  mkdir -p "$MISE_DIR"
+  create_optional_symlink "$CONFIGS_DIR/mise.toml" "$MISE_DIR/config.toml"
+fi
+
 # ============================================
 # Done!
 # ============================================
@@ -152,8 +161,6 @@ if [ "$OS" = "macos" ]; then
   echo "To install Homebrew packages:"
   echo "  brew bundle install --file=$CONFIGS_DIR/Brewfile"
   echo ""
-  echo "For Cursor/VSCode, manually copy configs:"
-  echo "  cp $CONFIGS_DIR/vscode/settings.json ~/Library/Application\\ Support/Cursor/User/"
-  echo "  cp $CONFIGS_DIR/vscode/keybindings.json ~/Library/Application\\ Support/Cursor/User/"
+  echo "For Cursor/VSCode, run: ./sync cursor"
   echo ""
 fi

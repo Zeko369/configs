@@ -1,0 +1,47 @@
+# ============================================
+# Global mise configuration
+# Project-specific versions override these
+# ============================================
+
+[env]
+# Enable YJIT for Ruby (faster)
+RUBY_CONFIGURE_OPTS = "--enable-yjit"
+
+# ============================================
+# Runtimes - always install latest
+# ============================================
+[tools]
+bun = "latest"
+node = "latest"
+ruby = "latest"
+python = "latest"
+rust = "stable"
+
+# ============================================
+# Global npm packages
+# ============================================
+"npm:@antfu/ni" = "latest"       # Unified package manager (ni, nr, nx)
+"npm:opencode-ai" = "latest"     # OpenCode CLI
+"npm:vercel" = "latest"          # Vercel CLI
+
+# ============================================
+# Python tools via uv/pipx
+# ============================================
+uv = "latest"
+"pipx:claude-monitor" = "latest"
+
+# ============================================
+# Settings
+# ============================================
+[settings]
+experimental = true
+
+# Auto-create venvs with uv
+python.uv_venv_auto = true
+
+# Read .ruby-version, .node-version files
+idiomatic_version_file_enable_tools = ["ruby", "node", "python"]
+
+# Use bun for npm packages (faster)
+[settings.npm]
+bun = true

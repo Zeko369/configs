@@ -1,0 +1,26 @@
+# Machine-specific Git configuration
+# This file is symlinked to ~/.gitconfig
+# Copy to local/.gitconfig and set your user info
+
+# ============================================
+# Include shared config (DO NOT REMOVE)
+# ============================================
+[include]
+    path = ~/repos/configs/git/config
+
+# ============================================
+# User info (CHANGE THIS)
+# ============================================
+[user]
+    name = Your Name
+    email = your.email@example.com
+
+# ============================================
+# Machine-specific settings below
+# ============================================
+
+# Example: GPG signing
+# [commit]
+#     gpgsign = true
+# [user]
+#     signingkey = YOURKEYID
