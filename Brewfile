@@ -36,6 +36,7 @@ brew 'zsh-syntax-highlighting'
 brew 'jq'                    # JSON processor
 brew 'yq'                    # YAML processor
 brew 'trash-cli'             # Safe rm
+brew 'neovim'                # Better vim
 
 # ============================================
 # Modern CLI replacements
