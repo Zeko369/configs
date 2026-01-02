@@ -53,6 +53,7 @@ brew 'lazygit'               # Git TUI
 brew 'tig'                   # Git history TUI
 brew 'diff-so-fancy'         # Diff highlighter
 brew 'git-lfs'               # Large file storage
+brew 'jj'                    # Jujutsu - Git-compatible VCS
 
 # ============================================
 # Dev tools
