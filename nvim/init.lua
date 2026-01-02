@@ -146,6 +146,7 @@ require('lazy').setup({
         ts_ls = {},
         pyright = {},
         bashls = {},
+        jsonls = {},
         lua_ls = {
           Lua = {
             workspace = { checkThirdParty = false },

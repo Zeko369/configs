@@ -4,7 +4,7 @@
     "@0xsero/open-queue",
     "opencode-pty",
     "opencode-antigravity-auth",
-    "opencode-openai-codex-auth",
-    "opencode-skills"
+    "opencode-openai-codex-auth"
+    // "opencode-skills"
   ]
 }
