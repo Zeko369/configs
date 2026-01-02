@@ -1,6 +1,6 @@
 " Machine-specific vimrc
 " This file is symlinked to ~/.vimrc
-" Copy this to local/.vimrc and customize for your machine
+" Copy to local/.vimrc and customize for your machine
 
 " ============================================
 " Source the base config (DO NOT REMOVE)
@@ -12,8 +12,11 @@ source $HOME/repos/configs/vim/vimrc
 " Machine-specific overrides below
 " ============================================
 
-" Example: Machine-specific colorscheme
-" colorscheme desert
+" Example: Different colorscheme
+" colorscheme retrobox
 
-" Example: Machine-specific font (for GUI vim)
+" Example: GUI vim font
 " set guifont=Monaco:h14
+
+" Example: Machine-specific mappings
+" nnoremap <leader>t :terminal<CR>

@@ -29,7 +29,7 @@ function scriptsSimple {
 	if ! command -v jq &> /dev/null; then
 		echo "This requires jq, you can use regular scripts without jq"
 	else
-		
+
 	fi
 }
 
@@ -41,12 +41,4 @@ function packages {
     KEY="dependencies"
     readPkg
   fi
-}
-
-function venvinit() {
-  if [ $# -eq 0 ]; then
-      python3 -m venv ./venv
-  else
-      python3 -m venv $1
-  fi 
 }

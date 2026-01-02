@@ -1,0 +1,140 @@
+{
+  // ============================================
+  // Editor appearance
+  // ============================================
+  "editor.fontFamily": "FiraCode Nerd Font",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 14,
+  "editor.lineNumbers": "relative",
+  "editor.cursorStyle": "line",
+  "editor.renderWhitespace": "all",
+  "editor.rulers": [100],
+  "editor.tabSize": 2,
+  "editor.wordWrap": "off",
+  "editor.accessibilitySupport": "off",
+
+  // ============================================
+  // Editor behavior
+  // ============================================
+  "editor.formatOnSave": true,
+  "editor.inlineSuggest.enabled": true,
+  "editor.suggestSelection": "first",
+  "editor.gotoLocation.multipleDefinitions": "goto",
+  "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+
+  // ============================================
+  // Files
+  // ============================================
+  "files.insertFinalNewline": true,
+  "files.exclude": {
+    "**/.git": false
+  },
+
+  // ============================================
+  // Workbench
+  // ============================================
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.tree.indent": 12,
+  "workbench.tree.renderIndentGuides": "always",
+  "window.autoDetectColorScheme": true,
+  "window.zoomLevel": 1,
+
+  // ============================================
+  // Explorer
+  // ============================================
+  "explorer.compactFolders": false,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+
+  // ============================================
+  // Git
+  // ============================================
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "scm.defaultViewMode": "tree",
+
+  // ============================================
+  // Terminal
+  // ============================================
+  "terminal.integrated.gpuAcceleration": "on",
+  "terminal.integrated.tabs.enabled": true,
+  "terminal.integrated.env.osx": {
+    "FIG_NEW_SESSION": "1",
+    "Q_NEW_SESSION": "1"
+  },
+
+  // ============================================
+  // Vim extension
+  // ============================================
+  "vim.leader": "<space>",
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-c>": false,
+    "<C-f>": false,
+    "<C-w>": false
+  },
+  "vim.insertModeKeyBindings": [
+    { "before": ["j", "k"], "after": ["<Esc>"] }
+  ],
+  "vim.normalModeKeyBindings": [
+    { "before": ["B"], "after": ["^"] },
+    { "before": ["E"], "after": ["$"] },
+    { "before": ["r", "n"], "commands": ["editor.action.rename"] }
+  ],
+  "vim.visualModeKeyBindings": [
+    { "before": ["B"], "after": ["^"] },
+    { "before": ["E"], "after": ["$"] }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    { "before": ["<leader>", "%"], "commands": ["editor.emmet.action.matchTag"] }
+  ],
+
+  // ============================================
+  // Diff editor
+  // ============================================
+  "diffEditor.diffAlgorithm": "advanced",
+  "diffEditor.experimental.showMoves": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.renderSideBySide": true,
+
+  // ============================================
+  // Language-specific
+  // ============================================
+  "[markdown]": {
+    "editor.formatOnSave": false,
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "other": "off",
+      "strings": "off"
+    }
+  },
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // ============================================
+  // ESLint
+  // ============================================
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "javascriptreact",
+    "typescriptreact",
+    "html"
+  ],
+
+  // ============================================
+  // TypeScript
+  // ============================================
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.preferences.preferTypeOnlyAutoImports": true,
+  "javascript.updateImportsOnFileMove.enabled": "always"
+}

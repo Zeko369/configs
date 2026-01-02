@@ -2,7 +2,5 @@
   "files.associations": {
     "**/shell/*": "shellscript",
     "*vimrc*": "viml",
-    "*.js": "javascript",
-    ".huskyrc": "json"
   },
 }

@@ -124,7 +124,15 @@ if [ -f "$CONFIGS_DIR/ghostty_config" ]; then
 fi
 
 # ideavimrc
-create_optional_symlink "$CONFIGS_DIR/ideavimrc" "$HOME/.ideavimrc"
+create_optional_symlink "$CONFIGS_DIR/vim/ideavimrc" "$HOME/.ideavimrc"
+
+# Zed config
+if [ -d "$CONFIGS_DIR/zed" ]; then
+  ZED_DIR="$HOME/.config/zed"
+  mkdir -p "$ZED_DIR"
+  create_optional_symlink "$CONFIGS_DIR/zed/settings.json" "$ZED_DIR/settings.json"
+  create_optional_symlink "$CONFIGS_DIR/zed/keymap.json" "$ZED_DIR/keymap.json"
+fi
 
 # ============================================
 # Done!
@@ -143,5 +151,9 @@ echo ""
 if [ "$OS" = "macos" ]; then
   echo "To install Homebrew packages:"
   echo "  brew bundle install --file=$CONFIGS_DIR/Brewfile"
+  echo ""
+  echo "For Cursor/VSCode, manually copy configs:"
+  echo "  cp $CONFIGS_DIR/vscode/settings.json ~/Library/Application\\ Support/Cursor/User/"
+  echo "  cp $CONFIGS_DIR/vscode/keybindings.json ~/Library/Application\\ Support/Cursor/User/"
   echo ""
 fi

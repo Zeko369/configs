@@ -1,0 +1,412 @@
+:function Pero(name)
+:	execute "/a:nama"
+:endfunction
+
+nnoremap <M-Up> :m .-2<CR>==
+nnoremap <M-Down> :m .+1<CR>==
+inoremap <M-Down> <Esc>:m .+1<CR>==gi
+inoremap <M-Up> <Esc>:m .-2<CR>==gi
+vnoremap <M-Down> :m '>+1<CR>gv=gv
+vnoremap <M-Up> :m '<-2<CR>gv=gv
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""		__      _______ __  __ _____   _____ 		    ""
+""		\ \    / /_   _|  \/  |  __ \ / ____|               ""
+""		 \ \  / /  | | | \  / | |__) | |     		    ""
+""		  \ \/ /   | | | |\/| |  _  /| |                    ""
+""		 _ \  /   _| |_| |  | | | \ \| |____                ""
+""		(_) \/   |_____|_|  |_|_|  \_\\_____|               ""
+""								    ""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"HELLO, I'm Zeko369 and this is my vim config, if you are reading this that
+"means that you use vim or are about to use vim, great choice, I like you
+"some hints are on the bottom
+"you can use it as you wish, that includes copying and distributing if it is noted that this is my config
+"
+"NAVIGATION (relative number from this line, maybe not accurete because i adde something)
+"1. Plugins.....................................8			
+"	- Powerline.............................26	
+"	- Pathongen.............................31
+"	- Vundle................................34
+"	- neocomplete...........................57
+"	- Ctrl - P..............................83
+"	- Nerdtree..............................86
+"2.  Tabs (	)...............................108
+"3.  Tabs (windows).............................111
+"4.  Leaders....................................119
+"5.  Looks......................................114
+"6.  Numbers....................................120
+"7.  Smart movements1...........................135
+"8.  Splits.....................................143
+"8.  Smart movements improvements...............147
+"9.  Folds......................................154
+"10. Search.....................................164
+"11. Some my lazy features......................170
+"12. Brackets...................................175
+"13. Hell for others............................183
+"14. Touchbar...................................191
+"15. Filetyps...................................209
+"16. Some others................................213
+"17. HINTS......................................226
+
+"Plugins
+"POWERLINE setup
+set laststatus=2
+" set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+" set t_Co=256
+"Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+" let g:airline_theme='powerlineish'
+" let g:airline_theme='solarized'
+" let g:airline_theme='luna'
+let g:airline_theme='onedark'
+
+"PATHONGEN
+execute pathogen#infect()
+filetype plugin indent on
+let g:vim_arduino_ino_cmd = 'ano'
+
+"VUNDLE
+filetype off
+set nocompatible
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'easymotion/vim-easymotion'
+
+Plugin 'davidhalter/jedi-vim'
+Plugin 'a.vim'
+
+Plugin 'plasticboy/vim-markdown'
+
+Plugin 'slim-template/vim-slim.git'
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'honza/vim-snippets'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-surround'
+
+Plugin 'kien/ctrlp.vim'
+
+Plugin 'sudar/vim-arduino-snippets'
+Plugin 'sudar/vim-arduino-syntax'
+
+Plugin 'Shougo/neocomplete'
+Plugin 'Shougo/neosnippet'
+Plugin 'Shougo/neosnippet-snippets'
+
+Plugin 'scrooloose/nerdcommenter'
+" Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree'
+
+Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+Plugin 'joshdick/onedark.vim'
+Plugin 'joshdick/airline-onedark.vim'
+
+Plugin 'majutsushi/tagbar'
+Plugin 'benmills/vimux'
+Plugin 'jplaut/vim-arduino-ino'
+
+Plugin 'wakatime/vim-wakatime'
+
+Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+"tagbar
+"neocomplete
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 1
+let g:neosnippet#enable_snipmate_compatibility = 1
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-arduino-snippets/Ultisnips/'
+let g:neocomplete#sources#tags#cache_limit_size = 16777216 " 16MB
+
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>" "easier way for this down"
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+imap <expr><TAB>
+ \ pumvisible() ? "\<C-n>" :
+ \ neosnippet#expandable_or_jumpable() ?
+ \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+"CTRL P
+let g:ctrlp_map = '<c-p>'
+" let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_use_caching = 1
+let g:ctrlp_clear_cache_on_exit = 0
+
+"Nerdtree
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+" Add your own custom formats or override the defaults
+" let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+let g:NERDCustomDelimiters = { 'c': { 'left': '//','right': '' } }
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"mother of tabs(dragons)
+" set tabstop=2 " set tabstop=4
+" set shiftwidth=2
+" set softtabstop=2
+
+
+set tabstop=8
+set softtabstop=0
+set expandtab
+set shiftwidth=2 smarttab
+
+"other kind of tabs
+map <C-t>	:tabnew<CR>
+inoremap <S-Tab>	gT
+nnoremap <S-Tab>		gT
+nnoremap j gj
+nnoremap k gk
+let notabs = 0
+
+"leader mappings
+let mapleader="-"
+map w<leader> :w<Enter>
+map <leader>r :%s/
+
+"looks
+" if (empty($TMUX))
+"   if (has("nvim"))
+"     let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+"   endif
+"   if (has("termguicolors"))
+"     set termguicolors
+"   endif
+" endif
+
+syntax on
+" colorscheme onedark
+set t_Co=256                        " force vim to use 256 colors
+let g:solarized_termcolors=256      " use solarized 256 fallback
+set background=dark
+
+"numbers
+set relativenumber
+set number
+
+"speeding movement
+nnoremap <C-j>		3j
+vnoremap <C-j>		3j
+nnoremap <C-k>		3k
+vnoremap <C-k>		3k
+" nnoremap <C-w>		3w
+" vnoremap <C-w>		3w
+" nnoremap <C-b>		3b
+" vnoremap <C-b>		3b
+nnoremap <C-e>		3<C-e>
+nnoremap <C-y>		3<C-y>
+
+"splits
+set splitbelow
+set splitright
+
+
+"vims smart movement made smarter
+nnoremap B ^
+nnoremap E $
+map Y      y$
+inoremap jk <ESC>
+
+map <C-F5> source ~/.vimrc
+
+"folds
+set foldenable
+set foldlevel=10
+set foldnestmax=10
+filetype plugin indent on
+" set foldmethod=marker
+" set foldmethod=indent
+set foldmethod=syntax
+
+map <Leader>t o<++><Esc><Leader>cc
+nnoremap <space><space> /<++><Enter>:nohlsearch<Enter>
+
+set autoindent              " automatically set indent of new line
+set smartindent
+
+"serach
+set incsearch
+set ignorecase
+set smartcase
+set hlsearch
+
+"lazy features
+map <C-L>  ma$a;<Esc>`a
+" set clipboard=unnamedplus
+
+"autocomplete brackets
+" inoremap {      {}<Left>
+" inoremap [      []<Left>
+" inoremap (      ()<Left>
+" inoremap "      ""<Left>
+" inoremap '      ''<Left>
+" inoremap <      <><Left>
+
+"make vim hell for non vim users (remove arrow keys) 
+"or be a decent human ?
+" inoremap <Up>   <Esc>
+" inoremai <Down> <Esc>
+" inoremap <Left> <Esc>
+" inoremap <Right> <Esc>
+" noremap <Left>  <Esc>
+" noremap <Right> <Esc>
+
+"'touchbar' (functions row) mapings
+" map <F1>                :help<Enter>
+map <F2>                :w<Enter>
+map <C-F2>              :w
+map <F3>                :wq<Enter>
+map <F4>                :q!<Enter>
+set pastetoggle=<F5>
+map <C-H>		I
+map <F6>		:nohlsearch<CR>
+map <F12>		:NERDTreeToggle<CR>
+map <Leader><F12>	:NERDTreeFind<CR>
+map <Leader><F8>		<C-Y>:sleep 300ms<CR><Esc>k<Leader><F8>
+map <Leader><F9>		<C-Y>:sleep 150ms<CR><Esc>k<Leader><F9>
+map <Leader><F10>		<C-Y>:sleep 100ms<CR><Esc>k<Leader><F10>
+map <F8>		<C-E>:sleep 300ms<CR><Esc>j<F8>
+map <F9>		<C-E>:sleep 150ms<CR><Esc>j<F9>
+map <F10>		<C-E>:sleep 100ms<CR><Esc>j<F10>
+
+"filetypes
+autocmd Filetype python set tabstop=8
+autocmd Filetype cpp nnoremap <C-M> /int main()<Enter> zz <C-E> :nohlsearch <Enter> 
+autocmd Filetype ino nnoremap <C-M> /void loop<Enter> zz <C-E> :nohlsearch <Enter> 
+
+"some other commands
+" set whichwrap+=<,>,[,]
+set mouse=a
+vnoremap <C-c> :w !pbcopy<CR><CR> 
+" noremap <C-v> :r !pbpaste<CR><CR>
+" set wrap
+set showcmd
+set showmatch
+set textwidth=150
+set nocompatible "vim only no vi
+set ruler "show cursor all the time
+"set lazyredraw
+set wildmenu
+set backupdir=~/.vim_backup
+cmap w!! w !sudo tee > /dev/null %
+
+"Arduino
+au BufNewFile,BufRead *.pde   setf pde
+au BufNewFile,BufRead *.ino   setf ino
+" au BufRead,BufNewFile *.pde set filetype=arduino
+" au BufRead,BufNewFile *.ino set filetype=arduino
+" autocmd Filetype arduino map <C-U> :ArduinoUpload
+" autocmd Filetype arduino map <C-S-U> :ArduinoUpload
+" autocmd Filetype arduino map <C-U> :ArduinoUpload
+" autocmd Filetype arduino map <C-U> :ArduinoUpload
+let g:arduino_cmd = '/home/zeko/installs/arduino-1.8.1/arduino'
+let g:arduino_dir = '/home/zeko/installs/arduino-1.8.1'
+
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+nmap s <Plug>(easymotion-overwin-f)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+" Gif config
+" map  / <Plug>(easymotion-sn)
+" omap / <Plug>(easymotion-tn)
+
+" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
+" Without these mappings, `n` & `N` works fine. (These mappings just provide
+" different highlight method and have some other features )
+" map  n <Plug>(easymotion-next)
+" map  N <Plug>(easymotion-prev)
+
+map <Leader>l <Plug>(easymotion-lineforward)
+
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+
+let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_do_mapping = 0 
+
+map <C-1> 1gt
+map <C-2> 2gt
+map <C-3> 3gt
+map <C-4> 4gt
+map <C-5> 5gt
+map <C-6> 6gt
+map <C-7> 7gt
+map <C-8> 8gt
+map <C-9> 9gt
+
+nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
+
+set backspace=indent,eol,start
+
+
+"USFULL STUFF
+":%s/old/new/gc for replace with confirmation
+"or just use leader r for replace without comfirm
+"H, M, L - top, mid, bottom
+":w !sudo tee % make currnet file sudo editable
+"Macros
+"	qa - record macro a
+"	q  - stop recording
+"	@q - play macro a
+"zz move screen to cursor
+"fx find x
+"tx find x - 1
+"~  TO MAKE SELECTED TEXT TOGGLE CAPS
+
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv

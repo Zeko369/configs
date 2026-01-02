@@ -1,0 +1,40 @@
+[
+  // ============================================
+  // Vim mode - escape with jk
+  // ============================================
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "j k": "vim::NormalBefore"
+    }
+  },
+
+  // ============================================
+  // Vim mode - B/E for line start/end
+  // ============================================
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "E": "vim::EndOfLine",
+      "B": "vim::StartOfLine"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual",
+    "bindings": {
+      "E": "vim::EndOfLine",
+      "B": "vim::StartOfLine"
+    }
+  },
+
+  // ============================================
+  // File navigation (swap cmd+t and cmd+p like Cursor)
+  // ============================================
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-t": "file_finder::Toggle",
+      "cmd-p": "project_symbols::Toggle"
+    }
+  }
+]

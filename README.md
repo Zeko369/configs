@@ -1,67 +1,83 @@
 # Dotfiles
 
-Cross-platform configuration files for zsh, vim, tmux, and various tools.
+Cross-platform configuration files for zsh, vim, tmux, and various editors.
 
 ## Quick Start
 
 ```bash
-# Clone the repo
 git clone https://github.com/YOUR_USERNAME/configs.git ~/repos/configs
-
-# Run the installer
-cd ~/repos/configs
-./install.sh
+cd ~/repos/configs && ./install.sh
 ```
 
-## How It Works
+## Structure
 
 ```
 configs/
-├── zshrc              # Base zsh config (cross-platform)
-├── vim/vimrc          # Base vim config
-├── tmux.conf          # Base tmux config
-├── Brewfile           # macOS Homebrew packages
+├── zshrc                    # Base zsh config (cross-platform)
+├── tmux.conf                # Tmux config
+├── ghostty_config           # Ghostty terminal
+├── Brewfile                 # macOS packages
 │
-├── local/             # GITIGNORED - machine-specific configs
-│   ├── .zshrc         # Sources base + your machine customizations
-│   ├── .vimrc         # Sources base + your machine customizations
-│   └── .tmux.conf     # Sources base + your machine customizations
+├── vim/
+│   ├── vimrc                # Modern vim config (no plugins needed)
+│   ├── ideavimrc            # JetBrains IDE vim bindings
+│   └── legacy-vimrc         # Old plugin-heavy config (reference)
 │
-├── local.example/     # Templates for local/ configs
+├── vscode/                  # Cursor/VSCode settings
+│   ├── settings.json
+│   └── keybindings.json
 │
-└── shell/             # Extra utilities (optional)
-    ├── aliases        # Additional aliases
-    ├── functions.sh   # Package.json helpers
-    └── ls.sh          # Smart ls (eza/exa/lsd fallback)
+├── zed/                     # Zed editor settings
+│   ├── settings.json
+│   └── keymap.json
+│
+├── shell/                   # Extra shell utilities
+│   ├── aliases              # Additional aliases
+│   ├── functions.sh         # Package.json helpers
+│   └── ls.sh                # Smart ls fallback
+│
+├── local/                   # GITIGNORED - machine-specific
+│   ├── .zshrc               # → ~/.zshrc
+│   ├── .vimrc               # → ~/.vimrc
+│   ├── .tmux.conf           # → ~/.tmux.conf
+│   └── ghostty.local        # Loaded by ghostty_config
+│
+└── local.example/           # Templates for local/
 ```
 
-The `local/` directory is gitignored. Your `~/.zshrc` symlinks to `local/.zshrc`, which sources the base config and allows machine-specific customizations.
+## Key Bindings (consistent across editors)
 
-## Machine-Specific Customizations
+| Binding | Action |
+|---------|--------|
+| `jk` | Escape to normal mode |
+| `B` / `E` | Start / End of line |
+| `Cmd+T` | File finder |
+| `Cmd+P` | Symbol search |
+| `Space` | Leader key |
 
-Edit `local/.zshrc` to add things specific to your machine:
+## Customization
+
+Edit files in `local/` for machine-specific settings:
 
 ```bash
-# Source the base config
+# local/.zshrc
 source "$CONFIGS_DIR/zshrc"
-
-# Machine-specific stuff below
 export SOME_API_KEY="xxx"
-alias vpn="open /Applications/SomeVPN.app"
 ```
 
-## macOS: Install Packages
+```vim
+" local/.vimrc
+source $HOME/repos/configs/vim/vimrc
+colorscheme retrobox
+```
+
+## macOS Setup
 
 ```bash
 brew bundle install --file=~/repos/configs/Brewfile
 ```
 
-## Updating
-
-The base configs in the repo can be updated and committed. Your machine-specific customizations in `local/` stay private.
-
+For Cursor/VSCode, manually copy:
 ```bash
-cd ~/repos/configs
-git pull
-source ~/.zshrc
+cp vscode/*.json ~/Library/Application\ Support/Cursor/User/
 ```
