@@ -57,6 +57,7 @@ copy_template() {
 copy_template ".zshrc"
 copy_template ".vimrc"
 copy_template ".tmux.conf"
+copy_template "ghostty.local"
 
 # ============================================
 # Step 3: Create symlinks

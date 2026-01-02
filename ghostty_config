@@ -1,17 +1,31 @@
+# Ghostty configuration
+# Base config - cross-platform settings
+# Machine-specific overrides go in local/ghostty.local
+
+# ============================================
+# Font
+# ============================================
 font-family = "FiraCode Nerd Font Mono"
-
-theme = light:atomonelight,dark:Ghostty Default StyleDark
-
-window-height = 30
-window-width = 100
-
-unfocused-split-opacity = 0.9
-
 font-size = 14
 
-macos-titlebar-style = "native"
+# ============================================
+# Theme (auto light/dark mode)
+# ============================================
+theme = light:Atom One Light,dark:Ghostty Default Style Dark
 
-auto-update = "download"
-auto-update-channel = "tip"
+# ============================================
+# Window
+# ============================================
+window-height = 30
+window-width = 100
+unfocused-split-opacity = 0.9
 
+# ============================================
+# Keybindings
+# ============================================
 keybind = super+enter=unbind
+
+# ============================================
+# Load machine-specific config (optional)
+# ============================================
+config-file = ?local/ghostty.local
