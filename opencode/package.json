@@ -2,6 +2,11 @@
   "name": "opencode-plugins",
   "private": true,
   "dependencies": {
+    "@0xsero/open-queue": "^1.0.11",
+    "opencode-antigravity-auth": "^1.2.7",
+    "opencode-openai-codex-auth": "^4.2.0",
+    "opencode-pty": "^0.1.1",
+    "opencode-skills": "^1.0.0",
     "opencode-wakatime": "^1.1.0"
   }
 }
