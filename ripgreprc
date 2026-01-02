@@ -1,0 +1,27 @@
+# Ripgrep config
+# Set RIPGREP_CONFIG_PATH=~/repos/configs/ripgreprc
+
+# Smart case (case-insensitive unless uppercase used)
+--smart-case
+
+# Search hidden files
+--hidden
+
+# Follow symlinks
+--follow
+
+# Don't search these
+--glob=!.git/
+--glob=!node_modules/
+--glob=!vendor/
+--glob=!.bundle/
+--glob=!coverage/
+--glob=!dist/
+--glob=!build/
+--glob=!.next/
+--glob=!*.min.js
+--glob=!*.min.css
+--glob=!package-lock.json
+--glob=!yarn.lock
+--glob=!pnpm-lock.yaml
+--glob=!bun.lockb

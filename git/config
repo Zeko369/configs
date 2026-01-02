@@ -8,10 +8,11 @@
     email = zekan.fran369@gmail.com
 
 # ============================================
-# Delta (better diffs)
+# Core
 # ============================================
 [core]
     pager = delta
+    excludesfile = ~/repos/configs/git/ignore
 
 [interactive]
     diffFilter = delta --color-only

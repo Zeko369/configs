@@ -8,6 +8,12 @@ case "$(uname -s)" in
   Linux)  IS_LINUX=true ;;
 esac
 
+# Configs directory
+export CONFIGS_DIR="$HOME/repos/configs"
+
+# Tool configs
+export RIPGREP_CONFIG_PATH="$CONFIGS_DIR/ripgreprc"
+
 # Amazon Q pre block (macOS only)
 if [[ "$IS_MACOS" == true ]] && [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]]; then
   builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"

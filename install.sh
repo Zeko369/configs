@@ -143,6 +143,17 @@ if [ -f "$CONFIGS_DIR/mise.toml" ]; then
   create_optional_symlink "$CONFIGS_DIR/mise.toml" "$MISE_DIR/config.toml"
 fi
 
+# lazygit config
+if [ -f "$CONFIGS_DIR/lazygit/config.yml" ]; then
+  if [ "$OS" = "macos" ]; then
+    LAZYGIT_DIR="$HOME/Library/Application Support/lazygit"
+  else
+    LAZYGIT_DIR="$HOME/.config/lazygit"
+  fi
+  mkdir -p "$LAZYGIT_DIR"
+  create_optional_symlink "$CONFIGS_DIR/lazygit/config.yml" "$LAZYGIT_DIR/config.yml"
+fi
+
 # ============================================
 # Done!
 # ============================================

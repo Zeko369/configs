@@ -1,0 +1,38 @@
+# ============================================
+# Global gitignore
+# ============================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+*~
+.directory
+
+# Editors
+*.swp
+*.swo
+*.swn
+.idea/
+.vscode/
+*.sublime-workspace
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env.local
+.env.*.local
+
+# Build artifacts (usually in project gitignore, but just in case)
+*.o
+*.pyc
+__pycache__/
