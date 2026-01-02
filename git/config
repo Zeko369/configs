@@ -3,6 +3,10 @@
 # Included by local/.gitconfig
 # ============================================
 
+[user]
+    name = Fran Zekan
+    email = zekan.fran369@gmail.com
+
 # ============================================
 # Delta (better diffs)
 # ============================================

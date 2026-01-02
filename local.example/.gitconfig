@@ -1,6 +1,6 @@
 # Machine-specific Git configuration
 # This file is symlinked to ~/.gitconfig
-# Copy to local/.gitconfig and set your user info
+# Copy to local/.gitconfig and customize
 
 # ============================================
 # Include shared config (DO NOT REMOVE)
@@ -9,15 +9,12 @@
     path = ~/repos/configs/git/config
 
 # ============================================
-# User info (CHANGE THIS)
+# Machine-specific overrides below
 # ============================================
-[user]
-    name = Your Name
-    email = your.email@example.com
 
-# ============================================
-# Machine-specific settings below
-# ============================================
+# Example: Work email override
+# [user]
+#     email = fran@work.com
 
 # Example: GPG signing
 # [commit]
