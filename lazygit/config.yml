@@ -3,7 +3,6 @@
 gui:
   # Show file icons (requires nerd font)
   nerdFontsVersion: "3"
-
   # Theme - matches your terminal
   theme:
     activeBorderColor:
@@ -17,37 +16,28 @@ gui:
       - "#45475a"
     cherryPickedCommitFgColor:
       - "#89b4fa"
-
   # Show random tip at startup
   showRandomTip: false
-
   # Mouse support
   mouseEvents: true
-
   # Side panel width
   sidePanelWidth: 0.3333
-
   # Show command log
   showCommandLog: false
-
 git:
   # Use delta for diffs (matches your git config)
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never
-
+  pagers:
+    - colorArg: always
+      pager: delta --dark --paging=never
   # Auto-fetch every 60 seconds
   autoFetch: true
   autoRefresh: true
-
   # Commit signing (uncomment if you use GPG)
   # commit:
   #   signOff: true
-
 os:
   # Open files with your editor
   editPreset: "vim"
-
 # Custom commands (press 'C' in lazygit)
 customCommands:
   # Yeet: quick commit and push
@@ -59,13 +49,11 @@ customCommands:
       - type: "input"
         title: "Commit message"
         initialValue: "yolo"
-
   # Open PR in browser
   - key: "O"
     context: "localBranches"
     command: "gh pr view --web || gh pr create --web"
     description: "Open/create PR in browser"
-
   # Checkout PR
   - key: "P"
     context: "localBranches"
@@ -74,13 +62,11 @@ customCommands:
     prompts:
       - type: "input"
         title: "PR number"
-
   # Interactive rebase from main
   - key: "R"
     context: "localBranches"
     command: "git rebase -i $(git merge-base HEAD origin/main)"
     description: "Interactive rebase from main"
-
 keybinding:
   universal:
     # Vim-style
