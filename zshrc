@@ -79,8 +79,17 @@ bindkey "\e\eOC" end-of-line
 # ============================================
 function git_main_branch() {
   command git rev-parse --git-dir &>/dev/null || return
+
+  # Try to get the default branch from remote's HEAD
+  local remote_head=$(command git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null)
+  if [[ -n "$remote_head" ]]; then
+    echo ${remote_head##*/}
+    return 0
+  fi
+
+  # Fallback: check common branch names
   local ref
-  for ref in refs/{heads,remotes/{origin,upstream}}/{main,trunk,mainline,default,master}; do
+  for ref in refs/{heads,remotes/{origin,upstream}}/{main,trunk,mainline,default,dev,master}; do
     if command git show-ref -q --verify $ref; then
       echo ${ref:t}
       return 0
