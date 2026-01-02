@@ -1,5 +1,5 @@
 # ============================================
-# Cross-platform zsh config
+# Cross-platform zsh config (no oh-my-zsh!)
 # ============================================
 
 # Detect OS
@@ -14,122 +14,150 @@ export CONFIGS_DIR="$HOME/repos/configs"
 # Tool configs
 export RIPGREP_CONFIG_PATH="$CONFIGS_DIR/ripgreprc"
 
-# Amazon Q pre block (macOS only)
-if [[ "$IS_MACOS" == true ]] && [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]]; then
-  builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
+# Fix hostname for starship (macOS hostname command returns weird value)
+if [[ "$IS_MACOS" == true ]]; then
+  export STARSHIP_HOST=$(scutil --get LocalHostName 2>/dev/null || hostname)
 fi
+
+# Kiro CLI - disabled (slows down new tabs significantly)
+# if [[ "$IS_MACOS" == true ]] && [[ -x ~/.local/bin/kiro-cli ]]; then
+#   eval "$(~/.local/bin/kiro-cli init zsh pre --rcfile zshrc)"
+# fi
 
 # Add deno completions to search path
 if [[ ":$FPATH:" != *":$HOME/completions:"* ]]; then export FPATH="$HOME/completions:$FPATH"; fi
+
+# Debug mode
 if [ -n "${ZSH_DEBUGRC+1}" ]; then
     zmodload zsh/zprof
 fi
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# ============================================
+# Shell options
+# ============================================
+setopt AUTO_CD              # Type directory name to cd into it (implicit cd)
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+# ============================================
+# History
+# ============================================
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_REDUCE_BLANKS
+setopt INC_APPEND_HISTORY
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="candy"
+# ============================================
+# Completions
+# ============================================
+autoload -Uz compinit
+# Only regenerate compinit cache once a day
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
 
-DISABLE_AUTO_UPDATE="true"
+# Case-insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# Menu selection
+zstyle ':completion:*' menu select
+# Colors in completion
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# ============================================
+# Key bindings
+# ============================================
+bindkey -e  # emacs mode
+bindkey "\e\eOD" beginning-of-line
+bindkey "\e\eOC" end-of-line
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# ============================================
+# Git helpers (replaces oh-my-zsh git plugin)
+# ============================================
+function git_main_branch() {
+  command git rev-parse --git-dir &>/dev/null || return
+  local ref
+  for ref in refs/{heads,remotes/{origin,upstream}}/{main,trunk,mainline,default,master}; do
+    if command git show-ref -q --verify $ref; then
+      echo ${ref:t}
+      return 0
+    fi
+  done
+  echo master
+}
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+# Directory navigation - AUTO_CD handles typing paths directly
+# These aliases handle the common shorthand without trailing slash
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias -- -='cd -'
 
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+# Git aliases (the ones you actually use)
+alias g='git'
+alias ga='git add'
+alias gc='git commit --verbose'
+alias gcm='git checkout $(git_main_branch)'
+alias gco='git checkout'
+alias gd='git diff'
+alias gst='git status'
+alias gp='git push'
+alias gl='git pull'
 
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
+# ============================================
+# Rails helpers (replaces oh-my-zsh rails plugin)
+# ============================================
+function _rails_command() {
+  if [ -e "bin/stubs/rails" ]; then
+    bin/stubs/rails "$@"
+  elif [ -e "bin/rails" ]; then
+    bin/rails "$@"
+  elif [ -e "script/rails" ]; then
+    ruby script/rails "$@"
+  elif [ -e "script/server" ]; then
+    ruby script/"$@"
+  else
+    command rails "$@"
+  fi
+}
+alias rails='_rails_command'
 
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
+function _rake_command() {
+  if [ -e "bin/stubs/rake" ]; then
+    bin/stubs/rake "$@"
+  elif [ -e "bin/rake" ]; then
+    bin/rake "$@"
+  elif type bundle &> /dev/null && [[ -e "Gemfile" || -e "gems.rb" ]]; then
+    bundle exec rake "$@"
+  else
+    command rake "$@"
+  fi
+}
+alias rake='_rake_command'
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+# ============================================
+# Prompt (starship)
+# ============================================
+eval "$(starship init zsh)"
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+# ============================================
+# Syntax highlighting (via brew - path hardcoded for speed)
+# ============================================
+if [[ "$IS_MACOS" == true ]]; then
+  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+elif [[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+# ============================================
+# Your custom config starts here
+# ============================================
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(rails git ruby zsh-syntax-highlighting)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# eval "$(fnm env --use-on-cd)"
 real_npx=$(which npx)
 alias _npx="$real_npx"
 alias npx="bunx"
@@ -146,8 +174,6 @@ alias ci.="ci ."
 alias cs="cursor"
 alias cs.="cs ."
 
-# eval "$(rbenv init - zsh)"
-
 alias ll="eza -l --git --icons always"
 alias n="open"
 alias ga.="git add ."
@@ -155,17 +181,13 @@ alias lg="lazygit"
 
 export EDITOR="vim"
 
-bindkey "\e\eOD" beginning-of-line
-bindkey "\e\eOC" end-of-line
-
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm end
-#
+
 alias cd.='cd $(readlink -f .)' # Go to real dir (i.e. if current dir is linked)
 
 alias be="bundle exec"
@@ -535,9 +557,6 @@ function gwd() {
 
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
-# source "$HOME/.rye/env"
-# export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
-
 eval "$(atuin init zsh)"
 
 alias reload="source ~/.zshrc"
@@ -550,17 +569,17 @@ alias _rm="$real_rm"
 function rm() {
   # Get the real rm command path
   local real_rm=$(which rm)
-  
+
   # Check if trash command exists
   if ! command -v trash &> /dev/null; then
     echo "Warning: 'trash' command not found. Install it with 'brew install trash' or use 'realrm' for permanent deletion."
     return 1
   fi
-  
+
   # Check if -f flag is present (force, ignore non-existent files)
   local force_flag=false
   local files=()
-  
+
   for arg in "$@"; do
     # Check if this is a flag (starting with -)
     if [[ "$arg" =~ ^- ]]; then
@@ -574,13 +593,13 @@ function rm() {
       files+=("$arg")
     fi
   done
-  
+
   # If no files were provided after filtering, show usage
   if [[ ${#files[@]} -eq 0 ]]; then
     echo "No files or directories specified"
     return 1
   fi
-  
+
   # If -f flag is present, filter out non-existent files
   if [[ "$force_flag" == true ]]; then
     local existing_files=()
@@ -590,13 +609,13 @@ function rm() {
       fi
     done
     files=("${existing_files[@]}")
-    
+
     # If no files exist after filtering, silently succeed (like rm -f does)
     if [[ ${#files[@]} -eq 0 ]]; then
       return 0
     fi
   fi
-  
+
   # Use trash for the filtered file arguments
   trash "${files[@]}"
 }
@@ -658,7 +677,6 @@ function lt() {
 if [ -n "${ZSH_DEBUGRC+1}" ]; then
     zprof
 fi
-# . "/Users/franzekan/.deno/env"
 
 eval "$(mise activate zsh)"
 eval "$(zoxide init zsh)"
@@ -666,7 +684,7 @@ eval "$(zoxide init zsh)"
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
 
-# Amazon Q post block (macOS only)
-if [[ "$IS_MACOS" == true ]] && [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]]; then
-  builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
-fi
+# Kiro CLI post - disabled (slows down new tabs significantly)
+# if [[ "$IS_MACOS" == true ]] && [[ -x ~/.local/bin/kiro-cli ]]; then
+#   eval "$(~/.local/bin/kiro-cli init zsh post --rcfile zshrc)"
+# fi

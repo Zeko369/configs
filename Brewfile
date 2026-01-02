@@ -31,6 +31,8 @@ brew 'bat'                   # Better cat
 brew 'eza'                   # Better ls
 brew 'zoxide'                # Better cd
 brew 'atuin'                 # Better shell history
+brew 'starship'              # Fast prompt
+brew 'zsh-syntax-highlighting'
 brew 'jq'                    # JSON processor
 brew 'yq'                    # YAML processor
 brew 'trash-cli'             # Safe rm
