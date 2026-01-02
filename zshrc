@@ -378,6 +378,9 @@ eval "$(atuin init zsh)"
 alias reload="source ~/.zshrc"
 alias reload!="cp ~/repos/configs/zshrc ~/.zshrc && reload"
 
+local real_rm=$(which rm)
+alias _rm="$real_rm"
+
 # Safe rm function that uses trash instead of permanent deletion
 function rm() {
   # Get the real rm command path
@@ -440,6 +443,7 @@ export HOMEBREW_BUNDLE_FILE_GLOBAL="~/repos/configs/Brewfile"
 alias rebrew="brew bundle install --global"
 
 alias ca="cursor-agent"
+alias vfz='vim $(fzf)'
 
 notif() {
     # Save the command as a string

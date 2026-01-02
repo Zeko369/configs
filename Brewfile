@@ -1,7 +1,9 @@
 cask_args appdir: '/Applications', require_sha: true
 
 # Services
-brew 'postgresql'
+brew 'postgresql@14'
+brew 'postgresql@15'
+brew 'postgresql@16'
 brew 'valkey'
 
 # Utils
@@ -17,6 +19,7 @@ brew 'bat'
 brew 'btop'
 brew 'cloudflared'
 brew 'diff-so-fancy'
+brew 'dive'
 brew 'doctl'
 brew 'eza'
 brew 'fastfetch'
@@ -38,6 +41,8 @@ brew 'transmission-cli'
 brew 'trash-cli'
 brew 'zoxide'
 brew 'nmap'
+brew 'helm'
+brew 'watch'
 
 # Browsers
 cask 'firefox'
@@ -52,20 +57,19 @@ cask 'readdle-spark'
 cask 'slack'
 
 # Tools
-cask '1password-cli'
 cask '1password'
 cask 'aldente'
 cask 'alt-tab'
 cask 'atuin-desktop'
+cask 'balenaetcher'
 cask 'betterdisplay'
 cask 'cleanshot'
-cask 'cyberduck'
 cask 'daisydisk', args: { require_sha: false }
 cask 'flux-app'
-cask 'font-fira-code-nerd-font'
 cask 'jordanbaird-ice'
 cask 'keka'
 cask 'linear-linear'
+cask 'nordvpn'
 cask 'notion-calendar'
 cask 'notion'
 cask 'ollama-app'
@@ -82,16 +86,22 @@ cask 'multiviewer'
 cask 'obs'
 cask 'spotify', args: { require_sha: false }
 cask 'vlc@nightly'
+cask 'riverside-studio', args: { require_sha: false }
 
 # Devtools
-cask 'amazon-q'
+cask '1password-cli'
+cask 'claude-code'
 cask 'codex'
-cask 'cursor-cli'
 cask 'cursor'
+cask 'cursor-cli'
+cask 'cyberduck'
+cask 'font-fira-code-nerd-font'
 cask 'ghostty'
 cask 'jetbrains-toolbox'
+cask 'kiro-cli'
 cask 'orbstack'
 cask 'postico'
 cask 'proxyman'
 cask 'tableplus'
 cask 'yaak'
+cask 'zed'
