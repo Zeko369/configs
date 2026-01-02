@@ -1,4 +1,10 @@
 node_modules/
 tools/dist
+
+# Machine-specific configs (symlinked to home directory)
+# Use local.example/ as template, copy to local/ and customize
+local/
+
+# Legacy patterns (can remove once cleanup is done)
 shell/zshrc.base.local*
 vim/vimrc.local

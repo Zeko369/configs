@@ -1,7 +1,20 @@
-# Amazon Q pre block. Keep at the top of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
+# ============================================
+# Cross-platform zsh config
+# ============================================
+
+# Detect OS
+case "$(uname -s)" in
+  Darwin) IS_MACOS=true ;;
+  Linux)  IS_LINUX=true ;;
+esac
+
+# Amazon Q pre block (macOS only)
+if [[ "$IS_MACOS" == true ]] && [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]]; then
+  builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
+fi
+
 # Add deno completions to search path
-if [[ ":$FPATH:" != *":/Users/franzekan/completions:"* ]]; then export FPATH="/Users/franzekan/completions:$FPATH"; fi
+if [[ ":$FPATH:" != *":$HOME/completions:"* ]]; then export FPATH="$HOME/completions:$FPATH"; fi
 if [ -n "${ZSH_DEBUGRC+1}" ]; then
     zmodload zsh/zprof
 fi
@@ -116,7 +129,7 @@ alias _npx="$real_npx"
 alias npx="bunx"
 
 # bun completions
-[ -s "/Users/franzekan/.bun/_bun" ] && source "/Users/franzekan/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -140,7 +153,7 @@ bindkey "\e\eOD" beginning-of-line
 bindkey "\e\eOC" end-of-line
 
 # pnpm
-export PNPM_HOME="/Users/franzekan/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -514,7 +527,7 @@ function gwd() {
   echo "Done! Worktree and branch removed."
 }
 
-[ -f "/Users/franzekan/.ghcup/env" ] && source "/Users/franzekan/.ghcup/env" # ghcup-env
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
 # source "$HOME/.rye/env"
 # export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
@@ -642,9 +655,12 @@ fi
 # . "/Users/franzekan/.deno/env"
 
 eval "$(mise activate zsh)"
+eval "$(zoxide init zsh)"
 
 # opencode
-export PATH=/Users/franzekan/.opencode/bin:$PATH
+export PATH="$HOME/.opencode/bin:$PATH"
 
-# Amazon Q post block. Keep at the bottom of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
+# Amazon Q post block (macOS only)
+if [[ "$IS_MACOS" == true ]] && [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]]; then
+  builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
+fi
