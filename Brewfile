@@ -69,6 +69,7 @@ brew 'dive'                  # Docker image explorer
 brew 'lazydocker'            # Docker TUI
 brew 'watch'
 brew 'entr'                  # File watcher
+brew 'wakatime-cli'          # Coding time tracker
 
 # ============================================
 # Cloud / Infra
