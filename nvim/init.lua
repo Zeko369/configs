@@ -108,27 +108,23 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     config = function()
-      -- Install parsers for common languages
-      local parsers = {
-        'bash', 'c', 'css', 'go', 'html', 'javascript', 'json',
-        'lua', 'markdown', 'python', 'ruby', 'rust', 'tsx',
-        'typescript', 'vim', 'vimdoc', 'yaml',
-      }
-
-      -- Ensure parsers are installed
-      local installed = require('nvim-treesitter.install')
-      for _, parser in ipairs(parsers) do
-        if not vim.tbl_contains(vim.tbl_keys(vim.treesitter.language.get_filetypes('')), parser) then
-          pcall(function() installed.ensure_installed(parser) end)
-        end
-      end
-
-      -- Enable treesitter-based highlighting for all supported filetypes
-      vim.api.nvim_create_autocmd('FileType', {
-        callback = function(args)
-          pcall(vim.treesitter.start, args.buf)
-        end,
-      })
+      pcall(function()
+        require('nvim-treesitter.configs').setup {
+          ensure_installed = {
+            'bash', 'c', 'css', 'go', 'html', 'javascript', 'json',
+            'lua', 'markdown', 'python', 'ruby', 'rust', 'tsx',
+            'typescript', 'vim', 'vimdoc', 'yaml',
+          },
+          auto_install = true,
+          highlight = {
+            enable = true,
+            additional_vim_regex_highlighting = false,
+          },
+          indent = {
+            enable = true,
+          },
+        }
+      end)
     end,
   },
 
@@ -271,6 +267,12 @@ require('lazy').setup({
       view = { width = 30 },
       filters = { dotfiles = false },
     },
+  },
+
+  -- Lazygit integration
+  {
+    'kdheepak/lazygit.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
   },
 
   -- Colorscheme
@@ -440,6 +442,9 @@ keymap('n', '<leader>/', '<cmd>Telescope current_buffer_fuzzy_find<cr>', { desc 
 keymap('n', '<leader>gs', '<cmd>Telescope git_status<cr>', { desc = 'Git status' })
 keymap('n', '<leader>gc', '<cmd>Telescope git_commits<cr>', { desc = 'Git commits' })
 keymap('n', '<leader>gb', '<cmd>Telescope git_branches<cr>', { desc = 'Git branches' })
+
+-- Lazygit
+keymap('n', '<leader>gg', '<cmd>LazyGit<cr>', { desc = 'Open lazygit' })
 
 -- ============================================
 -- Autocommands
