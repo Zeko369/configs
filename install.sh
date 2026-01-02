@@ -161,6 +161,13 @@ if [ -f "$CONFIGS_DIR/atuin.toml" ]; then
   create_optional_symlink "$CONFIGS_DIR/atuin.toml" "$ATUIN_DIR/config.toml"
 fi
 
+# opencode config
+if [ -f "$CONFIGS_DIR/opencode/opencode.jsonc" ]; then
+  OPENCODE_DIR="$HOME/.config/opencode"
+  mkdir -p "$OPENCODE_DIR"
+  create_optional_symlink "$CONFIGS_DIR/opencode/opencode.jsonc" "$OPENCODE_DIR/opencode.jsonc"
+fi
+
 # ============================================
 # Done!
 # ============================================
