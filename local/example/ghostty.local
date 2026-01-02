@@ -1,6 +1,5 @@
 # Machine-specific Ghostty config
 # This file is loaded by ghostty_config via config-file directive
-# Copy to local/ghostty.local and customize
 
 # ============================================
 # macOS-specific

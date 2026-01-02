@@ -1,5 +1,27 @@
-# Extra aliases - source this file for additional utilities
-# These are optional and can be sourced in local/.zshrc if needed
+# Global aliases
+
+# ============================================
+# Directory navigation
+# ============================================
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias -- -='cd -'
+alias cd.='cd $(readlink -f .)'  # Go to real dir (if current dir is linked)
+
+# ============================================
+# Shell utilities
+# ============================================
+alias c='clear'
+alias quit='exit'
+alias reload='source ~/.zshrc'
+alias aliases="alias | sed 's/=.*//'"
+alias paths='echo -e ${PATH//:/\\n}'
+alias space="df -h | grep -v -E '/dev/loop|udev|tmpfs'"
+alias fwd='readlink -f'
+alias ff='fastfetch'
 
 # ============================================
 # Cross-platform clipboard (Linux support)
@@ -17,38 +39,36 @@ fi
 # ============================================
 # Quick HTTP servers
 # ============================================
-alias up="python3 -m http.server 8000"
-alias upp="php -S 0.0.0.0:8080"
+alias up='python3 -m http.server 8000'
+alias upp='php -S 0.0.0.0:8080'
+alias rserver='ruby -run -e httpd . -p 8080'
 
 # ============================================
-# Basic utilities
-# ============================================
-alias c="clear"
-alias quit="exit"
-alias space="df -h | grep -v -E '/dev/loop|udev|tmpfs'"
-
 # Python
-alias py="ipython3"
-alias venv="source ./venv/bin/activate"
-alias deac="deactivate"
-
-# Ruby
-alias be="bundle exec"
-alias kill_puma="pkill -9 -f puma"
+# ============================================
+alias py='ipython3'
+alias venv='source ./venv/bin/activate'
+alias deac='deactivate'
 
 # ============================================
 # Docker
 # ============================================
-alias d="docker"
-alias dc="docker-compose"
-alias dcu="dc up"
-alias dcd="dc down"
-alias dcb="dc build"
+alias d='docker'
+alias dc='docker compose'
+alias dcu='dc up'
+alias dcup='dc up'
+alias dcd='dc down'
+alias dcb='dc build'
 
 # ============================================
-# Git extras
+# Misc tools
 # ============================================
-alias gcopr="gh pr checkout"
+alias n='open'  # macOS Finder
+alias ocd='OVERCOMMIT_DISABLE=1'
+alias ro='railway open'
+alias fmns='foreman start'
+alias sstat='thin --stats "/thin/stats" start'
+alias rfind='find . -name "*.rb" | xargs grep -n'
 
 # ============================================
 # Fun
@@ -60,7 +80,7 @@ alias wth2="curl -4 http://v2.wttr.in/Zagreb"
 # Linux-specific (gnome)
 # ============================================
 if [[ "$OSTYPE" == "linux"* ]]; then
-  alias term="gnome-terminal"
-  alias terminal="gnome-terminal"
-  alias n="nautilus"
+  alias term='gnome-terminal'
+  alias terminal='gnome-terminal'
+  alias n='nautilus'
 fi

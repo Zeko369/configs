@@ -34,5 +34,10 @@ function lsToggleGit() {
 
 alias ltg="lsToggleGit"
 
-alias ll='_ls -lh'
+alias ll='eza -l --git --icons always'
 alias la='_ls -lha'
+
+# Tree view with eza
+function lt() {
+  eza --tree --level=2 --long --icons --git --ignore-glob="node_modules|.git|vendor" $argv
+}

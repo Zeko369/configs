@@ -4,7 +4,7 @@ set -e
 
 CONFIGS_DIR="$(cd "$(dirname "$0")" && pwd)"
 LOCAL_DIR="$CONFIGS_DIR/local"
-EXAMPLE_DIR="$CONFIGS_DIR/local.example"
+EXAMPLE_DIR="$LOCAL_DIR/example"
 
 # Colors
 RED='\033[0;31m'
@@ -54,10 +54,10 @@ copy_template() {
   fi
 }
 
-copy_template ".zshrc"
-copy_template ".vimrc"
-copy_template ".tmux.conf"
-copy_template ".gitconfig"
+copy_template "zshrc"
+copy_template "vimrc"
+copy_template "tmux.conf"
+copy_template "gitconfig"
 copy_template "ghostty.local"
 
 # ============================================
@@ -88,10 +88,10 @@ create_symlink() {
   ln -s "$src" "$dest"
 }
 
-create_symlink "$LOCAL_DIR/.zshrc" "$HOME/.zshrc"
-create_symlink "$LOCAL_DIR/.vimrc" "$HOME/.vimrc"
-create_symlink "$LOCAL_DIR/.tmux.conf" "$HOME/.tmux.conf"
-create_symlink "$LOCAL_DIR/.gitconfig" "$HOME/.gitconfig"
+create_symlink "$LOCAL_DIR/zshrc" "$HOME/.zshrc"
+create_symlink "$LOCAL_DIR/vimrc" "$HOME/.vimrc"
+create_symlink "$LOCAL_DIR/tmux.conf" "$HOME/.tmux.conf"
+create_symlink "$LOCAL_DIR/gitconfig" "$HOME/.gitconfig"
 
 # ============================================
 # Step 4: Optional configs (direct symlinks, no local wrapper needed)
@@ -152,6 +152,13 @@ if [ -f "$CONFIGS_DIR/lazygit/config.yml" ]; then
   fi
   mkdir -p "$LAZYGIT_DIR"
   create_optional_symlink "$CONFIGS_DIR/lazygit/config.yml" "$LAZYGIT_DIR/config.yml"
+fi
+
+# atuin config
+if [ -f "$CONFIGS_DIR/atuin.toml" ]; then
+  ATUIN_DIR="$HOME/.config/atuin"
+  mkdir -p "$ATUIN_DIR"
+  create_optional_symlink "$CONFIGS_DIR/atuin.toml" "$ATUIN_DIR/config.toml"
 fi
 
 # ============================================

@@ -1,6 +1,5 @@
 # Machine-specific Git configuration
 # This file is symlinked to ~/.gitconfig
-# Copy to local/.gitconfig and customize
 
 # ============================================
 # Include shared config (DO NOT REMOVE)
