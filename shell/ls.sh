@@ -1,7 +1,15 @@
 #!/bin/sh
+# Smart ls with fallback: eza → exa → lsd → ls
 
 function _ls() {
-  if command -v exa &> /dev/null; then
+  if command -v eza &> /dev/null; then
+    if [ -n "$NO_GIT" ]; then
+      eza --long --header --icons "$@"
+    else
+      eza --long --header --icons --git "$@"
+    fi
+  elif command -v exa &> /dev/null; then
+    # Fallback to exa (deprecated, but might be installed on older systems)
     if [ -n "$NO_GIT" ]; then
       exa --long --header --icons "$@"
     else
@@ -14,22 +22,17 @@ function _ls() {
   fi
 }
 
-function exaToggleGit() {
-  if command -v exa &> /dev/null; then
-    if [ -n "$NO_GIT" ]; then
-      unset NO_GIT
-      echo "Git enabled in exa"
-    else
-      export NO_GIT=true
-      echo "Git disabled in exa"
-    fi
+function lsToggleGit() {
+  if [ -n "$NO_GIT" ]; then
+    unset NO_GIT
+    echo "Git info enabled in ls"
   else
-    echo "No exa on system"
-    echo "Install exa first"
+    export NO_GIT=true
+    echo "Git info disabled in ls"
   fi
 }
 
-alias etg="exaToggleGit"
+alias ltg="lsToggleGit"
 
 alias ll='_ls -lh'
 alias la='_ls -lha'
