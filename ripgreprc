@@ -25,3 +25,4 @@
 --glob=!yarn.lock
 --glob=!pnpm-lock.yaml
 --glob=!bun.lockb
+--glob=!bun.lock

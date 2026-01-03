@@ -9,10 +9,11 @@ alias cs='cursor'
 alias cs.='cs .'
 
 # ============================================
-# Vim
+# Vim / Neovim
 # ============================================
-export EDITOR='vim'
-alias vfz='vim $(fzf)'
+export EDITOR='nvim'
+alias nv='nvim'
+alias vfz='nvim $(fzf)'
 
 # ============================================
 # Zed

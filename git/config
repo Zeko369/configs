@@ -55,6 +55,26 @@
     enabled = true
 
 # ============================================
+# Column output (auto-format in columns)
+# ============================================
+[column]
+    ui = auto
+
+# ============================================
+# Fetch behavior
+# ============================================
+[fetch]
+    prune = true       # Delete local refs to deleted remote branches
+    prunetags = true   # Same for tags
+
+# ============================================
+# Rebase behavior
+# ============================================
+[rebase]
+    autosquash = true  # Auto-reorder fixup!/squash! commits
+    autostash = true   # Stash before rebase, pop after
+
+# ============================================
 # URL rewrites (use SSH instead of HTTPS)
 # ============================================
 [url "git@github.com:"]

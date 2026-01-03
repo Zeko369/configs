@@ -33,8 +33,9 @@ brew 'zoxide'                # Better cd
 brew 'atuin'                 # Better shell history
 brew 'starship'              # Fast prompt
 brew 'zsh-syntax-highlighting'
-brew 'jq'                    # JSON processor
+brew 'jaq'                   # Better jq (Rust)
 brew 'yq'                    # YAML processor
+brew 'yj'                    # Convert YAML/JSON/TOML
 brew 'trash-cli'             # Safe rm
 brew 'neovim'                # Better vim
 
@@ -48,6 +49,12 @@ brew 'procs'                 # Better ps
 brew 'delta'                 # Better git diff
 brew 'tldr'                  # Simplified man pages
 brew 'glow'                  # Markdown viewer
+brew 'xh'                    # Better curl (HTTPie-like)
+brew 'sd'                    # Better sed (simpler syntax)
+brew 'choose'                # Better cut/awk for columns
+brew 'doggo'                 # Better dig (DNS lookup)
+brew 'grex'                  # Generate regex from examples
+brew 'ouch'                  # Universal compress/decompress
 
 # ============================================
 # Git tools

@@ -1,27 +1,15 @@
 #!/bin/sh
-# Smart ls with fallback: eza → exa → lsd → ls
+# ls aliases using eza
 
-function _ls() {
-  if command -v eza &> /dev/null; then
-    if [ -n "$NO_GIT" ]; then
-      eza --long --header --icons "$@"
-    else
-      eza --long --header --icons --git "$@"
-    fi
-  elif command -v exa &> /dev/null; then
-    # Fallback to exa (deprecated, but might be installed on older systems)
-    if [ -n "$NO_GIT" ]; then
-      exa --long --header --icons "$@"
-    else
-      exa --long --header --icons --git "$@"
-    fi
-  elif command -v lsd &> /dev/null; then
-    lsd "$@"
-  else
-    ls "$@"
-  fi
-}
+# Basic listing
+alias ls='eza --icons'
+alias ll='eza -l --git --icons'
+alias la='eza -la --git --icons'
 
+# Tree view
+alias lt='eza --tree --level=2 --icons --git -I "node_modules|.git|vendor"'
+
+# Toggle git info for performance in large repos
 function lsToggleGit() {
   if [ -n "$NO_GIT" ]; then
     unset NO_GIT
@@ -33,11 +21,3 @@ function lsToggleGit() {
 }
 
 alias ltg="lsToggleGit"
-
-alias ll='eza -l --git --icons always'
-alias la='_ls -lha'
-
-# Tree view with eza
-function lt() {
-  eza --tree --level=2 --long --icons --git --ignore-glob="node_modules|.git|vendor" $argv
-}

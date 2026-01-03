@@ -21,6 +21,12 @@ alias grs='git restore --staged'
 alias grs.='grs .'
 alias gs='echo "You'\''re dumb"; gst'
 alias lg='lazygit'
+alias gf='git fetch'
+alias gfa='git fetch --all'
+alias grb='git rebase'
+alias grbi='git rebase -i'
+alias gsta='git stash'
+alias gstp='git stash pop'
 
 # GitHub CLI
 alias pr='gh pr view --web'
@@ -84,9 +90,9 @@ function gpm() { git pull origin $(git_main_branch) }
 
 function cdgr() { cd "$(git rev-parse --show-toplevel)" }
 
-function ocm() { open "$(git remote get-url origin | sed 's/git@github.com:/https:\/\/github.com\//' | sed 's/.git$//')/commit/$(git rev-parse HEAD)" }
+function ocm() { gh browse "$(git rev-parse HEAD)" }
 
-function cmcp() { echo "$(git remote get-url origin | sed 's/git@github.com:/https:\/\/github.com\//' | sed 's/.git$//')/commit/$(git rev-parse HEAD)" | pbcopy }
+function cmcp() { gh browse -n "$(git rev-parse HEAD)" | pbcopy }
 
 function add_unless_staged() {
   if git diff --cached --quiet; then

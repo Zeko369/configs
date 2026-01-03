@@ -84,6 +84,11 @@ elif [[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; th
 fi
 
 # ============================================
+# zsh-defer (lazy loading for slow tools)
+# ============================================
+source "$CONFIGS_DIR/shell/plugins/zsh-defer.plugin.zsh"
+
+# ============================================
 # Source shell modules
 # ============================================
 source "$CONFIGS_DIR/shell/aliases"
@@ -135,6 +140,11 @@ eval "$(mise activate zsh)"
 
 # zoxide (smart cd)
 eval "$(zoxide init zsh)"
+
+# kiro-cli (deferred to avoid slow startup)
+if [[ -x "/Applications/Kiro CLI.app/Contents/MacOS/kiro-cli" ]]; then
+  zsh-defer -c 'eval "$(/Applications/Kiro\ CLI.app/Contents/MacOS/kiro-cli init zsh post)"'
+fi
 
 # ============================================
 # Debug output
