@@ -126,7 +126,7 @@ alias _npx="$real_npx"
 alias npx="bunx"
 
 # Homebrew
-export HOMEBREW_BUNDLE_FILE_GLOBAL="~/repos/configs/Brewfile"
+export HOMEBREW_BUNDLE_FILE_GLOBAL="$CONFIGS_DIR/Brewfile"
 alias rebrew="brew bundle install --global"
 
 # opencode

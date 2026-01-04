@@ -26,6 +26,15 @@ unfocused-split-opacity = 0.9
 keybind = super+enter=unbind
 
 # ============================================
+# Working Directory
+# ============================================
+# New windows: start in home directory
+working-directory = home
+
+# New tabs/splits: inherit working directory from current session
+window-inherit-working-directory = true
+
+# ============================================
 # Load machine-specific config (optional)
 # ============================================
 config-file = ?local/ghostty.local
