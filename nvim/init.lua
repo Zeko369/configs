@@ -113,7 +113,7 @@ require('lazy').setup({
           ensure_installed = {
             'bash', 'c', 'css', 'go', 'html', 'javascript', 'json',
             'lua', 'markdown', 'python', 'ruby', 'rust', 'tsx',
-            'typescript', 'vim', 'vimdoc', 'yaml',
+            'typescript', 'vimdoc', 'yaml',
           },
           auto_install = true,
           highlight = {
@@ -275,6 +275,9 @@ require('lazy').setup({
     'kdheepak/lazygit.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
   },
+
+  -- WakaTime
+  'wakatime/vim-wakatime',
 
   -- Colorscheme
   {
@@ -446,6 +449,12 @@ keymap('n', '<leader>gb', '<cmd>Telescope git_branches<cr>', { desc = 'Git branc
 
 -- Lazygit
 keymap('n', '<leader>gg', '<cmd>LazyGit<cr>', { desc = 'Open lazygit' })
+
+-- Diagnostics
+keymap('n', 'gl', vim.diagnostic.open_float, { desc = 'Show diagnostic' })
+keymap('n', '[d', vim.diagnostic.goto_prev, { desc = 'Previous diagnostic' })
+keymap('n', ']d', vim.diagnostic.goto_next, { desc = 'Next diagnostic' })
+keymap('n', '<leader>dl', '<cmd>Telescope diagnostics<cr>', { desc = 'List diagnostics' })
 
 -- ============================================
 -- Autocommands
