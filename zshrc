@@ -141,11 +141,6 @@ eval "$(mise activate zsh)"
 # zoxide (smart cd)
 eval "$(zoxide init zsh)"
 
-# kiro-cli (deferred to avoid slow startup)
-if [[ -x "/Applications/Kiro CLI.app/Contents/MacOS/kiro-cli" ]]; then
-  zsh-defer -c 'eval "$(/Applications/Kiro\ CLI.app/Contents/MacOS/kiro-cli init zsh post)"'
-fi
-
 # ============================================
 # Debug output
 # ============================================
