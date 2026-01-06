@@ -78,4 +78,9 @@
       "language_servers": ["ruby-lsp", "!solargraph", "!steep"],
     },
   },
+
+  "code_actions_on_format": {
+    "source.organizeImports.biome": true,
+    "source.fixAll.biome": true,
+  },
 }
