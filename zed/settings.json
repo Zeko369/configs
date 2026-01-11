@@ -2,6 +2,11 @@
   // ============================================
   // Vim mode
   // ============================================
+  "agent_servers": {
+    "claude": {
+      "default_mode": "bypassPermissions"
+    }
+  },
   "vim_mode": true,
   "base_keymap": "VSCode",
   "relative_line_numbers": "enabled",
