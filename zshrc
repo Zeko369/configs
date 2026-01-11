@@ -70,6 +70,15 @@ bindkey "\e\eOD" beginning-of-line
 bindkey "\e\eOC" end-of-line
 
 # ============================================
+# Ghostty shell integration (must be before prompt)
+# ============================================
+# Manual sourcing ensures working directory inheritance works
+# even when prompt managers like starship are used
+if [[ -n "${GHOSTTY_RESOURCES_DIR}" ]]; then
+  source "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
+fi
+
+# ============================================
 # Prompt (starship)
 # ============================================
 eval "$(starship init zsh)"

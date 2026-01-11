@@ -26,12 +26,21 @@ unfocused-split-opacity = 0.9
 keybind = super+enter=unbind
 
 # ============================================
+# Shell Integration
+# ============================================
+# Explicit shell integration (don't rely on auto-detect)
+# This is required for working directory inheritance to work
+shell-integration = zsh
+
+# ============================================
 # Working Directory
 # ============================================
-# New windows: start in home directory
+# Fallback directory when nothing to inherit (new windows without context)
 working-directory = home
 
-# New tabs/splits: inherit working directory from current session
+# Tabs/splits inherit working directory from focused pane
+# Note: This also affects windows - Ghostty doesn't distinguish yet
+# See: https://github.com/ghostty-org/ghostty/issues/1392
 window-inherit-working-directory = true
 
 # ============================================
