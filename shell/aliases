@@ -18,15 +18,15 @@ alias _sed='/usr/bin/sed'
 # Modern replacements
 alias cat='bat'
 #alias grep='rg'
-alias find='fd'
+#alias find='fd'
 alias top='btop'
 alias df='duf'
 alias du='dust'
 #alias ps='procs'
 #alias dig='doggo'
-alias curl='xh'
+#alias curl='xh'
 #alias sed='sd'
-alias jq='jaq'
+#alias jq='jaq'
 
 # ============================================
 # Directory navigation
