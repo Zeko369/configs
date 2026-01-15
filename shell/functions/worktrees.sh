@@ -66,11 +66,19 @@ function gwc() {
     return 1
   fi
 
-  # Check if branch already exists
+  # Check if branch already exists locally
   local branch_exists=false
   if git rev-parse --verify "$branch_name" &>/dev/null; then
     branch_exists=true
-    echo "Branch $branch_name already exists, checking it out..."
+    echo "Branch $branch_name already exists locally, checking it out..."
+  else
+    # Branch not found locally, fetch and check remote
+    echo "Branch not found locally, fetching from remote..."
+    git fetch --quiet
+    if git rev-parse --verify "origin/$branch_name" &>/dev/null; then
+      branch_exists=true
+      echo "Branch $branch_name found on remote, checking it out..."
+    fi
   fi
 
   # Determine base branch
