@@ -41,9 +41,27 @@ set ruler
 set signcolumn=yes
 
 " Colors (works in most terminals)
-set background=dark
 set termguicolors
-colorscheme habamax
+
+" Detect macOS system theme
+function! IsDarkMode()
+  return system("defaults read -g AppleInterfaceStyle 2>/dev/null") =~# 'Dark'
+endfunction
+
+function! ApplySystemTheme()
+  if IsDarkMode()
+    set background=dark
+  else
+    set background=light
+  endif
+  colorscheme habamax
+endfunction
+
+" Apply on startup
+call ApplySystemTheme()
+
+" Re-check on focus (when switching back after toggling system theme)
+autocmd FocusGained * call ApplySystemTheme()
 
 " Whitespace visualization
 set listchars=tab:→\ ,trail:·,extends:»,precedes:«,nbsp:␣

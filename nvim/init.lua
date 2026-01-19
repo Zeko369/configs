@@ -285,7 +285,34 @@ require('lazy').setup({
     name = 'catppuccin',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'catppuccin-mocha'
+      -- Detect macOS system theme
+      local function is_dark_mode()
+        local handle = io.popen("defaults read -g AppleInterfaceStyle 2>/dev/null")
+        if handle then
+          local result = handle:read("*a")
+          handle:close()
+          return result:match("Dark") ~= nil
+        end
+        return true -- Default to dark
+      end
+
+      local function apply_theme()
+        if is_dark_mode() then
+          vim.o.background = 'dark'
+          vim.cmd.colorscheme 'catppuccin-mocha'
+        else
+          vim.o.background = 'light'
+          vim.cmd.colorscheme 'catppuccin-latte'
+        end
+      end
+
+      -- Apply on startup
+      apply_theme()
+
+      -- Re-check on focus (when switching back after toggling system theme)
+      vim.api.nvim_create_autocmd('FocusGained', {
+        callback = apply_theme,
+      })
     end,
   },
 

@@ -8,8 +8,28 @@ case "$(uname -s)" in
   Linux)  IS_LINUX=true ;;
 esac
 
+# Detect system theme (light/dark)
+if [[ "$IS_MACOS" == true ]]; then
+  if [[ $(defaults read -g AppleInterfaceStyle 2>/dev/null) == "Dark" ]]; then
+    export SYSTEM_THEME="dark"
+  else
+    export SYSTEM_THEME="light"
+  fi
+else
+  # Default to dark on Linux (could be extended to detect GTK/Qt theme)
+  export SYSTEM_THEME="dark"
+fi
+
+# Configure git delta pager based on theme
+if [[ "$SYSTEM_THEME" == "light" ]]; then
+  export GIT_PAGER="delta --syntax-theme='GitHub' --light"
+else
+  export GIT_PAGER="delta --syntax-theme='Dracula'"
+fi
+
 # Configs directory
 export CONFIGS_DIR="$HOME/repos/configs"
+export PATH="$CONFIGS_DIR/bin:$PATH"
 
 # Tool configs
 export RIPGREP_CONFIG_PATH="$CONFIGS_DIR/ripgreprc"
