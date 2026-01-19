@@ -136,7 +136,8 @@ alias npx="bunx"
 
 # Homebrew
 export HOMEBREW_BUNDLE_FILE_GLOBAL="$CONFIGS_DIR/Brewfile"
-alias rebrew="brew bundle install --global"
+export HOMEBREW_NO_AUTO_UPDATE=1
+alias rebrew="brew update && brew bundle install --global && brew upgrade"
 
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
