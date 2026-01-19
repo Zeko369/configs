@@ -1,6 +1,8 @@
 # Lazygit configuration
 
 gui:
+  # Prompt before quitting (prevents accidental exits)
+  confirmOnQuit: true
   # Show file icons (requires nerd font)
   nerdFontsVersion: "3"
   # Theme - matches your terminal
