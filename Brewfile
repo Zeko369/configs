@@ -117,6 +117,7 @@ cask 'betterdisplay'
 cask 'cleanshot'
 cask 'daisydisk', args: { require_sha: false }
 cask 'flux-app'
+cask 'hyperkey'
 cask 'jordanbaird-ice'
 cask 'keka'
 cask 'linear-linear'
