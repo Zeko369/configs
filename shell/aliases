@@ -87,13 +87,17 @@ alias dcd='dc down'
 alias dcb='dc build'
 
 # ============================================
+# Node
+# ============================================
+alias npm_relogin="npm logout && npm login"
+
+# ============================================
 # Misc tools
 # ============================================
-alias n='open'  # macOS Finder
-alias ocd='OVERCOMMIT_DISABLE=1'
+alias n='open'  # macOS Finder, TODO: This should go into a macos only file
 alias ro='railway open'
-alias fmns='foreman start'
 alias sstat='thin --stats "/thin/stats" start'
+
 # ============================================
 # Tmux
 # ============================================
