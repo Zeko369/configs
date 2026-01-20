@@ -67,11 +67,40 @@ require('lazy').setup({
     },
   },
 
-  -- Indentation guides
+  -- Indentation guides (subtle background lines)
   {
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
-    opts = {},
+    config = function()
+      local hooks = require('ibl.hooks')
+      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+        vim.api.nvim_set_hl(0, 'IblIndent', { fg = '#313244' })
+      end)
+
+      require('ibl').setup({
+        indent = {
+          char = '│',
+          highlight = 'IblIndent',
+        },
+        scope = { enabled = false },  -- Using mini.indentscope instead
+      })
+    end,
+  },
+
+  -- Highlight current scope (the VS Code-like feature)
+  {
+    'echasnovski/mini.indentscope',
+    config = function()
+      vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { fg = '#cba6f7' })  -- Mauve/purple
+      require('mini.indentscope').setup({
+        symbol = '│',
+        options = { try_as_border = true },
+        draw = {
+          delay = 50,
+          animation = require('mini.indentscope').gen_animation.none(),
+        },
+      })
+    end,
   },
 
   -- Fuzzy finder
@@ -285,6 +314,8 @@ require('lazy').setup({
     name = 'catppuccin',
     priority = 1000,
     config = function()
+      require('catppuccin').setup({})
+
       -- Detect macOS system theme
       local function is_dark_mode()
         local handle = io.popen("defaults read -g AppleInterfaceStyle 2>/dev/null")
