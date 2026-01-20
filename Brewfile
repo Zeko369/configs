@@ -77,6 +77,7 @@ brew 'lazydocker'            # Docker TUI
 brew 'watch'
 brew 'entr'                  # File watcher
 brew 'wakatime-cli'          # Coding time tracker
+brew 'max-sixty/worktrunk/wt'
 
 # ============================================
 # Cloud / Infra
