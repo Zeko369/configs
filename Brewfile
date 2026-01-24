@@ -1,6 +1,13 @@
 cask_args appdir: '/Applications', require_sha: true
 
 # ============================================
+# Mac App Store
+# ============================================
+brew 'mas'                   # Mac App Store CLI
+mas 'Flighty', id: 1358823008
+mas 'Xcode', id: 497799835
+
+# ============================================
 # Services / Databases
 # ============================================
 brew 'postgresql@14'
@@ -37,6 +44,7 @@ brew 'jaq'                   # Better jq (Rust)
 brew 'yq'                    # YAML processor
 brew 'yj'                    # Convert YAML/JSON/TOML
 brew 'trash-cli'             # Safe rm
+brew 'vim'
 brew 'neovim'                # Better vim
 
 # ============================================
@@ -76,6 +84,7 @@ brew 'dive'                  # Docker image explorer
 brew 'lazydocker'            # Docker TUI
 brew 'watch'
 brew 'entr'                  # File watcher
+brew 'zellij'                # Terminal multiplexer
 brew 'wakatime-cli'          # Coding time tracker
 brew 'max-sixty/worktrunk/wt'
 
@@ -110,6 +119,8 @@ cask 'slack'
 
 # Tools
 cask '1password'
+cask 'claude'
+cask 'home-assistant'
 cask 'aldente'
 cask 'alt-tab'
 cask 'atuin-desktop'
@@ -147,6 +158,7 @@ cask 'claude-code'
 cask 'codex'
 cask 'cursor'
 cask 'cursor-cli'
+cask 'opencode-desktop'
 cask 'cyberduck'
 cask 'font-fira-code-nerd-font'
 cask 'ghostty'
