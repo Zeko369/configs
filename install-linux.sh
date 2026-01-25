@@ -133,6 +133,12 @@ if [ "$SHELL" != "$(which zsh)" ]; then
 fi
 
 # ============================================
+# Step 6: Install Claude Code
+# ============================================
+info "Installing Claude Code..."
+curl -fsSL https://claude.ai/install.sh | bash
+
+# ============================================
 # Done!
 # ============================================
 echo ""
