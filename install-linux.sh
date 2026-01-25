@@ -25,20 +25,15 @@ fi
 CONFIGS_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # ============================================
-# Step 1: Add apt repositories
+# Step 1: Add mise apt repository
 # ============================================
-info "Adding apt repositories..."
+info "Adding mise apt repository..."
 sudo apt-get update -qq
-sudo apt-get install -y -qq gpg curl software-properties-common
+sudo apt-get install -y -qq gpg curl
 
-# mise repo
 sudo install -dm 755 /etc/apt/keyrings
 curl -fsSL https://mise.jdx.dev/gpg-key.pub | gpg --dearmor | sudo tee /etc/apt/keyrings/mise-archive-keyring.gpg > /dev/null
 echo "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=amd64] https://mise.jdx.dev/deb stable main" | sudo tee /etc/apt/sources.list.d/mise.list > /dev/null
-
-# lazygit PPA
-info "Adding lazygit PPA..."
-sudo add-apt-repository -y ppa:lazygit-team/release
 
 # ============================================
 # Step 2: Update and install apt packages
@@ -71,7 +66,6 @@ APT_PACKAGES=(
   # Git tools
   tig
   gh
-  lazygit
 
   # Shell
   zsh-syntax-highlighting

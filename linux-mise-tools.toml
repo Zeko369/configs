@@ -8,6 +8,7 @@
 
 [tools]
 rust = "latest"
+go = "latest"
 
 # Shell prompt
 "cargo:starship" = "latest"
@@ -23,3 +24,6 @@ rust = "latest"
 
 # Code statistics
 "cargo:tokei" = "latest"
+
+# Git TUI
+"go:github.com/jesseduffield/lazygit" = "latest"
