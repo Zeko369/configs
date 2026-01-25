@@ -101,19 +101,27 @@ if command -v batcat &> /dev/null && ! command -v bat &> /dev/null; then
 fi
 
 # ============================================
-# Step 4: Install cargo-based tools via mise
+# Step 4: Symlink Linux mise config
 # ============================================
-info "Installing cargo-based tools via mise..."
+info "Setting up Linux mise config..."
 
-# Activate mise in current shell
+MISE_DIR="$HOME/.config/mise"
+mkdir -p "$MISE_DIR"
+
+# Symlink linux-mise-tools.toml as config.local.toml
+if [ -L "$MISE_DIR/config.local.toml" ]; then
+  rm "$MISE_DIR/config.local.toml"
+elif [ -f "$MISE_DIR/config.local.toml" ]; then
+  mv "$MISE_DIR/config.local.toml" "$MISE_DIR/config.local.toml.backup.$(date +%Y%m%d_%H%M%S)"
+fi
+ln -s "$CONFIGS_DIR/linux-mise-tools.toml" "$MISE_DIR/config.local.toml"
+info "Symlinked: $MISE_DIR/config.local.toml → $CONFIGS_DIR/linux-mise-tools.toml"
+
+# Trust and install
 eval "$(mise activate bash)"
-
-# Trust and install from linux-mise-tools.toml
-mise trust "$CONFIGS_DIR/linux-mise-tools.toml"
-mise install --file "$CONFIGS_DIR/linux-mise-tools.toml"
-
-info "Cargo tools installed. To use them globally, run:"
-echo "  mise use --global --file $CONFIGS_DIR/linux-mise-tools.toml"
+mise trust "$MISE_DIR"
+info "Installing tools from mise configs..."
+mise install
 
 # ============================================
 # Step 5: Change default shell to zsh
