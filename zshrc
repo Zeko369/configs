@@ -99,6 +99,13 @@ if [[ -n "${GHOSTTY_RESOURCES_DIR}" ]]; then
 fi
 
 # ============================================
+# mise (runtime version manager) - activate early so tools are in PATH
+# ============================================
+if command -v mise &> /dev/null; then
+  eval "$(mise activate zsh)"
+fi
+
+# ============================================
 # Prompt (starship)
 # ============================================
 eval "$(starship init zsh)"
@@ -164,9 +171,6 @@ export PATH="$HOME/.opencode/bin:$PATH"
 
 # atuin (shell history)
 eval "$(atuin init zsh)"
-
-# mise (runtime version manager)
-eval "$(mise activate zsh)"
 
 # zoxide (smart cd)
 eval "$(zoxide init zsh)"
