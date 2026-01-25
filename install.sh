@@ -128,6 +128,21 @@ fi
 # ideavimrc
 create_optional_symlink "$CONFIGS_DIR/vim/ideavimrc" "$HOME/.ideavimrc"
 
+# Neovim config
+if [ -d "$CONFIGS_DIR/nvim" ]; then
+  NVIM_DEST="$HOME/.config/nvim"
+  if [ -L "$NVIM_DEST" ]; then
+    rm "$NVIM_DEST"
+  elif [ -d "$NVIM_DEST" ]; then
+    backup="${NVIM_DEST}.backup.$(date +%Y%m%d_%H%M%S)"
+    warn "Backing up: $NVIM_DEST → $backup"
+    mv "$NVIM_DEST" "$backup"
+  fi
+  mkdir -p "$HOME/.config"
+  info "Creating symlink: $NVIM_DEST → $CONFIGS_DIR/nvim"
+  ln -s "$CONFIGS_DIR/nvim" "$NVIM_DEST"
+fi
+
 # Zed config
 if [ -d "$CONFIGS_DIR/zed" ]; then
   ZED_DIR="$HOME/.config/zed"
