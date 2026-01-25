@@ -117,11 +117,12 @@ fi
 ln -s "$CONFIGS_DIR/linux-mise-tools.toml" "$MISE_DIR/config.local.toml"
 info "Symlinked: $MISE_DIR/config.local.toml → $CONFIGS_DIR/linux-mise-tools.toml"
 
-# Trust and install
+# Trust, install, and activate globally
 eval "$(mise activate bash)"
 mise trust "$MISE_DIR"
-info "Installing tools from mise configs..."
+info "Installing and activating tools globally..."
 mise install
+mise use --global --file "$CONFIGS_DIR/linux-mise-tools.toml"
 
 # ============================================
 # Step 5: Change default shell to zsh
