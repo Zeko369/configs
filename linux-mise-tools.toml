@@ -1,11 +1,14 @@
-# Linux-specific tools installed via mise's cargo backend
+# Linux-specific tools installed via mise
 # These tools aren't available in Ubuntu's apt repositories
 #
 # Usage:
-#   mise trust ~/repos/configs/linux-mise-tools.toml
-#   mise install -f ~/repos/configs/linux-mise-tools.toml
+#   cd ~/repos/configs
+#   mise trust linux-mise-tools.toml
+#   mise install --file linux-mise-tools.toml
 
 [tools]
+rust = "latest"
+
 # Shell prompt
 "cargo:starship" = "latest"
 

@@ -103,29 +103,17 @@ fi
 # ============================================
 # Step 4: Install cargo-based tools via mise
 # ============================================
-info "Setting up mise for cargo tools..."
+info "Installing cargo-based tools via mise..."
 
 # Activate mise in current shell
 eval "$(mise activate bash)"
 
-# Install rust first (needed for cargo backend)
-info "Installing rust via mise..."
-mise use --global rust@latest
+# Trust and install from linux-mise-tools.toml
+mise trust "$CONFIGS_DIR/linux-mise-tools.toml"
+mise install --file "$CONFIGS_DIR/linux-mise-tools.toml"
 
-# Install cargo-based tools
-CARGO_TOOLS=(
-  "cargo:starship"
-  "cargo:atuin"
-  "cargo:lazygit"
-  "cargo:procs"
-  "cargo:du-dust"
-  "cargo:tokei"
-)
-
-for tool in "${CARGO_TOOLS[@]}"; do
-  info "Installing $tool..."
-  mise use --global "$tool@latest" || warn "Failed to install $tool"
-done
+info "Cargo tools installed. To use them globally, run:"
+echo "  mise use --global --file $CONFIGS_DIR/linux-mise-tools.toml"
 
 # ============================================
 # Step 5: Change default shell to zsh
