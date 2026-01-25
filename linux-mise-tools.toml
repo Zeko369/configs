@@ -1,0 +1,25 @@
+# Linux-specific tools installed via mise's cargo backend
+# These tools aren't available in Ubuntu's apt repositories
+#
+# Usage:
+#   mise trust ~/repos/configs/linux-mise-tools.toml
+#   mise install -f ~/repos/configs/linux-mise-tools.toml
+
+[tools]
+# Shell prompt
+"cargo:starship" = "latest"
+
+# Shell history with sync
+"cargo:atuin" = "latest"
+
+# Git TUI
+"cargo:lazygit" = "latest"
+
+# Modern ps replacement
+"cargo:procs" = "latest"
+
+# Modern du replacement (binary is called 'dust')
+"cargo:du-dust" = "latest"
+
+# Code statistics
+"cargo:tokei" = "latest"
