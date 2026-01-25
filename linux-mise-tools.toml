@@ -15,9 +15,6 @@ rust = "latest"
 # Shell history with sync
 "cargo:atuin" = "latest"
 
-# Git TUI
-"cargo:lazygit" = "latest"
-
 # Modern ps replacement
 "cargo:procs" = "latest"
 
