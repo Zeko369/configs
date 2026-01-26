@@ -21,7 +21,7 @@ brew 'valkey'
 brew 'imagemagick'
 brew 'libpq'
 brew 'libyaml'
-brew 'openssl'
+brew 'openssl@3'
 brew 'vips'
 
 # ============================================
