@@ -31,6 +31,7 @@ yarn-error.log*
 # Environment
 .env.local
 .env.*.local
+mise.local.toml
 
 # Build artifacts (usually in project gitignore, but just in case)
 *.o
