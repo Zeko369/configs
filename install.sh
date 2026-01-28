@@ -184,6 +184,24 @@ if [ -f "$CONFIGS_DIR/opencode/opencode.jsonc" ]; then
 fi
 
 # ============================================
+# Step 5: Install git-hunks (non-interactive hunk staging)
+# ============================================
+if command -v git &> /dev/null; then
+  GIT_HUNKS_REPO="https://github.com/rockorager/git-hunks.git"
+  TEMP_DIR=$(mktemp -d)
+
+  if git clone --depth 1 "$GIT_HUNKS_REPO" "$TEMP_DIR/git-hunks" 2>/dev/null; then
+    info "Installing git-hunks..."
+    make -C "$TEMP_DIR/git-hunks" PREFIX=~/.local install >/dev/null 2>&1
+    info "git-hunks installed to ~/.local/bin"
+  else
+    warn "Failed to clone git-hunks, skipping"
+  fi
+
+  rm -rf "$TEMP_DIR"
+fi
+
+# ============================================
 # Done!
 # ============================================
 echo ""
