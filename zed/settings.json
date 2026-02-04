@@ -2,6 +2,14 @@
   // ============================================
   // Vim mode
   // ============================================
+  "agent": {
+    "default_model": {
+      "provider": "ollama",
+      "model": "glm-4.7-flash:q4_K_M"
+    },
+    "favorite_models": [],
+    "model_parameters": []
+  },
   "agent_servers": {
     "claude": {
       "default_mode": "bypassPermissions"
