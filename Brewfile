@@ -43,7 +43,7 @@ brew 'zsh-syntax-highlighting'
 brew 'jaq'                   # Better jq (Rust)
 brew 'yq'                    # YAML processor
 brew 'yj'                    # Convert YAML/JSON/TOML
-brew 'trash-cli'             # Safe rm
+brew 'trash'                 # Safe rm (macOS)
 brew 'vim'
 brew 'neovim'                # Better vim
 
@@ -59,7 +59,6 @@ brew 'tldr'                  # Simplified man pages
 brew 'glow'                  # Markdown viewer
 brew 'xh'                    # Better curl (HTTPie-like)
 brew 'sd'                    # Better sed (simpler syntax)
-brew 'choose'                # Better cut/awk for columns
 brew 'doggo'                 # Better dig (DNS lookup)
 brew 'grex'                  # Generate regex from examples
 brew 'ouch'                  # Universal compress/decompress

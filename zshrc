@@ -137,6 +137,7 @@ source "$CONFIGS_DIR/shell/functions/rm.sh"
 
 # macOS specific
 if [[ "$IS_MACOS" == true ]]; then
+  export PATH="/opt/homebrew/opt/trash/bin:$PATH"
   source "$CONFIGS_DIR/shell/macos/notif.sh"
 fi
 
