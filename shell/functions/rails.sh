@@ -41,6 +41,14 @@ alias rrr='r routes | fzf'
 alias be='bundle exec'
 alias br='bundle exec'  # typo helper
 
+# RSpec with fzf
+function speczf() {
+  local spec=$(find spec -name "*_spec.rb" 2>/dev/null | fzf --height 40% --reverse)
+  if [[ -n "$spec" ]]; then
+    be rspec "$spec"
+  fi
+}
+
 # Linting
 alias lint='be rubocop'
 

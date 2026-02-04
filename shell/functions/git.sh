@@ -8,7 +8,16 @@ alias ga='git add'
 alias ga.='git add .'
 alias gc='git commit --verbose'
 alias gcm='git checkout $(git_main_branch)'
-alias gco='git checkout'
+function gco() {
+  if [[ $# -eq 0 ]]; then
+    local branch=$(git branch -a | fzf --height 40% --reverse | sed 's/^[* ]*//' | sed 's|remotes/origin/||')
+    if [[ -n "$branch" ]]; then
+      git checkout "$branch"
+    fi
+  else
+    git checkout "$@"
+  fi
+}
 alias gco.='git checkout .'
 alias gco-='git checkout -'
 alias gd='git diff'
