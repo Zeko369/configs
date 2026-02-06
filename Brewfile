@@ -155,6 +155,7 @@ cask 'riverside-studio', args: { require_sha: false }
 cask '1password-cli'
 cask 'claude-code'
 cask 'codex'
+cask 'codex-app'
 cask 'cursor'
 cask 'cursor-cli'
 cask 'opencode-desktop'
