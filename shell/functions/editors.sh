@@ -12,8 +12,23 @@ alias cs.='cs .'
 # Vim / Neovim
 # ============================================
 export EDITOR='nvim'
-alias nv='nvim'
 alias vfz='nvim $(fzf)'
+
+vim() {
+  if [[ "$1" =~ ^(.+):([0-9]+)$ ]]; then
+    command vim +"${match[2]}" "${match[1]}"
+  else
+    command vim "$@"
+  fi
+}
+
+nvim() {
+  if [[ "$1" =~ ^(.+):([0-9]+)$ ]]; then
+    command nvim +"${match[2]}" "${match[1]}"
+  else
+    command nvim "$@"
+  fi
+}
 
 # ============================================
 # Zed
