@@ -92,6 +92,7 @@ brew 'max-sixty/worktrunk/wt'
 # ============================================
 brew 'doctl'                 # DigitalOcean CLI
 brew 'cloudflared'           # Cloudflare tunnel
+brew 'railway'               # Railway CLI
 brew 'rclone'                # Cloud storage sync
 brew 'helm'                  # Kubernetes package manager
 brew 'nmap'                  # Network scanner
