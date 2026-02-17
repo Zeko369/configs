@@ -174,7 +174,7 @@ export PATH="$HOME/.opencode/bin:$PATH"
 eval "$(atuin init zsh)"
 
 # zoxide (smart cd)
-eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh --cmd cd)"
 
 # ============================================
 # Debug output
