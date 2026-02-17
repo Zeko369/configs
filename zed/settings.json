@@ -11,6 +11,9 @@
     "model_parameters": []
   },
   "agent_servers": {
+    "opencode": {
+      "type": "registry"
+    },
     "claude": {
       "default_mode": "bypassPermissions"
     }
@@ -80,9 +83,15 @@
   // Terminal
   // ============================================
   "terminal": {
+    "working_directory": "current_project_directory",
+    "shell": { "program": "zsh" },
     "env": {
       "Q_NEW_SESSION": "1",
       "FIG_NEW_SESSION": "1",
+      // Prevent Claude Code env vars from leaking when Zed is launched from CLI
+      "CLAUDECODE": null,
+      "CLAUDE_CODE_ENTRYPOINT": null,
+      "GIT_EDITOR": null,
     },
   },
 
