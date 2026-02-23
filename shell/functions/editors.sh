@@ -56,6 +56,6 @@ zc() {
 # ============================================
 # AI tools
 # ============================================
-alias cc='claude --allow-dangerously-skip-permissions'
+alias cc='claude --dangerously-skip-permissions'
 alias ca='cursor-agent'
 alias oc='opencode'

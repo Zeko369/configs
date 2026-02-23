@@ -98,6 +98,7 @@ alias n='open'  # macOS Finder, TODO: This should go into a macos only file
 alias ro='railway open'
 alias sstat='thin --stats "/thin/stats" start'
 alias mi="mise install"
+alias om='overmind'
 
 # ============================================
 # Tmux
