@@ -58,4 +58,5 @@ zc() {
 # ============================================
 alias cc='claude --dangerously-skip-permissions'
 alias ca='cursor-agent'
+alias cx='codex'
 alias oc='opencode'
