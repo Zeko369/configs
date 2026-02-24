@@ -2,21 +2,38 @@
   // ============================================
   // Vim mode
   // ============================================
+  "lsp": {
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always",
+          },
+        },
+        "javascript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always",
+          },
+        },
+      },
+      "enable_lsp_tasks": true,
+    },
+  },
   "agent": {
     "default_model": {
       "provider": "ollama",
-      "model": "glm-4.7-flash:q4_K_M"
+      "model": "glm-4.7-flash:q4_K_M",
     },
     "favorite_models": [],
-    "model_parameters": []
+    "model_parameters": [],
   },
   "agent_servers": {
     "opencode": {
-      "type": "registry"
+      "type": "registry",
     },
     "claude": {
-      "default_mode": "bypassPermissions"
-    }
+      "default_mode": "bypassPermissions",
+    },
   },
   "vim_mode": true,
   "base_keymap": "VSCode",
@@ -89,9 +106,9 @@
       "Q_NEW_SESSION": "1",
       "FIG_NEW_SESSION": "1",
       // Prevent Claude Code env vars from leaking when Zed is launched from CLI
-      "CLAUDECODE": null,
-      "CLAUDE_CODE_ENTRYPOINT": null,
-      "GIT_EDITOR": null,
+      "CLAUDECODE": "",
+      "CLAUDE_CODE_ENTRYPOINT": "",
+      "GIT_EDITOR": "",
     },
   },
 
