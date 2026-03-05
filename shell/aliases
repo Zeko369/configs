@@ -14,6 +14,9 @@ alias _ps='/bin/ps'
 alias _dig='/usr/bin/dig'
 alias _curl='/usr/bin/curl'
 alias _sed='/usr/bin/sed'
+if command -v jq &> /dev/null; then
+  alias _jq="$(command -v jq)"
+fi
 
 # Modern replacements
 alias cat='bat'
@@ -26,7 +29,7 @@ alias du='dust'
 #alias dig='doggo'
 #alias curl='xh'
 #alias sed='sd'
-#alias jq='jaq'
+alias jq='jaq'
 
 # ============================================
 # Directory navigation

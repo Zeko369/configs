@@ -5,6 +5,7 @@ cask_args appdir: '/Applications', require_sha: true
 # ============================================
 brew 'mas'                   # Mac App Store CLI
 mas 'Flighty', id: 1358823008
+mas '1Password for Safari', id: 1569813296
 mas 'Xcode', id: 497799835
 
 # ============================================
@@ -41,6 +42,7 @@ brew 'atuin'                 # Better shell history
 brew 'starship'              # Fast prompt
 brew 'zsh-syntax-highlighting'
 brew 'jaq'                   # Better jq (Rust)
+brew 'jq'
 brew 'yq'                    # YAML processor
 brew 'yj'                    # Convert YAML/JSON/TOML
 brew 'trash'                 # Safe rm (macOS)
@@ -54,7 +56,6 @@ brew 'btop'                  # Better top/htop
 brew 'duf'                   # Better df
 brew 'dust'                  # Better du
 brew 'procs'                 # Better ps
-brew 'delta'                 # Better git diff
 brew 'tldr'                  # Simplified man pages
 brew 'glow'                  # Markdown viewer
 brew 'xh'                    # Better curl (HTTPie-like)
@@ -71,6 +72,8 @@ brew 'tig'                   # Git history TUI
 brew 'diff-so-fancy'         # Diff highlighter
 brew 'git-lfs'               # Large file storage
 brew 'jj'                    # Jujutsu - Git-compatible VCS
+brew 'git-delta'
+brew 'gitleaks'
 
 # ============================================
 # Dev tools
@@ -95,6 +98,7 @@ brew 'cloudflared'           # Cloudflare tunnel
 brew 'railway'               # Railway CLI
 brew 'rclone'                # Cloud storage sync
 brew 'helm'                  # Kubernetes package manager
+brew 'kubeseal'
 brew 'nmap'                  # Network scanner
 
 # ============================================
@@ -104,6 +108,7 @@ brew 'ffmpeg'                # Video processing
 brew 'wget'                  # Download files
 brew 'transmission-cli'
 brew 'fastfetch'             # System info
+brew 'yt-dlp'
 
 # Browsers
 cask 'firefox'
@@ -137,6 +142,7 @@ cask 'nordvpn'
 cask 'notion-calendar'
 cask 'notion'
 cask 'ollama-app'
+cask 'prismlauncher'
 cask 'raycast'
 cask 'scroll-reverser'
 cask 'tailscale-app'
