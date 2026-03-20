@@ -40,7 +40,7 @@ experimental = true
 python.uv_venv_auto = true
 
 # Read .ruby-version, .node-version files
-idiomatic_version_file_enable_tools = ["ruby", "node", "python"]
+idiomatic_version_file_enable_tools = ["ruby", "node", "python", "bun"]
 
 # Use bun for npm packages (faster)
 [settings.npm]

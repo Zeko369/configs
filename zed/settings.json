@@ -28,11 +28,15 @@
     "model_parameters": [],
   },
   "agent_servers": {
+    "codex-acp": {
+      "type": "registry"
+    },
+    "claude-acp": {
+      "type": "registry",
+      "default_mode": "bypassPermissions",
+    },
     "opencode": {
       "type": "registry",
-    },
-    "claude": {
-      "default_mode": "bypassPermissions",
     },
   },
   "vim_mode": true,
