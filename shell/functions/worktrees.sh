@@ -120,6 +120,15 @@ function gwc() {
   fi
 }
 
+# gwl: List worktrees and fzf into one (uses zoxide for smarter cd)
+# Usage: gwl
+function gwl() {
+  local selected=$(git worktree list | fzf --height 40% --reverse | awk '{print $1}')
+  if [[ -n "$selected" ]]; then
+    z "$selected"
+  fi
+}
+
 # gwd: Delete the current worktree (must be run from within a worktree)
 # Usage: gwd [-f|--force]
 function gwd() {
