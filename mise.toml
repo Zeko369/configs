@@ -23,6 +23,7 @@ rust = "stable"
 "npm:@antfu/ni" = "latest"       # Unified package manager (ni, nr, nx)
 "npm:opencode-ai" = "latest"     # OpenCode CLI
 "npm:vercel" = "latest"          # Vercel CLI
+"npm:btca" = "latest"            # BTCA CLI
 
 # ============================================
 # Python tools via uv/pipx
