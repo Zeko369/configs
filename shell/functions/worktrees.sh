@@ -1,17 +1,17 @@
 # Git worktree helpers
 # gwc: Create a new worktree in worktrees-<repo>/<branch-name>
-# Usage: gwc <branch-name> [--no-cd] [--master]
+# Usage: gwc <branch-name> [--no-cd] [--current]
 function gwc() {
   local branch_name=""
   local no_cd=false
-  local from_master=false
+  local from_current=false
 
   # Parse arguments
   for arg in "$@"; do
     if [[ "$arg" == "--no-cd" ]]; then
       no_cd=true
-    elif [[ "$arg" == "--master" ]]; then
-      from_master=true
+    elif [[ "$arg" == "--current" ]]; then
+      from_current=true
     elif [[ -z "$branch_name" ]]; then
       branch_name="$arg"
     fi
@@ -19,10 +19,10 @@ function gwc() {
 
   # Check if branch name provided
   if [[ -z "$branch_name" ]]; then
-    echo "Usage: gwc <branch-name> [--no-cd] [--master]"
+    echo "Usage: gwc <branch-name> [--no-cd] [--current]"
     echo "  Creates a new git worktree in worktrees-<repo>/<branch-name>"
     echo "  --no-cd: Don't change to the new worktree directory"
-    echo "  --master: Create branch from master instead of current branch"
+    echo "  --current: Create branch from current branch instead of master"
     return 1
   fi
 
@@ -81,25 +81,19 @@ function gwc() {
     fi
   fi
 
-  # Determine base branch
-  local base_branch=""
-  if [[ "$from_master" == true ]]; then
-    base_branch="master"
-  fi
-
   # Create the worktree
   if [[ "$branch_exists" == true ]]; then
     # Branch exists, just checkout
     echo "Creating worktree at $worktree_path with existing branch $branch_name..."
     git worktree add "$worktree_path" "$branch_name"
-  elif [[ -n "$base_branch" ]]; then
-    # Create new branch from specified base
-    echo "Creating worktree at $worktree_path with new branch $branch_name from $base_branch..."
-    git worktree add -b "$branch_name" "$worktree_path" "$base_branch"
-  else
+  elif [[ "$from_current" == true ]]; then
     # Create new branch from current branch
-    echo "Creating worktree at $worktree_path with new branch $branch_name..."
+    echo "Creating worktree at $worktree_path with new branch $branch_name from current branch..."
     git worktree add -b "$branch_name" "$worktree_path"
+  else
+    # Default: create new branch from master
+    echo "Creating worktree at $worktree_path with new branch $branch_name from master..."
+    git worktree add -b "$branch_name" "$worktree_path" master
   fi
 
   if [[ $? -ne 0 ]]; then
