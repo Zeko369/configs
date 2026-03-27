@@ -26,31 +26,15 @@ function gwc() {
     return 1
   fi
 
-  # Get the git root directory
-  local git_root=$(git rev-parse --show-toplevel 2>/dev/null)
-  if [[ -z "$git_root" ]]; then
+  # Find the main worktree root (works from any worktree)
+  local main_root=$(git worktree list | head -1 | awk '{print $1}')
+  if [[ -z "$main_root" ]]; then
     echo "Error: Not in a git repository"
     return 1
   fi
 
-  local repo_name=$(basename "$git_root")
-  local worktree_base=""
-
-  # Check if we're already inside a worktrees-<repo> directory
-  local current_dir=$(pwd)
-  local parent_dir=$(dirname "$current_dir")
-  local grandparent_dir=$(dirname "$parent_dir")
-
-  if [[ "$(basename "$parent_dir")" == worktrees-* ]]; then
-    # We're in worktrees-<repo>/<some-branch>, use parent as base
-    worktree_base="$parent_dir"
-  elif [[ "$(basename "$grandparent_dir")" == worktrees-* ]]; then
-    # We're deeper in a worktree, use grandparent
-    worktree_base="$grandparent_dir"
-  else
-    # We're in the main repo, create worktrees-<repo> next to it
-    worktree_base="$(dirname "$git_root")/worktrees-$repo_name"
-  fi
+  local repo_name=$(basename "$main_root")
+  local worktree_base="$(dirname "$main_root")/worktrees-$repo_name"
 
   local worktree_path="$worktree_base/$branch_name"
 
