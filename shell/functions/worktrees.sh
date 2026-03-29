@@ -1,10 +1,11 @@
 # Git worktree helpers
 # gwc: Create a new worktree in worktrees-<repo>/<branch-name>
-# Usage: gwc <branch-name> [--no-cd] [--current]
+# Usage: gwc <branch-name> [--no-cd] [--current] [--staged]
 function gwc() {
   local branch_name=""
   local no_cd=false
   local from_current=false
+  local use_staged=false
 
   # Parse arguments
   for arg in "$@"; do
@@ -12,6 +13,8 @@ function gwc() {
       no_cd=true
     elif [[ "$arg" == "--current" ]]; then
       from_current=true
+    elif [[ "$arg" == "--staged" ]]; then
+      use_staged=true
     elif [[ -z "$branch_name" ]]; then
       branch_name="$arg"
     fi
@@ -19,11 +22,25 @@ function gwc() {
 
   # Check if branch name provided
   if [[ -z "$branch_name" ]]; then
-    echo "Usage: gwc <branch-name> [--no-cd] [--current]"
+    echo "Usage: gwc <branch-name> [--no-cd] [--current] [--staged]"
     echo "  Creates a new git worktree in worktrees-<repo>/<branch-name>"
     echo "  --no-cd: Don't change to the new worktree directory"
     echo "  --current: Create branch from current branch instead of master"
+    echo "  --staged: Carry over currently staged changes to the new worktree"
     return 1
+  fi
+
+  # Save staged changes if --staged was passed
+  local patch_file=""
+  if [[ "$use_staged" == true ]]; then
+    if git diff --cached --quiet; then
+      echo "Error: No staged changes to carry over"
+      return 1
+    fi
+    patch_file=$(mktemp)
+    git diff --cached > "$patch_file"
+    echo "Saved staged changes, unstaging from current worktree..."
+    git restore --staged .
   fi
 
   # Find the main worktree root (works from any worktree)
@@ -83,6 +100,18 @@ function gwc() {
   if [[ $? -ne 0 ]]; then
     echo "Error: Failed to create worktree"
     return 1
+  fi
+
+  # Apply staged changes if --staged was passed
+  if [[ -n "$patch_file" && -f "$patch_file" ]]; then
+    echo "Applying staged changes to new worktree..."
+    if (cd "$worktree_path" && git apply "$patch_file" && git add .); then
+      echo "Staged changes applied successfully."
+    else
+      echo "Warning: Failed to apply some staged changes. Patch saved at $patch_file"
+      patch_file=""  # Don't delete on failure
+    fi
+    [[ -n "$patch_file" ]] && rm -f "$patch_file"
   fi
 
   # Run mise trust in the new worktree
