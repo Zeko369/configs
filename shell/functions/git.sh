@@ -212,12 +212,12 @@ function yeetfix() {
 function yeetb() {
   add_unless_staged
 
-  local message="yolo"
+  local branch_name=$(git rev-parse --abbrev-ref HEAD)
+
+  local message="$branch_name"
   if [ -n "$*" ]; then
     message="$*"
   fi
-
-  local branch_name=$(git rev-parse --abbrev-ref HEAD)
 
   git commit -m "$message"
   git push -u origin "$branch_name"
