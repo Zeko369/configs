@@ -10,8 +10,18 @@ alias gc='git commit --verbose'
 alias gcm='git checkout $(git_main_branch)'
 function gco() {
   if [[ $# -eq 0 ]]; then
-    local branch=$(git branch -a | fzf --height 40% --reverse | sed 's/^[* ]*//' | sed 's|remotes/origin/||')
+    local branch=$(git branch -a | fzf --height 40% --reverse | sed 's/^[*+ ]*//' | sed 's|remotes/origin/||')
     if [[ -n "$branch" ]]; then
+      local wt_path=$(git worktree list --porcelain | awk -v b="$branch" '/^worktree /{p=$2} /^branch refs\/heads\//{if($2 == "refs/heads/" b) print p}')
+      if [[ -n "$wt_path" ]]; then
+        echo "Branch '$branch' is already checked out in worktree: $wt_path"
+        printf "CD into that directory? [Y/n] "
+        read -r answer
+        if [[ -z "$answer" || "$answer" =~ ^[Yy]$ ]]; then
+          cd "$wt_path"
+          return
+        fi
+      fi
       git checkout "$branch"
     fi
   else
