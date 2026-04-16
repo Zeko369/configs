@@ -137,6 +137,7 @@ source "$CONFIGS_DIR/shell/functions/rm.sh"
 
 # macOS specific
 if [[ "$IS_MACOS" == true ]]; then
+  ulimit -n 65536 2>/dev/null
   export PATH="/opt/homebrew/opt/trash/bin:$PATH"
   source "$CONFIGS_DIR/shell/macos/notif.sh"
 fi
