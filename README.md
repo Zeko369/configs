@@ -17,6 +17,8 @@ configs/
 ├── tmux.conf                # Tmux config
 ├── ghostty_config           # Ghostty terminal
 ├── Brewfile                 # macOS packages
+├── valkey/
+│   └── overrides.conf       # Repo-wide Valkey overrides (macOS)
 │
 ├── vim/
 │   ├── vimrc                # Modern vim config (no plugins needed)
@@ -40,7 +42,8 @@ configs/
 │   ├── .zshrc               # → ~/.zshrc
 │   ├── .vimrc               # → ~/.vimrc
 │   ├── .tmux.conf           # → ~/.tmux.conf
-│   └── ghostty.local        # Loaded by ghostty_config
+│   ├── ghostty.local        # Loaded by ghostty_config
+│   └── valkey.conf          # Machine-specific Valkey overrides
 │
 └── local.example/           # Templates for local/
 ```
@@ -75,6 +78,19 @@ colorscheme retrobox
 
 ```bash
 brew bundle install --file=~/repos/configs/Brewfile
+./install.sh
+```
+
+`./install.sh` will generate Homebrew's `etc/valkey.conf` as a wrapper that includes:
+
+1. Homebrew's stock Valkey config
+2. Repo-wide overrides from `valkey/overrides.conf`
+3. Machine-specific overrides from `local/valkey.conf`
+
+If Valkey is already running, reload it after config changes:
+
+```bash
+brew services restart valkey
 ```
 
 For Cursor/VSCode, manually copy:
