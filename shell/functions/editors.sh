@@ -57,6 +57,7 @@ zc() {
 # AI tools
 # ============================================
 alias cc='claude --dangerously-skip-permissions'
+alias ccw='CLAUDE_CONFIG_DIR=~/.claude-work cc'
 alias ca='cursor-agent'
 alias cx='codex --dangerously-bypass-approvals-and-sandbox'
 alias oc='opencode'
