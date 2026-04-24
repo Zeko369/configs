@@ -2,6 +2,12 @@
   // ============================================
   // Vim mode
   // ============================================
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
   "lsp": {
     "vtsls": {
       "settings": {
@@ -20,6 +26,7 @@
     },
   },
   "agent": {
+    "dock": "right",
     "default_model": {
       "provider": "ollama",
       "model": "glm-4.7-flash:q4_K_M",
@@ -84,6 +91,7 @@
     },
   },
   "git_panel": {
+    "dock": "left",
     "collapse_untracked_diff": false,
     "tree_view": true,
     "status_style": "icon",
@@ -94,6 +102,7 @@
   // Project
   // ============================================
   "project_panel": {
+    "dock": "left",
     "auto_fold_dirs": false,
   },
   "session": {

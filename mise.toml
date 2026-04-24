@@ -20,10 +20,11 @@ rust = "stable"
 # ============================================
 # Global npm packages
 # ============================================
-"npm:@antfu/ni" = "latest"       # Unified package manager (ni, nr, nx)
-"npm:opencode-ai" = "latest"     # OpenCode CLI
-"npm:vercel" = "latest"          # Vercel CLI
-"npm:btca" = "latest"            # BTCA CLI
+"npm:@antfu/ni" = "latest"                     # Unified package manager (ni, nr, nx)
+"npm:opencode-ai" = "latest"                   # OpenCode CLI
+"npm:vercel" = "latest"                        # Vercel CLI
+"npm:btca" = "latest"                          # BTCA CLI
+"npm:@mariozechner/pi-coding-agent" = "latest" # pi
 
 # ============================================
 # Python tools via uv/pipx
