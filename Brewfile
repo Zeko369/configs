@@ -7,6 +7,7 @@ brew 'mas'                   # Mac App Store CLI
 mas 'Flighty', id: 1358823008
 mas '1Password for Safari', id: 1569813296
 mas 'Xcode', id: 497799835
+mas 'Goodnotes', id: 1444383602
 
 # ============================================
 # Services / Databases
@@ -88,6 +89,7 @@ brew 'watch'
 brew 'entr'                  # File watcher
 brew 'zellij'                # Terminal multiplexer
 brew 'wakatime-cli'          # Coding time tracker
+brew 'mole'                  # Mac optimizer/cleaner
 brew 'max-sixty/worktrunk/wt'
 
 # ============================================
@@ -121,6 +123,7 @@ cask 'beeper'
 cask 'discord'
 cask 'readdle-spark'
 cask 'slack'
+cask 'zoom'
 
 # Tools
 cask '1password'
@@ -149,6 +152,8 @@ cask 'tailscale-app'
 cask 'transmission'
 cask 'utm'
 cask 'voiceink'
+cask 'windows-app'             # Microsoft Remote Desktop
+cask 'qflipper'               # Flipper Zero companion
 
 # Media
 cask 'iina'
@@ -157,6 +162,7 @@ cask 'obs'
 cask 'spotify', args: { require_sha: false }
 cask 'vlc@nightly'
 cask 'riverside-studio', args: { require_sha: false }
+cask 'zwift', args: { require_sha: false }  # Cycling
 
 # Devtools
 cask '1password-cli'
@@ -178,4 +184,12 @@ cask 'proxyman'
 cask 'tableplus'
 cask 'yaak'
 cask 'zed'
+cask 'cmux'
+cask 't3-code@nightly'
 cask 'steipete/tap/codexbar'
+
+# CAD / 3D
+cask 'autodesk-fusion', args: { require_sha: false }
+cask 'blender'
+cask 'freecad'
+cask 'kicad'
