@@ -88,25 +88,29 @@ brew bundle install --file=~/repos/configs/Brewfile
 ./install.sh
 ```
 
-### Linux — Arch / CachyOS
+### Linux — three tiers
+
+Both Linux installers expose the same flags:
+
+| Flag | What you get |
+|------|--------------|
+| `--cli-bare` | Server-grade shell only — zsh + prompt + history + tmux + nav, git basics |
+| `--cli-dev` | Bare + language runtimes, cloud CLIs, media tools, Git extras |
+| `--gui` (default) | Bare + dev + desktop apps |
 
 ```bash
-./install-arch.sh             # CLI + GUI apps (default)
-./install-arch.sh --cli-only  # skip GUI apps
-./install.sh                  # symlinks
+./install-arch.sh             # full install
+./install-arch.sh --cli-bare  # for SSH'd servers
+
+./install-debian.sh           # full install
+./install-debian.sh --cli-dev # dev box, no desktop apps
+
+./install.sh                  # symlinks (always run after the package step)
 ```
 
-Uses `pacman` for repo packages and `paru` (auto-bootstrapped if missing) for AUR. AUR package names are best-effort; comment out anything that fails and report.
+**Arch** uses `pacman` + `paru` (auto-bootstrapped if missing, skipped entirely on `--cli-bare`). AUR package names are best-effort; comment out anything that fails and report.
 
-### Linux — Debian / Ubuntu
-
-```bash
-./install-debian.sh           # CLI only
-./install-debian.sh --gui     # CLI + a small GUI set
-./install.sh                  # symlinks
-```
-
-GUI app coverage on Debian is intentionally minimal — most casks need separate vendor PPAs / `.deb`s and aren't scripted here.
+**Debian** GUI coverage is intentionally minimal — most casks need vendor PPAs / `.deb`s. On `--cli-bare`, atuin/starship/lazygit are *not* installed (they only arrive via the mise gap-filler in the dev tier), so bare Debian is a degraded shell experience compared to bare Arch.
 
 ### Valkey (macOS)
 
