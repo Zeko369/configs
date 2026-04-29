@@ -74,14 +74,43 @@ source $HOME/repos/configs/vim/vimrc
 colorscheme retrobox
 ```
 
-## macOS Setup
+## Setup
+
+There are two stages:
+
+1. A platform-specific package installer (`Brewfile` on macOS, `install-debian.sh` on Debian/Ubuntu, `install-arch.sh` on Arch/CachyOS).
+2. `./install.sh` to wire up symlinks. This is cross-platform and idempotent.
+
+### macOS
 
 ```bash
 brew bundle install --file=~/repos/configs/Brewfile
 ./install.sh
 ```
 
-`./install.sh` will generate Homebrew's `etc/valkey.conf` as a wrapper that includes:
+### Linux — Arch / CachyOS
+
+```bash
+./install-arch.sh             # CLI + GUI apps (default)
+./install-arch.sh --cli-only  # skip GUI apps
+./install.sh                  # symlinks
+```
+
+Uses `pacman` for repo packages and `paru` (auto-bootstrapped if missing) for AUR. AUR package names are best-effort; comment out anything that fails and report.
+
+### Linux — Debian / Ubuntu
+
+```bash
+./install-debian.sh           # CLI only
+./install-debian.sh --gui     # CLI + a small GUI set
+./install.sh                  # symlinks
+```
+
+GUI app coverage on Debian is intentionally minimal — most casks need separate vendor PPAs / `.deb`s and aren't scripted here.
+
+### Valkey (macOS)
+
+`./install.sh` generates Homebrew's `etc/valkey.conf` as a wrapper that includes:
 
 1. Homebrew's stock Valkey config
 2. Repo-wide overrides from `valkey/overrides.conf`

@@ -289,11 +289,21 @@ echo "To reload your shell config:"
 echo "  source ~/.zshrc"
 echo ""
 
-# Remind about Brewfile on macOS
+# Remind about platform package installer
 if [ "$OS" = "macos" ]; then
   echo "To install Homebrew packages:"
   echo "  brew bundle install --file=$CONFIGS_DIR/Brewfile"
   echo ""
   echo "For Cursor/VSCode, run: ./sync cursor"
   echo ""
+elif [ "$OS" = "linux" ]; then
+  if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    case "${ID_LIKE:-$ID}" in
+      *arch*)         echo "To install packages:  ./install-arch.sh" ;;
+      *debian*|*ubuntu*) echo "To install packages:  ./install-debian.sh" ;;
+      *)              echo "Detected Linux but no installer for ID=$ID. See install-arch.sh / install-debian.sh." ;;
+    esac
+    echo ""
+  fi
 fi
