@@ -143,8 +143,11 @@ if [ -f "$CONFIGS_DIR/ghostty_config" ]; then
   else
     GHOSTTY_DIR="$HOME/.config/ghostty"
   fi
-  mkdir -p "$GHOSTTY_DIR"
+  mkdir -p "$GHOSTTY_DIR/local"
   create_optional_symlink "$CONFIGS_DIR/ghostty_config" "$GHOSTTY_DIR/config"
+  # ghostty resolves `config-file = ?local/ghostty.local` relative to the
+  # symlink's parent dir, not the target — so mirror local/ghostty.local there.
+  create_optional_symlink "$LOCAL_DIR/ghostty.local" "$GHOSTTY_DIR/local/ghostty.local"
 fi
 
 # ideavimrc
