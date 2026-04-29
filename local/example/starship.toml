@@ -1,0 +1,13 @@
+# Machine-specific Starship overrides.
+#
+# install.sh concatenates the repo base (configs/starship.toml) with this file
+# and writes the result to ~/.config/starship.toml.
+#
+# Caveat: TOML forbids duplicate [section] headers, so this file should
+# generally only define sections that DON'T appear in the base config.
+# To override an existing section, edit the base config directly.
+#
+# Useful things to put here:
+#   - Toggle modules on/off per machine ([package] disabled = false, etc.)
+#   - Add language modules not in the base
+#   - Per-host tweaks (e.g. battery display thresholds on a laptop only)
