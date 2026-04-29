@@ -1,29 +1,52 @@
-# Linux-specific tools installed via mise
-# These tools aren't available in Ubuntu's apt repositories
+# Debian/Ubuntu CLI tools installed via mise (cargo / go).
+# These tools aren't available in Debian/Ubuntu's apt repositories at all
+# (or only in stale versions). Compiles once on first install, then cached.
+#
+# Companion to install-debian.sh (--cli-dev tier and up). Aim is to bring
+# Debian closer to Arch's native package coverage.
 #
 # Usage:
 #   cd ~/repos/configs
-#   mise trust linux-mise-tools.toml
-#   mise install --file linux-mise-tools.toml
+#   mise trust debian-mise-tools.toml
+#   mise install --file debian-mise-tools.toml
 
 [tools]
+# Language toolchains (needed by the cargo:/go: packages below)
 rust = "latest"
 go = "latest"
 
-# Shell prompt
+# ============================================
+# Shell prompt + history (bare-tier UX, but apt has neither)
+# ============================================
 "cargo:starship" = "latest"
-
-# Shell history with sync
 "cargo:atuin" = "latest"
 
-# Modern ps replacement
-"cargo:procs" = "latest"
+# ============================================
+# Modern CLI replacements
+# ============================================
+"cargo:du-dust" = "latest"        # dust — better du
+"cargo:procs" = "latest"          # procs — better ps
+"cargo:tokei" = "latest"          # code statistics
+"cargo:tealdeer" = "latest"       # tldr
+"cargo:sd" = "latest"             # better sed
+"cargo:ouch" = "latest"           # universal compress/decompress
+"cargo:xh" = "latest"             # better curl (HTTPie-like)
+"cargo:zellij" = "latest"         # terminal multiplexer
+"cargo:jaq" = "latest"            # faster jq
+"cargo:grex" = "latest"           # regex from examples
+"cargo:jj-cli" = "latest"         # jujutsu VCS
 
-# Modern du replacement (binary is called 'dust')
-"cargo:du-dust" = "latest"
-
-# Code statistics
-"cargo:tokei" = "latest"
-
-# Git TUI
+# ============================================
+# Go-built tools
+# ============================================
 "go:github.com/jesseduffield/lazygit" = "latest"
+"go:github.com/jesseduffield/lazydocker" = "latest"
+"go:github.com/wagoodman/dive" = "latest"
+"go:github.com/charmbracelet/glow" = "latest"
+"go:github.com/sclevine/yj" = "latest"
+"go:github.com/mr-karan/doggo/cmd/doggo" = "latest"
+"go:github.com/DarthSim/overmind/v2" = "latest"
+"go:github.com/gitleaks/gitleaks/v8" = "latest"
+"go:github.com/cloudflare/cloudflared/cmd/cloudflared" = "latest"
+"go:github.com/bitnami-labs/sealed-secrets/cmd/kubeseal" = "latest"
+"go:github.com/digitalocean/doctl/cmd/doctl" = "latest"
