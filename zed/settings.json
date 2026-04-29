@@ -102,7 +102,7 @@
   // Project
   // ============================================
   "project_panel": {
-    "dock": "left",
+    "dock": "right",
     "auto_fold_dirs": false,
   },
   "session": {
