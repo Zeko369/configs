@@ -251,9 +251,13 @@ if [ -f "$CONFIGS_DIR/opencode/opencode.jsonc" ]; then
   create_optional_symlink "$CONFIGS_DIR/opencode/opencode.jsonc" "$OPENCODE_DIR/opencode.jsonc"
 fi
 
-# Beeper custom CSS (macOS only)
-if [ "$OS" = "macos" ] && [ -f "$CONFIGS_DIR/beeper/custom.css" ]; then
-  BEEPER_DIR="$HOME/Library/Application Support/BeeperTexts"
+# Beeper custom CSS
+if [ -f "$CONFIGS_DIR/beeper/custom.css" ]; then
+  if [ "$OS" = "macos" ]; then
+    BEEPER_DIR="$HOME/Library/Application Support/BeeperTexts"
+  else
+    BEEPER_DIR="$HOME/.config/BeeperTexts"
+  fi
   mkdir -p "$BEEPER_DIR"
   create_optional_symlink "$CONFIGS_DIR/beeper/custom.css" "$BEEPER_DIR/custom.css"
 fi
