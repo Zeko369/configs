@@ -251,6 +251,13 @@ if [ -f "$CONFIGS_DIR/opencode/opencode.jsonc" ]; then
   create_optional_symlink "$CONFIGS_DIR/opencode/opencode.jsonc" "$OPENCODE_DIR/opencode.jsonc"
 fi
 
+# Beeper custom CSS (macOS only)
+if [ "$OS" = "macos" ] && [ -f "$CONFIGS_DIR/beeper/custom.css" ]; then
+  BEEPER_DIR="$HOME/Library/Application Support/BeeperTexts"
+  mkdir -p "$BEEPER_DIR"
+  create_optional_symlink "$CONFIGS_DIR/beeper/custom.css" "$BEEPER_DIR/custom.css"
+fi
+
 # ============================================
 # Step 5: Install git-hunks (non-interactive hunk staging)
 # ============================================

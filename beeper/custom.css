@@ -1,0 +1,39 @@
+/*
+# Custom Beeper.app style
+This file will be injected as a <style> tag
+After making your changes, type "Reload custom CSS" in the command bar
+To open dev tools, open the command bar and type "open console"
+*/
+
+:root {
+  /*
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+  */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {}
+}
+
+.thread-header {
+  padding-left: 4px !important;
+  justify-content: flex-start;
+}
+
+.PinnedThreadListItem-module__heading {
+  display: none;
+}
+
+/* .ThreadListItem-module__wrapper:has(img[src*="zeko369_bZveuGeq7a9ibILVyF2fa6SdR7bYfCm12zGbReHjBT68PMa5N151kCbo5uAfoJun"]) {
+  background: linear-gradient(to right,
+    #2a2a2a 0%,
+    #8b5cf6 50%,
+    #a855f7 70%,
+    #c084fc 100%);
+
+  border-radius: 4px;
+} */
+
+/* .PinnedThreadListItem-module__wrapper:hover .PinnedThreadListItem-module__heading {
+  display: block;
+} */
