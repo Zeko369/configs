@@ -5,19 +5,15 @@ local real_rm=$(which rm)
 alias _rm="$real_rm"
 alias realrm="$real_rm"
 
-# Detect trash command (macOS: trash, Linux: trash-put)
-if command -v trash &> /dev/null; then
-  _trash_cmd="trash"
-elif command -v trash-put &> /dev/null; then
-  _trash_cmd="trash-put"
-else
-  _trash_cmd=""
-fi
-
 # Safe rm function that uses trash instead of permanent deletion
 function rm() {
-  # Check if trash command exists
-  if [[ -z "$_trash_cmd" ]]; then
+  # Detect trash command (macOS: trash, Linux: trash-put)
+  local trash_cmd
+  if command -v trash &> /dev/null; then
+    trash_cmd="trash"
+  elif command -v trash-put &> /dev/null; then
+    trash_cmd="trash-put"
+  else
     echo "Warning: trash command not found. Install 'trash' (macOS) or 'trash-cli' (Linux), or use 'realrm' for permanent deletion."
     return 1
   fi
@@ -63,5 +59,5 @@ function rm() {
   fi
 
   # Use trash for the filtered file arguments
-  $_trash_cmd "${files[@]}"
+  $trash_cmd "${files[@]}"
 }
