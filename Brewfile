@@ -115,6 +115,7 @@ brew 'yt-dlp'
 cask 'firefox'
 cask 'google-chrome', args: { require_sha: false }
 cask 'google-chrome@dev', args: { require_sha: false }
+cask 'helium-browser'
 cask 'sizzy', args: { require_sha: false }
 
 # Chats
@@ -139,7 +140,7 @@ cask 'flux-app'
 cask 'hyperkey'
 cask 'jordanbaird-ice'
 cask 'keka'
-cask 'linear-linear'
+cask 'linear'
 cask 'nordvpn'
 cask 'notion-calendar'
 cask 'notion'
