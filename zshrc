@@ -65,22 +65,24 @@ setopt HIST_REDUCE_BLANKS
 setopt INC_APPEND_HISTORY
 
 # ============================================
-# Completions
+# zsh-defer (lazy loading for slow tools)
 # ============================================
-autoload -Uz compinit
-# Only regenerate compinit cache once a day
-if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
-  compinit
-else
-  compinit -C
-fi
+source "$CONFIGS_DIR/shell/plugins/zsh-defer.plugin.zsh"
 
-# Case-insensitive completion
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-# Menu selection
-zstyle ':completion:*' menu select
-# Colors in completion
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+# ============================================
+# Completions (deferred — compinit is slow, but not needed until first Tab)
+# ============================================
+zsh-defer -c '
+  autoload -Uz compinit
+  if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+    compinit
+  else
+    compinit -C
+  fi
+  zstyle ":completion:*" matcher-list "m:{a-z}={A-Z}"
+  zstyle ":completion:*" menu select
+  zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
+'
 
 # ============================================
 # Key bindings
@@ -118,11 +120,6 @@ if [[ "$IS_MACOS" == true ]]; then
 elif [[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
   source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
-
-# ============================================
-# zsh-defer (lazy loading for slow tools)
-# ============================================
-source "$CONFIGS_DIR/shell/plugins/zsh-defer.plugin.zsh"
 
 # ============================================
 # Source shell modules
