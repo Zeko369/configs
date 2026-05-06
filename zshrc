@@ -70,8 +70,19 @@ setopt INC_APPEND_HISTORY
 source "$CONFIGS_DIR/shell/plugins/zsh-defer.plugin.zsh"
 
 # ============================================
-# Completions (deferred — compinit is slow, but not needed until first Tab)
+# Completions
 # ============================================
+# TODO: finish setting up zsh-autocomplete (fish-like real-time completions)
+# if [[ "$IS_MACOS" == true ]]; then
+#   source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh 2>/dev/null
+# elif [[ -f /usr/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh ]]; then
+#   source /usr/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+# fi
+# bindkey '\t' menu-complete
+# bindkey -M menuselect '\t' menu-complete
+# bindkey -M menuselect '\r' .accept-line
+
+# Restore standard compinit while zsh-autocomplete is disabled
 zsh-defer -c '
   autoload -Uz compinit
   if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then

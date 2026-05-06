@@ -41,6 +41,7 @@ brew 'eza'                   # Better ls
 brew 'zoxide'                # Better cd
 brew 'atuin'                 # Better shell history
 brew 'starship'              # Fast prompt
+brew 'zsh-autocomplete'              # Fish-like real-time completions
 brew 'zsh-syntax-highlighting'
 brew 'jaq'                   # Better jq (Rust)
 brew 'jq'
