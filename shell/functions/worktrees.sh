@@ -61,10 +61,17 @@ function gwc() {
     mkdir -p "$worktree_base"
   fi
 
-  # Check if worktree already exists
+  # If worktree already exists, offer to cd into it
   if [[ -d "$worktree_path" ]]; then
-    echo "Error: Worktree already exists at $worktree_path"
-    return 1
+    echo "Worktree already exists at $worktree_path"
+    if [[ "$no_cd" == true ]]; then
+      return 0
+    fi
+    read "REPLY?cd into it? (Y/n) "
+    if [[ -z "$REPLY" || "$REPLY" =~ ^[Yy]$ ]]; then
+      cd "$worktree_path"
+    fi
+    return 0
   fi
 
   # Check if branch already exists locally
