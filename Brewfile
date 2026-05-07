@@ -89,7 +89,6 @@ brew 'lazydocker'            # Docker TUI
 brew 'watch'
 brew 'entr'                  # File watcher
 brew 'zellij'                # Terminal multiplexer
-brew 'wakatime-cli'          # Coding time tracker
 brew 'mole'                  # Mac optimizer/cleaner
 brew 'max-sixty/worktrunk/wt'
 
