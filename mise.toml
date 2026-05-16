@@ -20,19 +20,20 @@ rust = "stable"
 # ============================================
 # Global npm packages
 # ============================================
-"npm:@antfu/ni" = "latest"                     # Unified package manager (ni, nr, nx)
-"npm:opencode-ai" = "latest"                   # OpenCode CLI
-"npm:vercel" = "latest"                        # Vercel CLI
-"npm:btca" = "latest"                          # BTCA CLI
-"npm:@mariozechner/pi-coding-agent" = "latest" # pi
-"npm:@railway/cli" = "latest"                  # Railway.app CLI (was: brew 'railway' on macOS)
+"npm:@antfu/ni" = "latest"                       # Unified package manager (ni, nr, nx)
+"npm:opencode-ai" = "latest"                     # OpenCode CLI
+"npm:vercel" = "latest"                          # Vercel CLI
+"npm:btca" = "latest"                            # BTCA CLI
+"npm:@earendil-works/pi-coding-agent" = "latest" # pi
+"npm:@railway/cli" = "latest"                    # Railway.app CLI
+"npm:@withgraphite/graphite-cli" = "stable"      # Graphite CLI (gt) — stacked PRs
 
 # ============================================
 # Python tools via uv/pipx
 # ============================================
 uv = "latest"
 "pipx:claude-monitor" = "latest"
-"pipx:wakatime" = "latest"                     # Coding time tracker (was: AUR `wakatime` / brew 'wakatime-cli')
+"pipx:wakatime" = "latest"                       # Coding time tracker
 
 # ============================================
 # Settings
