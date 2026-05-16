@@ -1,0 +1,62 @@
+Run "xcode-select --install"
+Settings -> trackpad -> enable tap to click
+Settings -> trackpad -> app expose -> 3 down
+
+Install brew (/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)")
+brew bundle install
+
+disable autocorrect (and all other things in fixing)
+
+updates -> only secruity (disable os updates)
+add other finders (other index and thumb) to touchID
+
+oh-my-zsh
+
+download apple store apps (1password for safari, HomeAssistant, Flighty [lol], Tailscale)
+
+beeper (login, then configure iMessage, enable css patch, set keyboard shortcuts to texts)
+
+turn dock hiding on
+defaults write com.apple.dock autohide -int 1; killall Dock
+
+lower dock hiding timer
+defaults write com.apple.dock autohide-time-modifier -float 0.15; killall Dock
+defaults write com.apple.dock autohide-delay -float 0; killall Dock
+
+disable recent in dock
+
+setup https://github.com/kost/Croatian-US-mac (this time I used ~/Library not /Library)
+
+settings -> Desktop&Dock -> Hot Corners
+	top right mission control
+	bottom left -> launchpad (now Apps)
+
+remove spotlifyy and now playing from menu bar
+add sound to menu bar
+add seconds to time in menu bar, maybe add weather
+
+
+# Ovo prvo dvoje je ja mislim zapravo samo max speed u settingsima, ne kroz ove commande
+defaults write -g InitialKeyRepeat -float 15.0 # normal minimum is 15 (225 ms)
+defaults write -g KeyRepeat -float 2.0 # normal minimum is 2 (30 ms)
+defaults write -g ApplePressAndHoldEnabled -bool false
+
+desktop&dock -> show dekstop -> only in stagemanager click
+
+start postgres -> `brew services start postgresql`
+`createdb fran`
+`createdb dev`
+`createuser dev -s`
+
+psql -> `\password dev` -> foobar123
+
+For OH_MY_ZSH install
+-> zsh-syntax-highlighting -> git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+
+fucking idiot, you didn't sync atuin history
+
+airpods sanity
+
+move default screenshot location
+
+DISABLE JEBENI REORDER DESKTOPA
