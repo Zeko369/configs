@@ -328,6 +328,9 @@ if [ "$OS" = "macos" ]; then
   echo "To install Homebrew packages:"
   echo "  brew bundle install --file=$CONFIGS_DIR/Brewfile"
   echo ""
+  echo "To apply macOS defaults (dock/trackpad/keyboard/postgres bootstrap):"
+  echo "  $CONFIGS_DIR/macos-defaults.sh"
+  echo ""
   echo "For Cursor/VSCode, run: ./sync cursor"
   echo ""
 elif [ "$OS" = "linux" ]; then

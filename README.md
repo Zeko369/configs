@@ -4,9 +4,22 @@ Cross-platform configuration files for zsh, vim, tmux, and various editors.
 
 ## Quick Start
 
+**macOS:**
+
 ```bash
-git clone https://github.com/YOUR_USERNAME/configs.git ~/repos/configs
-cd ~/repos/configs && ./install.sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Zeko369/configs/master/bootstrap.sh)"
+```
+
+**Arch / CachyOS:**
+
+```bash
+sudo pacman -S --noconfirm git && git clone https://github.com/Zeko369/configs.git ~/repos/configs && ~/repos/configs/install-arch.sh && ~/repos/configs/install.sh
+```
+
+**Debian / Ubuntu:**
+
+```bash
+sudo apt update && sudo apt install -y git curl && git clone https://github.com/Zeko369/configs.git ~/repos/configs && ~/repos/configs/install-debian.sh && ~/repos/configs/install.sh
 ```
 
 ## Structure
@@ -84,8 +97,10 @@ There are two stages:
 ### macOS
 
 ```bash
+./bootstrap.sh                                       # Xcode CLT + Homebrew
 brew bundle install --file=~/repos/configs/Brewfile
 ./install.sh
+./macos-defaults.sh                                  # dock/trackpad/keyboard + postgres bootstrap
 ```
 
 ### Linux — three tiers
@@ -111,6 +126,15 @@ Both Linux installers expose the same flags:
 **Arch** uses `pacman` + `paru` (auto-bootstrapped if missing, skipped entirely on `--cli-bare`). AUR package names are best-effort; comment out anything that fails and report.
 
 **Debian** GUI coverage is intentionally minimal — most casks need vendor PPAs / `.deb`s. On `--cli-bare`, atuin/starship/lazygit are *not* installed (they only arrive via the mise gap-filler in the dev tier), so bare Debian is a degraded shell experience compared to bare Arch.
+
+### Authenticating GitHub
+
+After `brew bundle` (or the Linux equivalent) installs `gh`:
+
+```bash
+gh auth login          # pick SSH — generates an Ed25519 key and uploads it for you
+git -C ~/repos/configs remote set-url origin git@github.com:Zeko369/configs.git
+```
 
 ### Valkey (macOS)
 
