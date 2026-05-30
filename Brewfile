@@ -166,7 +166,7 @@ cask 'zwift', args: { require_sha: false }  # Cycling
 
 # Devtools
 cask '1password-cli'
-cask 'claude-code'
+cask 'claude-code@latest'
 cask 'codex'
 cask 'codex-app'
 cask 'cursor'

@@ -27,6 +27,7 @@
     },
   },
   "agent": {
+    "sidebar_side": "right",
     "dock": "right",
     "default_model": {
       "provider": "ollama",
@@ -103,7 +104,7 @@
   // Project
   // ============================================
   "project_panel": {
-    "dock": "right",
+    "dock": "left",
     "auto_fold_dirs": false,
   },
   "session": {
