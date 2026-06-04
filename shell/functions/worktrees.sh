@@ -137,6 +137,10 @@ function gwc() {
 # gwl: List worktrees and fzf into one (uses zoxide for smarter cd)
 # Usage: gwl
 function gwl() {
+  if ! git rev-parse --git-dir &>/dev/null; then
+    echo "Error: Not in a git repository"
+    return 1
+  fi
   local selected=$(git worktree list | fzf --height 40% --reverse | awk '{print $1}')
   if [[ -n "$selected" ]]; then
     z "$selected"
