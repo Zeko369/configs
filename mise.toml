@@ -27,6 +27,7 @@ rust = "stable"
 "npm:@earendil-works/pi-coding-agent" = "latest" # pi
 "npm:@railway/cli" = "latest"                    # Railway.app CLI
 "npm:@withgraphite/graphite-cli" = "stable"      # Graphite CLI (gt) — stacked PRs
+"npm:agent-browser" = "latest"                   # Chrome automation
 
 # ============================================
 # Python tools via uv/pipx
