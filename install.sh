@@ -59,7 +59,6 @@ copy_template "vimrc"
 copy_template "tmux.conf"
 copy_template "gitconfig"
 copy_template "ghostty.local"
-copy_template "valkey.conf"
 copy_template "starship.toml"
 
 # ============================================
@@ -228,51 +227,17 @@ $(cat "$STARSHIP_LOCAL")"
   write_managed_file "$STARSHIP_DEST" "$STARSHIP_MARKER" "$STARSHIP_CONTENT"
 fi
 
-# Valkey config (macOS + Homebrew only)
-if [ "$OS" = "macos" ] && [ -f "$CONFIGS_DIR/valkey/overrides.conf" ]; then
-  if command -v brew >/dev/null 2>&1; then
-    if brew list valkey >/dev/null 2>&1; then
-      BREW_PREFIX="$(brew --prefix)"
-      VALKEY_MAIN_CONF="$BREW_PREFIX/etc/valkey.conf"
-      VALKEY_FALLBACK_CONF="$BREW_PREFIX/etc/valkey-homebrew-default.conf"
-      VALKEY_FORMULA_CONF="$BREW_PREFIX/opt/valkey/.bottle/etc/valkey.conf"
-      VALKEY_LOCAL_CONF="$LOCAL_DIR/valkey.conf"
-      VALKEY_MARKER="# Managed by $CONFIGS_DIR/install.sh"
-
-      mkdir -p "$BREW_PREFIX/etc" "$BREW_PREFIX/var/run" "$BREW_PREFIX/var/db/valkey"
-
-      if [ -f "$VALKEY_FORMULA_CONF" ]; then
-        VALKEY_BASE_CONF="$VALKEY_FORMULA_CONF"
-      elif [ -f "$VALKEY_FALLBACK_CONF" ]; then
-        VALKEY_BASE_CONF="$VALKEY_FALLBACK_CONF"
-      elif [ -f "$VALKEY_MAIN_CONF" ] && [ ! -L "$VALKEY_MAIN_CONF" ]; then
-        info "Preserving existing Valkey config as fallback base: $VALKEY_FALLBACK_CONF"
-        cp "$VALKEY_MAIN_CONF" "$VALKEY_FALLBACK_CONF"
-        VALKEY_BASE_CONF="$VALKEY_FALLBACK_CONF"
-      else
-        warn "Couldn't find a Homebrew Valkey base config, skipping valkey.conf generation"
-        VALKEY_BASE_CONF=""
-      fi
-
-      if [ -n "$VALKEY_BASE_CONF" ]; then
-        VALKEY_CONTENT="$VALKEY_MARKER
-# Layer order:
-# 1. Homebrew stock config
-# 2. Repo-wide overrides
-# 3. Machine-specific overrides
-include $VALKEY_BASE_CONF
-include $CONFIGS_DIR/valkey/overrides.conf
-include $VALKEY_LOCAL_CONF"
-
-        write_managed_file "$VALKEY_MAIN_CONF" "$VALKEY_MARKER" "$VALKEY_CONTENT"
-      fi
-    else
-      warn "Valkey is not installed yet. Run 'brew bundle install --file=$CONFIGS_DIR/Brewfile' and rerun ./install.sh to generate valkey.conf."
-    fi
-  else
-    warn "Homebrew not found, skipping Valkey config"
-  fi
-fi
+# Service config setup (e.g. Valkey, Postgres).
+#
+# Each install.d/*.sh is a fragment sourced into this shell, so it reuses the
+# vars and helpers defined above (OS, CONFIGS_DIR, LOCAL_DIR, info, warn,
+# copy_template, write_managed_file). Fragments self-skip when their service
+# or platform doesn't apply. Drop in a new file to manage another service.
+for service_script in "$CONFIGS_DIR"/install.d/*.sh; do
+  [ -f "$service_script" ] || continue
+  # shellcheck source=/dev/null
+  source "$service_script"
+done
 
 # opencode config
 if [ -f "$CONFIGS_DIR/opencode/opencode.jsonc" ]; then
