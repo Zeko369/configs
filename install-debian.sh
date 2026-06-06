@@ -66,7 +66,7 @@ if [ "$INSTALL_DEV" = true ]; then
   DISTRO_ID="${ID:-debian}"  # "debian" or "ubuntu"
   CODENAME="$(lsb_release -cs)"
 
-  curl -fsSL "https://download.docker.com/linux/${DISTRO_ID}/gpg" | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+  curl -fsSL "https://download.docker.com/linux/${DISTRO_ID}/gpg" | sudo gpg --batch --yes --dearmor -o /etc/apt/keyrings/docker.gpg
   sudo chmod a+r /etc/apt/keyrings/docker.gpg
   echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/${DISTRO_ID} ${CODENAME} stable" | \
     sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
