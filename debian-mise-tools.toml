@@ -1,4 +1,4 @@
-# Debian/Ubuntu CLI tools installed via mise (cargo / go).
+# Debian/Ubuntu CLI tools installed via mise (cargo / go / npm).
 # These tools aren't available in Debian/Ubuntu's apt repositories at all
 # (or only in stale versions). Compiles once on first install, then cached.
 #
@@ -11,9 +11,10 @@
 #   mise install --file debian-mise-tools.toml
 
 [tools]
-# Language toolchains (needed by the cargo:/go: packages below)
+# Language toolchains (needed by the cargo:/go:/npm: packages below)
 rust = "latest"
 go = "latest"
+node = "latest"        # backs the npm: packages (codex CLI)
 
 # ============================================
 # Shell prompt + history (bare-tier UX, but apt has neither)
@@ -50,3 +51,8 @@ go = "latest"
 "go:github.com/cloudflare/cloudflared/cmd/cloudflared" = "latest"
 "go:github.com/bitnami-labs/sealed-secrets/cmd/kubeseal" = "latest"
 "go:github.com/digitalocean/doctl/cmd/doctl" = "latest"
+
+# ============================================
+# AI coding agents (parity with Arch's openai-codex / macOS Brewfile)
+# ============================================
+"npm:@openai/codex" = "latest"    # OpenAI Codex CLI
