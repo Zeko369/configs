@@ -31,6 +31,17 @@
     colorMoved = default
 
 # ============================================
+# Commit signing (SSH)
+# The signing key + commit.gpgsign live in local/gitconfig — each machine
+# has its own SSH key. allowed_signers lists those keys for local
+# `--show-signature` verification; append new machine keys there.
+# ============================================
+[gpg]
+    format = ssh
+[gpg "ssh"]
+    allowedSignersFile = ~/repos/configs/git/allowed_signers
+
+# ============================================
 # Push / Pull behavior
 # ============================================
 [push]

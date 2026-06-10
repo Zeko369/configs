@@ -1,0 +1,3 @@
+# SSH signing keys trusted for verifying commit signatures locally.
+# Format: <email> <key-type> <key>   (one machine's key per line)
+zekan.fran369@gmail.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH2K00kVc9RkEjM2LgkucodxW+RDfkIGe0Pfb6fulZi7

@@ -15,8 +15,13 @@
 # [user]
 #     email = fran@work.com
 
-# Example: GPG signing
+# Example: SSH commit signing (gpg.format = ssh is set in the shared config)
+# Use this machine's own SSH key, then add it on GitHub as a *signing* key
+# (gh ssh-key add ~/.ssh/id_ed25519.pub --type signing) and append it to
+# git/allowed_signers for local verification.
+# [user]
+#     signingkey = ~/.ssh/id_ed25519.pub
 # [commit]
 #     gpgsign = true
-# [user]
-#     signingkey = YOURKEYID
+# [tag]
+#     gpgsign = true
