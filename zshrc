@@ -108,7 +108,12 @@ bindkey "\e\eOC" end-of-line
 # Manual sourcing ensures working directory inheritance works
 # even when prompt managers like starship are used
 if [[ -n "${GHOSTTY_RESOURCES_DIR}" ]]; then
-  source "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
+  ghostty_integration="${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
+  if [[ ! -r "${ghostty_integration}" ]]; then
+    ghostty_integration="${GHOSTTY_RESOURCES_DIR:h}/shell-integration/ghostty-integration.zsh"
+  fi
+  [[ -r "${ghostty_integration}" ]] && source "${ghostty_integration}"
+  unset ghostty_integration
 fi
 
 # ============================================
