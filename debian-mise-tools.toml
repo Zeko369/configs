@@ -11,10 +11,9 @@
 #   mise install --file debian-mise-tools.toml
 
 [tools]
-# Language toolchains (needed by the cargo:/go:/npm: packages below)
+# Language toolchains (needed by the cargo:/go: packages below)
 rust = "latest"
 go = "latest"
-node = "latest"        # backs the npm: packages (codex CLI)
 
 # ============================================
 # Shell prompt + history (bare-tier UX, but apt has neither)
@@ -53,6 +52,6 @@ node = "latest"        # backs the npm: packages (codex CLI)
 "go:github.com/digitalocean/doctl/cmd/doctl" = "latest"
 
 # ============================================
-# AI coding agents (parity with Arch's openai-codex / macOS Brewfile)
+# AI coding agents
 # ============================================
-"npm:@openai/codex" = "latest"    # OpenAI Codex CLI
+# OpenAI Codex CLI lives in mise.toml as "npm:@openai/codex" (cross-platform)

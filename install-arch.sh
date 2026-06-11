@@ -182,7 +182,7 @@ PACMAN_DEV=(
   go
 
   # AI coding agents
-  openai-codex         # OpenAI Codex CLI
+  # openai-codex moved to mise.toml as "npm:@openai/codex" (cross-platform)
 )
 
 AUR_DEV=(

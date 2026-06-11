@@ -25,6 +25,7 @@ rust = "stable"
 "npm:vercel" = "latest"                          # Vercel CLI
 "npm:btca" = "latest"                            # BTCA CLI
 "npm:@earendil-works/pi-coding-agent" = "latest" # pi
+"npm:@openai/codex" = "latest"                   # OpenAI Codex CLI (npm tracks releases ahead of the brew cask)
 "npm:@railway/cli" = "latest"                    # Railway.app CLI
 "npm:@withgraphite/graphite-cli" = "stable"      # Graphite CLI (gt) — stacked PRs
 "npm:agent-browser" = "latest"                   # Chrome automation

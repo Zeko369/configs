@@ -166,7 +166,7 @@ cask 'zwift', args: { require_sha: false }  # Cycling
 
 # Devtools
 cask '1password-cli'
-cask 'codex'
+# codex CLI moved to mise.toml as "npm:@openai/codex" (cross-platform; brew cask lagged releases)
 cask 'codex-app'
 cask 'cursor'
 cask 'cursor-cli'
@@ -185,7 +185,7 @@ cask 'yaak'
 cask 'zed'
 cask 'cmux'
 cask 't3-code@nightly'
-cask 'steipete/tap/codexbar'
+cask 'codexbar'
 
 # CAD / 3D
 cask 'autodesk-fusion', args: { require_sha: false }
