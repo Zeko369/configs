@@ -33,11 +33,46 @@ export PATH="$CONFIGS_DIR/bin:$PATH"
 
 # Tool configs
 export RIPGREP_CONFIG_PATH="$CONFIGS_DIR/ripgreprc"
+source "$CONFIGS_DIR/shell/no-git-repos.sh"
 
 # Fix hostname for starship (macOS hostname command returns weird value)
 if [[ "$IS_MACOS" == true ]]; then
   export STARSHIP_HOST=$(scutil --get LocalHostName 2>/dev/null || hostname)
 fi
+
+# Keep prompt rendering cheap inside huge monorepos/caches.
+export STARSHIP_DEFAULT_CONFIG="${STARSHIP_DEFAULT_CONFIG:-$HOME/.config/starship.toml}"
+export STARSHIP_NO_GIT_CONFIG="${STARSHIP_NO_GIT_CONFIG:-$HOME/.cache/starship/no-git.toml}"
+
+_configs_generate_starship_no_git_config() {
+  local source="$STARSHIP_DEFAULT_CONFIG"
+  local dest="$STARSHIP_NO_GIT_CONFIG"
+  local tmp="${dest}.tmp"
+
+  [[ -r "$source" ]] || return 1
+  [[ ! -r "$dest" || "$source" -nt "$dest" ]] || return 0
+
+  mkdir -p "${dest:h}"
+  awk '
+    /\$git_(branch|state|status)\\/ { next }
+    /\$git_(branch|state|status)$/ { next }
+    { print }
+  ' "$source" > "$tmp" && mv "$tmp" "$dest"
+}
+
+_configs_update_starship_profile() {
+  export STARSHIP_CONFIG="$STARSHIP_DEFAULT_CONFIG"
+
+  if _configs_path_in_no_git_repo "$PWD"; then
+    _configs_generate_starship_no_git_config
+    export STARSHIP_CONFIG="$STARSHIP_NO_GIT_CONFIG"
+  fi
+}
+
+autoload -Uz add-zsh-hook
+add-zsh-hook chpwd _configs_update_starship_profile
+add-zsh-hook precmd _configs_update_starship_profile
+_configs_update_starship_profile
 
 # Add deno completions to search path
 if [[ ":$FPATH:" != *":$HOME/completions:"* ]]; then export FPATH="$HOME/completions:$FPATH"; fi

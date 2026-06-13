@@ -1,0 +1,3 @@
+# Paths where prompt/listing helpers should avoid Git status checks.
+# Use absolute paths, $HOME, or ~.
+$HOME/code/raycast-extensions
