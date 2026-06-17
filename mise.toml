@@ -38,10 +38,16 @@ uv = "latest"
 "pipx:wakatime" = "latest"                       # Coding time tracker
 
 # ============================================
+# CLI tools (prebuilt binaries)
+# ============================================
+"github:Zeko369/overmind" = "2.5.2"              # Procfile manager — patched fork (tmux socket-name-length + .overmind.sock cleanup); DarthSim/overmind#204 unmerged
+
+# ============================================
 # Settings
 # ============================================
 [settings]
 experimental = true
+task_run_auto_install = false
 
 # Auto-create venvs with uv
 python.uv_venv_auto = true

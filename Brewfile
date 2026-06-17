@@ -81,7 +81,7 @@ brew 'gitleaks'
 # Dev tools
 # ============================================
 brew 'just'                  # Task runner
-brew 'overmind'              # Procfile manager
+# brew 'overmind'            # Procfile manager — using patched fork until DarthSim/overmind#204 merges
 brew 'hyperfine'             # Benchmarking
 brew 'tokei'                 # Code statistics
 brew 'dive'                  # Docker image explorer
