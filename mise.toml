@@ -49,6 +49,9 @@ uv = "latest"
 experimental = true
 task_run_auto_install = false
 
+# Keep the release-age safety delay globally, but let fast-moving agent CLIs update immediately.
+minimum_release_age_excludes = ["npm:opencode-ai", "npm:@openai/codex", "npm:@earendil-works/pi-coding-agent"]
+
 # Auto-create venvs with uv
 python.uv_venv_auto = true
 
