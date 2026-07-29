@@ -181,6 +181,34 @@ if [ -f "$CONFIGS_DIR/mise.toml" ]; then
   MISE_DIR="$HOME/.config/mise"
   mkdir -p "$MISE_DIR"
   create_optional_symlink "$CONFIGS_DIR/mise.toml" "$MISE_DIR/config.toml"
+
+  # Give tools that do not load mise's shell activation a conventional,
+  # user-owned Codex path. Point at the mise shim rather than the npm launcher
+  # so mise supplies Node even when the caller has a minimal PATH. The target
+  # may not exist yet on a fresh install; mise creates it when Codex is installed.
+  CODEX_MISE_SHIM="$HOME/.local/share/mise/shims/codex"
+  CODEX_COMPAT_LINK="$HOME/.local/bin/codex"
+  mkdir -p "$HOME/.local/bin"
+
+  if [ -L "$CODEX_COMPAT_LINK" ]; then
+    if [ "$(readlink "$CODEX_COMPAT_LINK")" = "$CODEX_MISE_SHIM" ]; then
+      info "Codex compatibility symlink already exists: $CODEX_COMPAT_LINK"
+    else
+      info "Replacing existing symlink: $CODEX_COMPAT_LINK"
+      rm "$CODEX_COMPAT_LINK"
+      ln -s "$CODEX_MISE_SHIM" "$CODEX_COMPAT_LINK"
+    fi
+  elif [ -f "$CODEX_COMPAT_LINK" ]; then
+    backup="${CODEX_COMPAT_LINK}.backup.$(date +%Y%m%d_%H%M%S)"
+    warn "Backing up existing file: $CODEX_COMPAT_LINK → $backup"
+    mv "$CODEX_COMPAT_LINK" "$backup"
+    ln -s "$CODEX_MISE_SHIM" "$CODEX_COMPAT_LINK"
+  elif [ -e "$CODEX_COMPAT_LINK" ]; then
+    warn "$CODEX_COMPAT_LINK exists and is not a file or symlink, skipping"
+  else
+    info "Creating Codex compatibility symlink: $CODEX_COMPAT_LINK → $CODEX_MISE_SHIM"
+    ln -s "$CODEX_MISE_SHIM" "$CODEX_COMPAT_LINK"
+  fi
 fi
 
 # lazygit config
