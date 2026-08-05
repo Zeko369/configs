@@ -3,7 +3,19 @@
 # ============================================
 # VS Code / Cursor
 # ============================================
-alias ci='code-insiders'
+unalias ci 2>/dev/null
+ci() {
+  if command -v code-insiders >/dev/null 2>&1; then
+    command code-insiders "$@"
+  elif command -v code >/dev/null 2>&1; then
+    command code "$@"
+  elif command -v cursor >/dev/null 2>&1; then
+    command cursor --classic "$@"
+  else
+    printf 'ci: code-insiders, code, or cursor is required\n' >&2
+    return 127
+  fi
+}
 alias ci.='ci .'
 alias cs='cursor'
 alias cs.='cs .'
