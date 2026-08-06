@@ -1,7 +1,7 @@
 #!/bin/bash
 # Sync configs to applications that don't support symlinks
 # Usage: ./sync [target]
-#   ./sync cursor   - Sync Cursor/VSCode settings
+#   ./sync cursor   - Sync Cursor/VSCode settings and Cursor extensions
 #   ./sync all      - Sync everything (default)
 
 set -e
@@ -15,6 +15,39 @@ NC='\033[0m'
 
 info() { echo -e "${GREEN}[SYNC]${NC} $1"; }
 warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
+
+install_extension_manifest() {
+  local cli=$1
+  local manifest=$2
+  local label=$3
+  local extension
+  local installed=0
+  local failed=0
+
+  if ! command -v "$cli" >/dev/null 2>&1; then
+    warn "  → $label CLI not found; extensions not installed"
+    return
+  fi
+
+  while IFS= read -r extension || [ -n "$extension" ]; do
+    case "$extension" in
+      ""|\#*) continue ;;
+    esac
+
+    if "$cli" --install-extension "$extension" >/dev/null 2>&1; then
+      installed=$((installed + 1))
+    else
+      warn "  → $label: failed to install $extension"
+      failed=$((failed + 1))
+    fi
+  done < "$manifest"
+
+  if [ "$failed" -eq 0 ]; then
+    info "  → $label: ensured $installed extensions"
+  else
+    warn "  → $label: ensured $installed extensions; $failed failed"
+  fi
+}
 
 # Detect OS
 case "$(uname -s)" in
@@ -40,6 +73,10 @@ sync_cursor() {
     cp "$CONFIGS_DIR/vscode/settings.json" "$CURSOR_DIR/settings.json"
     cp "$CONFIGS_DIR/vscode/keybindings.json" "$CURSOR_DIR/keybindings.json"
     info "  → Cursor: synced"
+
+    if [ -f "$CONFIGS_DIR/vscode/cursor-extensions.txt" ]; then
+      install_extension_manifest cursor "$CONFIGS_DIR/vscode/cursor-extensions.txt" "Cursor"
+    fi
   else
     warn "  → Cursor: not installed"
   fi

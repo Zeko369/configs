@@ -46,7 +46,8 @@ configs/
 │
 ├── vscode/                  # Cursor/VSCode settings
 │   ├── settings.json
-│   └── keybindings.json
+│   ├── keybindings.json
+│   └── cursor-extensions.txt # Reproducible Cursor extensions
 │
 ├── zed/                     # Zed editor settings
 │   ├── settings.json
@@ -178,7 +179,7 @@ like `max_connections`, require a restart):
 brew services restart postgresql@14
 ```
 
-For Cursor/VSCode, manually copy:
+For Cursor/VSCode, sync settings and ensure the recorded Cursor extensions are installed:
 ```bash
-cp vscode/*.json ~/Library/Application\ Support/Cursor/User/
+./sync cursor
 ```
