@@ -304,6 +304,24 @@ if command -v git &> /dev/null; then
 fi
 
 # ============================================
+# Step 6: Install gh-stack (stacked PRs via GitHub CLI)
+# ============================================
+if command -v gh &> /dev/null; then
+  if gh extension list 2>/dev/null | grep -q $'\tgithub/gh-stack\t'; then
+    info "gh-stack extension already installed"
+  else
+    info "Installing gh-stack extension..."
+    if gh extension install github/gh-stack; then
+      info "gh-stack installed (gh stack)"
+    else
+      warn "Failed to install gh-stack, skipping"
+    fi
+  fi
+else
+  warn "gh not found, skipping gh-stack install"
+fi
+
+# ============================================
 # Done!
 # ============================================
 echo ""
