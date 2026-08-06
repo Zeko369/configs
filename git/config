@@ -25,10 +25,15 @@
     syntax-theme = Dracula
 
 [merge]
-    conflictstyle = diff3
+    conflictstyle = zdiff3
 
 [diff]
+    # myers (git's default) produces garbage diffs on reordered/reindented
+    # blocks — histogram gave -17/+1074 where myers gave -2122/+3179.
+    algorithm = histogram
     colorMoved = default
+    colorMovedWS = allow-indentation-change
+    renames = copies
 
 # ============================================
 # Commit signing (SSH)
