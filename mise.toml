@@ -13,6 +13,8 @@ RUBY_CONFIGURE_OPTS = "--enable-yjit"
 [tools]
 bun = "latest"
 node = "latest"
+pnpm = "latest"
+aube = "latest" # node install tool
 ruby = "latest"
 python = "latest"
 rust = "stable"
@@ -61,4 +63,5 @@ idiomatic_version_file_enable_tools = ["ruby", "node", "python", "bun"]
 
 # Use bun for npm packages (faster)
 [settings.npm]
-bun = true
+# package_manager = "aube"
+package_manager = "bun"
