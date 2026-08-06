@@ -41,7 +41,7 @@ brew 'eza'                   # Better ls
 brew 'zoxide'                # Better cd
 brew 'atuin'                 # Better shell history
 brew 'starship'              # Fast prompt
-brew 'zsh-autocomplete'              # Fish-like real-time completions
+brew 'zsh-autocomplete'      # Fish-like real-time completions
 brew 'zsh-syntax-highlighting'
 brew 'jaq'                   # Better jq (Rust)
 brew 'jq'
@@ -151,7 +151,6 @@ cask 'scroll-reverser'
 cask 'tailscale-app'
 cask 'transmission'
 cask 'utm'
-cask 'voiceink'
 cask 'windows-app'             # Microsoft Remote Desktop
 cask 'qflipper'               # Flipper Zero companion
 
@@ -167,9 +166,9 @@ cask 'zwift', args: { require_sha: false }  # Cycling
 # Devtools
 cask '1password-cli'
 # codex CLI moved to mise.toml as "npm:@openai/codex" (cross-platform; brew cask lagged releases)
-cask 'codex-app'
+cask 'chatgpt'
 cask 'cursor'
-cask 'cursor-cli'
+# cask 'cursor-cli'
 cask 'opencode-desktop'
 cask 'cyberduck'
 cask 'font-fira-code-nerd-font'
