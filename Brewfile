@@ -109,7 +109,7 @@ brew 'ffmpeg'                # Video processing
 brew 'wget'                  # Download files
 brew 'transmission-cli'
 brew 'fastfetch'             # System info
-brew 'yt-dlp'
+# yt-dlp moved to mise.toml so it can use the existing Node runtime instead of Homebrew's Deno dependency
 
 # Browsers
 cask 'firefox'

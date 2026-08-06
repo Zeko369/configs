@@ -150,7 +150,7 @@ PACMAN_DEV=(
   xsel
 
   # Media / image
-  yt-dlp
+  # yt-dlp is installed through mise/uv with its EJS dependency
   ffmpeg
   imagemagick
 

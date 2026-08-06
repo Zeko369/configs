@@ -229,6 +229,13 @@ if [ -f "$CONFIGS_DIR/atuin.toml" ]; then
   create_optional_symlink "$CONFIGS_DIR/atuin.toml" "$ATUIN_DIR/config.toml"
 fi
 
+# yt-dlp config
+if [ -f "$CONFIGS_DIR/yt-dlp/config" ]; then
+  YT_DLP_DIR="$HOME/.config/yt-dlp"
+  mkdir -p "$YT_DLP_DIR"
+  create_optional_symlink "$CONFIGS_DIR/yt-dlp/config" "$YT_DLP_DIR/config"
+fi
+
 # Starship config (layered: repo base + machine-local overrides).
 # Starship has no include directive, so install.sh regenerates the file.
 if [ -f "$CONFIGS_DIR/starship.toml" ]; then

@@ -36,6 +36,7 @@ rust = "stable"
 uv = "latest"
 "pipx:claude-monitor" = "latest"
 "pipx:wakatime" = "latest"                       # Coding time tracker
+"pipx:yt-dlp" = { version = "latest", extras = "default" } # Includes yt-dlp-ejs; mise installs it with uv
 
 # ============================================
 # CLI tools (prebuilt binaries)

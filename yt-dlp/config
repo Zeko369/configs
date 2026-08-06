@@ -1,0 +1,3 @@
+# Use mise-managed Node for YouTube's JavaScript challenges instead of Deno.
+--no-js-runtimes
+--js-runtimes node
