@@ -17,7 +17,7 @@ ci() {
   fi
 }
 alias ci.='ci .'
-alias cs='cursor'
+alias cs='cursor --classic'
 alias cs.='cs .'
 
 # ============================================
@@ -69,7 +69,7 @@ zc() {
 # AI tools
 # ============================================
 alias cc='claude --dangerously-skip-permissions'
-alias ccw='CLAUDE_CONFIG_DIR=~/.claude-work cc'
+# alias ccw='CLAUDE_CONFIG_DIR=~/.claude-work cc'  # retired 2026-07-08: merged into ~/.claude
 alias ca='cursor-agent'
 alias cx='codex --dangerously-bypass-approvals-and-sandbox'
 alias oc='opencode'
