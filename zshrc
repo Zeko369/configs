@@ -29,7 +29,7 @@ fi
 
 # Configs directory
 export CONFIGS_DIR="$HOME/repos/configs"
-export PATH="$CONFIGS_DIR/bin:$PATH"
+export PATH="$HOME/.local/bin:$CONFIGS_DIR/bin:$PATH"
 
 # Tool configs
 export RIPGREP_CONFIG_PATH="$CONFIGS_DIR/ripgreprc"

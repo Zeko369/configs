@@ -13,13 +13,13 @@ Cross-platform configuration files for zsh, vim, tmux, and various editors.
 **Arch / CachyOS:**
 
 ```bash
-sudo pacman -S --noconfirm git && git clone https://github.com/Zeko369/configs.git ~/repos/configs && ~/repos/configs/install-arch.sh && ~/repos/configs/install.sh
+sudo pacman -S --noconfirm git && git clone --recurse-submodules https://github.com/Zeko369/configs.git ~/repos/configs && ~/repos/configs/install-arch.sh && ~/repos/configs/install.sh
 ```
 
 **Debian / Ubuntu:**
 
 ```bash
-sudo apt update && sudo apt install -y git curl && git clone https://github.com/Zeko369/configs.git ~/repos/configs && ~/repos/configs/install-debian.sh && ~/repos/configs/install.sh
+sudo apt update && sudo apt install -y git curl && git clone --recurse-submodules https://github.com/Zeko369/configs.git ~/repos/configs && ~/repos/configs/install-debian.sh && ~/repos/configs/install.sh
 ```
 
 ## Structure
@@ -30,6 +30,7 @@ configs/
 ├── tmux.conf                # Tmux config
 ├── ghostty_config           # Ghostty terminal
 ├── Brewfile                 # macOS packages
+├── work-tailnet/            # Public submodule: 2nd tailnet CLI, macOS services, Raycast v2
 ├── valkey/
 │   └── overrides.conf       # Repo-wide Valkey overrides (macOS)
 ├── postgres/
@@ -64,9 +65,10 @@ configs/
 │   ├── .tmux.conf           # → ~/.tmux.conf
 │   ├── ghostty.local        # Loaded by ghostty_config
 │   ├── valkey.conf          # Machine-specific Valkey overrides
-│   └── postgres.conf        # Machine-specific Postgres overrides
+│   ├── postgres.conf        # Machine-specific Postgres overrides
+│   └── work-tailnet.json    # Private work-tailnet routes and Raycast shortcuts
 │
-└── local.example/           # Templates for local/
+└── local/example/           # Safe templates copied into local/
 ```
 
 ## Key Bindings (consistent across editors)
@@ -131,6 +133,12 @@ Both Linux installers expose the same flags:
 ./install.sh                  # symlinks (always run after the package step)
 ```
 
+If this checkout predates the work-tailnet submodule, initialize it once:
+
+```bash
+git submodule update --init -- work-tailnet
+```
+
 **Arch** uses `pacman` + `paru` (auto-bootstrapped if missing, skipped entirely on `--cli-bare`). AUR package names are best-effort; comment out anything that fails and report.
 
 **Debian** GUI coverage is intentionally minimal — most casks need vendor PPAs / `.deb`s. On `--cli-bare`, atuin/starship/lazygit are *not* installed (they only arrive via the mise gap-filler in the dev tier), so bare Debian is a degraded shell experience compared to bare Arch.
@@ -178,6 +186,30 @@ like `max_connections`, require a restart):
 ```bash
 brew services restart postgresql@14
 ```
+
+### Work tailnet (macOS)
+
+[`work-tailnet`](https://github.com/Zeko369/work-tailnet) is a public submodule containing the
+second userspace Tailscale daemon, PAC tooling, CLI, and Raycast extension. Private hostnames,
+routes, and site shortcuts stay in the ignored `local/work-tailnet.json` file.
+
+`./install.sh` initializes the submodule when needed, creates the private config template, and
+installs `tswork`, `tswork-pac`, and `tswork-run` into `~/.local/bin`. After filling in the JSON:
+
+```bash
+./work-tailnet/macos/setup.sh
+```
+
+To import the extension into Raycast v2 Beta, keep v2 running and run:
+
+```bash
+cd work-tailnet/raycast
+npm ci
+npm run dev
+```
+
+The extension reads the same private JSON and shells out to the stable CLI link, so the submodule
+can move or update without breaking it.
 
 For Cursor/VSCode, sync settings and ensure the recorded Cursor extensions are installed:
 ```bash

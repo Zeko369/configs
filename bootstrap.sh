@@ -56,7 +56,7 @@ SCRIPT_PATH="${BASH_SOURCE[0]:-}"
 if [ ! -d "$CONFIGS_DIR/.git" ] && { [ -z "$SCRIPT_PATH" ] || [ ! -f "$SCRIPT_PATH" ]; }; then
   info "Cloning configs into $CONFIGS_DIR"
   mkdir -p "$(dirname "$CONFIGS_DIR")"
-  git clone https://github.com/Zeko369/configs.git "$CONFIGS_DIR"
+  git clone --recurse-submodules https://github.com/Zeko369/configs.git "$CONFIGS_DIR"
 fi
 
 echo ""

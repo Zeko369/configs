@@ -100,7 +100,8 @@ brew 'cloudflared'           # Cloudflare tunnel
 brew 'rclone'                # Cloud storage sync
 brew 'helm'                  # Kubernetes package manager
 brew 'kubeseal'
-brew 'nmap'                  # Network scanner
+brew 'nmap'                  # Network scanner; ncat supports the optional work-tailnet SSH proxy
+brew 'tailscale', link: false # Standalone userspace daemon for the optional second tailnet
 
 # ============================================
 # Media / Files
