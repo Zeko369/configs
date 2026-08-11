@@ -135,6 +135,13 @@ write_managed_file() {
   printf '%s\n' "$content" > "$dest"
 }
 
+# Codex config
+if [ -f "$CONFIGS_DIR/codex/config.toml" ]; then
+  CODEX_DIR="$HOME/.codex"
+  mkdir -p "$CODEX_DIR"
+  create_optional_symlink "$CONFIGS_DIR/codex/config.toml" "$CODEX_DIR/config.toml"
+fi
+
 # Ghostty config (macOS: ~/Library/Application Support/com.mitchellh.ghostty/config)
 # Ghostty config (Linux: ~/.config/ghostty/config)
 if [ -f "$CONFIGS_DIR/ghostty_config" ]; then

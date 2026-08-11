@@ -29,6 +29,8 @@ configs/
 ├── zshrc                    # Base zsh config (cross-platform)
 ├── tmux.conf                # Tmux config
 ├── ghostty_config           # Ghostty terminal
+├── codex/
+│   └── config.toml          # Codex settings → ~/.codex/config.toml
 ├── Brewfile                 # macOS packages
 ├── work-tailnet/            # Public submodule: 2nd tailnet CLI, macOS services, Raycast v2
 ├── valkey/
