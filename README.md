@@ -182,11 +182,25 @@ block (between `configs-managed` markers) to every installed version's config:
 PostgreSQL uses last-assignment-wins, so the includes override the defaults
 above them. The block is rewritten idempotently on every `install.sh` run.
 
+**One server, one version.** The Brewfile pins exactly one `postgresql@N`
+(currently `@18`), linked into `$(brew --prefix)/bin`, serving every project and
+worktree from a single cluster on 5432 — per-project databases are cheap, extra
+servers are not. `macos-defaults.sh` discovers the installed version rather than
+hardcoding it, so a major upgrade is a one-line Brewfile edit plus a
+dump/restore. Note that local is intentionally ahead of production (DO managed
+PostgreSQL 15); CI is the gate that must match prod, not this machine.
+
+To run a second version side by side (reproducing a version-specific bug), do
+*not* `brew link` back and forth — that is global mutable state that changes
+under anything already running. Give it its own port instead, or use the
+project's `docker-compose.deps.yml`, and select it with `PGPORT` or a full
+connection string.
+
 After config changes, restart any running instance to apply (some settings,
 like `max_connections`, require a restart):
 
 ```bash
-brew services restart postgresql@14
+brew services restart postgresql@18
 ```
 
 ### Work tailnet (macOS)

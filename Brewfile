@@ -12,9 +12,10 @@ mas 'Goodnotes', id: 1444383602
 # ============================================
 # Services / Databases
 # ============================================
-brew 'postgresql@14'
-brew 'postgresql@15'
-brew 'postgresql@16'
+# Versioned formula = major pin: `brew upgrade` moves 18.6 -> 18.7 but never to 19.
+# Do NOT `brew pin` this (that would block security patches too). A major bump is a
+# deliberate edit here plus a dump/restore. See README "Postgres (macOS)".
+brew 'postgresql@18'
 brew 'valkey'
 
 # ============================================

@@ -70,7 +70,11 @@ EOF
   done <<< "$versions"
 
   if [ "$found_any" = true ]; then
-    warn "Postgres config changed — restart running instances to apply, e.g.: brew services restart $(head -1 <<< "$versions")"
+    # Name the version that is actually running, not just the first one found.
+    local running
+    running="$(brew services list 2>/dev/null | awk '$1 ~ /^postgresql@/ && $2 == "started" { print $1 }' | head -1)"
+    [ -n "$running" ] || running="$(sort -t@ -k2 -n <<< "$versions" | tail -1)"
+    warn "Postgres config changed — restart to apply: brew services restart $running"
   fi
 }
 

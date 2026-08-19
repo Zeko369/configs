@@ -117,15 +117,18 @@ fi
 # ============================================
 # Postgres bootstrap (idempotent)
 # ============================================
-if command -v brew >/dev/null 2>&1 && brew list postgresql@14 >/dev/null 2>&1; then
-  if ! brew services list 2>/dev/null | grep -q "^postgresql@14.*started"; then
-    info "Starting postgresql@14"
-    brew services start postgresql@14 >/dev/null
+# The version is discovered rather than hardcoded: use the highest installed
+# postgresql@N, so bumping the Brewfile is the only edit a major upgrade needs.
+PG_FORMULA="$(brew list --formula 2>/dev/null | grep -E '^postgresql@[0-9]+$' | sort -t@ -k2 -n | tail -1)"
+if [ -n "$PG_FORMULA" ]; then
+  if ! brew services list 2>/dev/null | grep -q "^${PG_FORMULA}[[:space:]]*started"; then
+    info "Starting $PG_FORMULA"
+    brew services start "$PG_FORMULA" >/dev/null
     sleep 2
   fi
-  PSQL=/opt/homebrew/opt/postgresql@14/bin/psql
+  PSQL="$(brew --prefix)/opt/$PG_FORMULA/bin/psql"
   if [ -x "$PSQL" ]; then
-    info "Postgres: ensuring fran/dev databases and dev superuser"
+    info "Postgres ($PG_FORMULA): ensuring fran/dev databases and dev superuser"
     "$PSQL" -d postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='dev'" | grep -q 1 \
       || "$PSQL" -d postgres -c "CREATE ROLE dev WITH LOGIN SUPERUSER CREATEDB CREATEROLE PASSWORD 'foobar123'"
     "$PSQL" -d postgres -tAc "SELECT 1 FROM pg_database WHERE datname='fran'" | grep -q 1 \
@@ -134,7 +137,7 @@ if command -v brew >/dev/null 2>&1 && brew list postgresql@14 >/dev/null 2>&1; t
       || "$PSQL" -d postgres -c "CREATE DATABASE dev OWNER dev"
   fi
 else
-  warn "postgresql@14 not installed yet — run 'brew bundle install --file=$HOME/repos/configs/Brewfile' first"
+  warn "No postgresql@N installed yet — run 'brew bundle install --file=$HOME/repos/configs/Brewfile' first"
 fi
 
 # ============================================
