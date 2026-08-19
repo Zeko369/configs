@@ -160,7 +160,7 @@ cask 'iina'
 cask 'multiviewer'
 cask 'obs'
 cask 'spotify', args: { require_sha: false }
-cask 'vlc@nightly'
+cask 'vlc'
 cask 'riverside-studio', args: { require_sha: false }
 cask 'zwift', args: { require_sha: false }  # Cycling
 
