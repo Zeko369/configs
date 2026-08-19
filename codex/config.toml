@@ -1,7 +1,10 @@
 model = "gpt-5.6-sol"
 personality = "friendly"
 check_for_update_on_startup = false
-notify = ["/Users/fran/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient","turn-ended"]
+notify = [
+  "/Users/fran/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient",
+  "turn-ended"
+]
 service_tier = "priority"
 plan_mode_reasoning_effort = "xhigh"
 approval_policy = "never"
@@ -178,17 +181,20 @@ trust_level = "trusted"
 [projects."/Users/fran/Documents/Codex/2026-08-10/co"]
 trust_level = "trusted"
 
+[projects."/Users/fran/code/executor"]
+trust_level = "trusted"
+
+[projects."/Users/fran/work/tmp"]
+trust_level = "trusted"
+
+[projects."/Users/fran/work/yaak"]
+trust_level = "trusted"
+
 [notice]
 "hide_gpt-5.1-codex-max_migration_prompt" = true
 
-[notice.model_migrations]
-"gpt-5.1-codex-max" = "gpt-5.2-codex"
-
-[mcp_servers.sentry]
-url = "https://mcp.sentry.dev/mcp"
-
-[mcp_servers.linear]
-url = "https://mcp.linear.app/mcp"
+  [notice.model_migrations]
+  "gpt-5.1-codex-max" = "gpt-5.2-codex"
 
 [mcp_servers.node_repl]
 args = []
@@ -201,13 +207,13 @@ NODE_REPL_NODE_MODULE_DIRS = "/Applications/ChatGPT.app/Contents/Resources/cua_n
 NODE_REPL_NODE_PATH = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node"
 NODE_REPL_TRUSTED_CODE_PATHS = "/Users/fran/.codex:/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
 CODEX_HOME = "/Users/fran/.codex"
-NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "323bc3e687e17d7e377238d9f4c69111c4d0e6219103b6316d8c52082489533b"
 BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
 NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
 NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = "Control desktop apps on macOS through Computer Use."
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.803.41515"
+BROWSER_USE_CODEX_APP_VERSION = "26.814.41957"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/fran/.codex/plugins/cache/openai-bundled/browser/26.814.41957/scripts/browser-service.mjs","sky":"@oai/sky/service"}'
 SKY_CUA_SERVICE_PATH = "/Users/fran/.codex/computer-use/Codex Computer Use.app"
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex"
 
@@ -220,14 +226,8 @@ enabled = false
 [mcp_servers.openaiDeveloperDocs]
 url = "https://developers.openai.com/mcp"
 
-[mcp_servers.resend]
-url = "https://mcp.resend.com/mcp"
-enabled_tools = [
-  "list-received-emails",
-  "get-received-email",
-  "list-received-email-attachments",
-  "get-received-email-attachment",
-]
+[mcp_servers.executor]
+url = "https://executor.zeko.run/mcp"
 
 [features]
 multi_agent = true
@@ -239,12 +239,21 @@ memories = true
 chronicle = false
 
 [tui]
-status_line = ["model-name", "current-dir", "project-root", "git-branch", "context-remaining"]
+status_line = [
+  "model-name",
+  "current-dir",
+  "project-root",
+  "git-branch",
+  "context-remaining"
+]
 theme = "gruvbox-dark"
 
-[tui.model_availability_nux]
-"gpt-5.5" = 4
-"gpt-5.6-sol" = 4
+  [tui.model_availability_nux]
+  "gpt-5.5" = 4
+  "gpt-5.6-sol" = 4
+
+[apps.atlassian]
+enabled = false
 
 [plugins."github@openai-curated"]
 enabled = true
@@ -297,13 +306,16 @@ enabled = true
 [plugins."browser@openai-bundled"]
 enabled = true
 
+[plugins."codex-app-tools@openai-bundled"]
+enabled = true
+
 [marketplaces.openai-bundled]
-last_updated = "2026-08-11T16:02:39Z"
+last_updated = "2026-08-19T09:45:52Z"
 source_type = "local"
 source = "/Users/fran/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
 [marketplaces.openai-primary-runtime]
-last_updated = "2026-08-06T05:15:32Z"
+last_updated = "2026-08-19T01:14:31Z"
 source_type = "local"
 source = "/Users/fran/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
@@ -326,61 +338,57 @@ conversationDetailMode = "STEPS_COMMANDS"
 worktree-auto-cleanup-enabled = false
 dock-icon-preference = "codex-system"
 show-context-window-usage = true
-enabled-reasoning-efforts = ["low", "medium", "high", "xhigh", "ultra", "max"]
+enabled-reasoning-efforts = [ "low", "medium", "high", "xhigh", "ultra", "max" ]
 
-[desktop.appearanceLightChromeTheme]
-accent = "#0169cc"
-contrast = 45
-ink = "#0d0d0d"
-opaqueWindows = false
-surface = "#ffffff"
+  [desktop.appearanceLightChromeTheme]
+  accent = "#0169cc"
+  contrast = 45
+  ink = "#0d0d0d"
+  opaqueWindows = false
+  surface = "#ffffff"
+  fonts = { }
 
-[desktop.appearanceLightChromeTheme.fonts]
+    [desktop.appearanceLightChromeTheme.semanticColors]
+    diffAdded = "#00a240"
+    diffRemoved = "#e02e2a"
+    skill = "#751ed9"
 
-[desktop.appearanceLightChromeTheme.semanticColors]
-diffAdded = "#00a240"
-diffRemoved = "#e02e2a"
-skill = "#751ed9"
+  [desktop.appearanceDarkChromeTheme]
+  accent = "#0169cc"
+  contrast = 60
+  ink = "#fcfcfc"
+  opaqueWindows = true
+  surface = "#111111"
+  fonts = { }
 
-[desktop.appearanceDarkChromeTheme]
-accent = "#0169cc"
-contrast = 60
-ink = "#fcfcfc"
-opaqueWindows = true
-surface = "#111111"
+    [desktop.appearanceDarkChromeTheme.semanticColors]
+    diffAdded = "#00a240"
+    diffRemoved = "#e02e2a"
+    skill = "#b06dff"
 
-[desktop.appearanceDarkChromeTheme.fonts]
+  [desktop.open-in-target-preferences]
+  global = "ghostty"
 
-[desktop.appearanceDarkChromeTheme.semanticColors]
-diffAdded = "#00a240"
-diffRemoved = "#e02e2a"
-skill = "#b06dff"
-
-[desktop.open-in-target-preferences]
-global = "ghostty"
-
-[desktop.open-in-target-preferences.perPath]
-"/Users/fran/.codex/worktrees/1850/unidy" = "zed"
-"/Users/fran/.codex/worktrees/19b6/unidy" = "cursor"
-"/Users/fran/.codex/worktrees/4079/unidy" = "ghostty"
-"/Users/fran/.codex/worktrees/5766/unidy" = "ghostty"
-"/Users/fran/.codex/worktrees/5952/unidy" = "ghostty"
-"/Users/fran/.codex/worktrees/7f82/unidy" = "ghostty"
-"/Users/fran/.codex/worktrees/7f99/unidy" = "ghostty"
-"/Users/fran/.codex/worktrees/8692/unidy" = "cursor"
-"/Users/fran/.codex/worktrees/8f6d/unidy" = "terminal"
-"/Users/fran/.codex/worktrees/9169/unidy" = "cursor"
-"/Users/fran/.codex/worktrees/96a9/unidy" = "cursor"
-"/Users/fran/.codex/worktrees/ae0a/unidy" = "ghostty"
-"/Users/fran/.codex/worktrees/e6c4/unidy" = "cursor"
-"/Users/fran/work/unidy" = "zed"
-"/Users/fran/work/unidy-k8s" = "zed"
-"/Users/fran/.codex/worktrees/eadd/unidy" = "ghostty"
+    [desktop.open-in-target-preferences.perPath]
+    "/Users/fran/.codex/worktrees/1850/unidy" = "zed"
+    "/Users/fran/.codex/worktrees/19b6/unidy" = "cursor"
+    "/Users/fran/.codex/worktrees/4079/unidy" = "ghostty"
+    "/Users/fran/.codex/worktrees/5766/unidy" = "ghostty"
+    "/Users/fran/.codex/worktrees/5952/unidy" = "ghostty"
+    "/Users/fran/.codex/worktrees/7f82/unidy" = "ghostty"
+    "/Users/fran/.codex/worktrees/7f99/unidy" = "ghostty"
+    "/Users/fran/.codex/worktrees/8692/unidy" = "cursor"
+    "/Users/fran/.codex/worktrees/8f6d/unidy" = "terminal"
+    "/Users/fran/.codex/worktrees/9169/unidy" = "cursor"
+    "/Users/fran/.codex/worktrees/96a9/unidy" = "cursor"
+    "/Users/fran/.codex/worktrees/ae0a/unidy" = "ghostty"
+    "/Users/fran/.codex/worktrees/e6c4/unidy" = "cursor"
+    "/Users/fran/work/unidy" = "zed"
+    "/Users/fran/work/unidy-k8s" = "zed"
+    "/Users/fran/.codex/worktrees/eadd/unidy" = "ghostty"
 
 [shell_environment_policy.set]
-BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
-NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "323bc3e687e17d7e377238d9f4c69111c4d0e6219103b6316d8c52082489533b"
-NODE_REPL_TRUSTED_CODE_PATHS = "/Users/fran/.codex:/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "8e86beb821b9afc846211798e0113bd4b9e79312dfcd135eb447bdb154f64071"
 
 [memories]
 generate_memories = true
