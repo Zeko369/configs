@@ -214,7 +214,14 @@ alias npx="bunx"
 # Homebrew
 export HOMEBREW_BUNDLE_FILE_GLOBAL="$CONFIGS_DIR/Brewfile"
 export HOMEBREW_NO_AUTO_UPDATE=1
-alias rebrew="brew update && brew bundle install --global && brew upgrade"
+rebrew() {
+  local mas_ids
+  mas_ids=$(sed -nE 's/^[[:space:]]*mas .*id:[[:space:]]*([0-9]+).*$/\1/p' "$HOMEBREW_BUNDLE_FILE_GLOBAL") || return 1
+
+  brew update &&
+    HOMEBREW_BUNDLE_MAS_SKIP="$mas_ids" brew bundle install --global --no-upgrade &&
+    brew upgrade
+}
 
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
