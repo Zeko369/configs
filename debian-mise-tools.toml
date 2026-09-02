@@ -1,6 +1,6 @@
-# Debian/Ubuntu CLI tools installed via mise (cargo / go / npm).
+# Debian/Ubuntu CLI tools installed via mise (prebuilt binaries).
 # These tools aren't available in Debian/Ubuntu's apt repositories at all
-# (or only in stale versions). Compiles once on first install, then cached.
+# (or only in stale versions). They download quickly instead of compiling.
 #
 # Companion to install-debian.sh (--cli-dev tier and up). Aim is to bring
 # Debian closer to Arch's native package coverage.
@@ -11,45 +11,41 @@
 #   mise install --file debian-mise-tools.toml
 
 [tools]
-# Language toolchains (needed by the cargo:/go: packages below)
-rust = "latest"
-go = "latest"
-
 # ============================================
 # Shell prompt + history (bare-tier UX, but apt has neither)
 # ============================================
-"cargo:starship" = "latest"
-"cargo:atuin" = "latest"
+"aqua:starship/starship" = "latest"
+"aqua:atuinsh/atuin" = "latest"
 
 # ============================================
 # Modern CLI replacements
 # ============================================
-"cargo:du-dust" = "latest"        # dust — better du
-"cargo:procs" = "latest"          # procs — better ps
-"cargo:tokei" = "latest"          # code statistics
-"cargo:tealdeer" = "latest"       # tldr
-"cargo:sd" = "latest"             # better sed
-"github:ouch-org/ouch" = "latest" # ouch — universal compress/decompress (prebuilt; cargo build needs clang for libbzip3)
-"cargo:xh" = "latest"             # better curl (HTTPie-like)
-"cargo:zellij" = "latest"         # terminal multiplexer
-"cargo:jaq" = "latest"            # faster jq
-"cargo:grex" = "latest"           # regex from examples
-"cargo:jj-cli" = "latest"         # jujutsu VCS
+"aqua:bootandy/dust" = "latest"                 # dust — better du
+"aqua:dalance/procs" = "latest"                 # procs — better ps
+"conda:tokei" = "latest"                        # code statistics (upstream doesn't publish current binaries)
+"aqua:tealdeer-rs/tealdeer" = "latest"          # tldr
+"aqua:chmln/sd" = "latest"                      # better sed
+"github:ouch-org/ouch" = "latest"               # ouch — universal compress/decompress
+"aqua:ducaale/xh" = "latest"                    # better curl (HTTPie-like)
+"aqua:zellij-org/zellij" = "latest"             # terminal multiplexer
+"aqua:01mf02/jaq" = "latest"                    # faster jq
+"aqua:pemistahl/grex" = "latest"                # regex from examples
+"aqua:jj-vcs/jj" = "latest"                     # jujutsu VCS
 
 # ============================================
-# Go-built tools
+# Prebuilt tools formerly installed via Go
 # ============================================
-"go:github.com/jesseduffield/lazygit" = "latest"
-"go:github.com/jesseduffield/lazydocker" = "latest"
-"go:github.com/wagoodman/dive" = "latest"
-"go:github.com/charmbracelet/glow" = "latest"
-"go:github.com/sclevine/yj" = "latest"
-"go:github.com/mr-karan/doggo/cmd/doggo" = "latest"
-"github:Zeko369/overmind" = "2.5.2"   # patched fork (tmux socket-name-length + .overmind.sock cleanup); go: backend can't target the fork due to module path. DarthSim/overmind#204 unmerged
-"go:github.com/zricethezav/gitleaks/v8" = "latest"   # gitleaks (go.mod still declares the old zricethezav path)
-"github:cloudflare/cloudflared" = "latest"   # prebuilt binary (go install rejected: go.mod has replace directives)
-"go:github.com/bitnami-labs/sealed-secrets/cmd/kubeseal" = "latest"
-"go:github.com/digitalocean/doctl/cmd/doctl" = "latest"
+"aqua:jesseduffield/lazygit" = "latest"
+"aqua:jesseduffield/lazydocker" = "latest"
+"aqua:wagoodman/dive" = "latest"
+"aqua:charmbracelet/glow" = "latest"
+"aqua:sclevine/yj" = "latest"
+"aqua:mr-karan/doggo" = "latest"
+"github:Zeko369/overmind" = "2.5.2"             # patched fork; DarthSim/overmind#204 remains unmerged
+"aqua:gitleaks/gitleaks" = "latest"
+"github:cloudflare/cloudflared" = "latest"      # upstream Go module has replace directives
+"aqua:bitnami/sealed-secrets" = "latest"        # kubeseal
+"aqua:digitalocean/doctl" = "latest"
 
 # ============================================
 # AI coding agents
