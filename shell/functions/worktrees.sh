@@ -174,6 +174,12 @@ function gwd() {
   fi
 
   local branch_name=$(git rev-parse --abbrev-ref HEAD)
+  local main_root=$(git worktree list --porcelain | awk '/^worktree / { sub(/^worktree /, ""); print; exit }')
+
+  if [[ -z "$main_root" || ! -d "$main_root" ]]; then
+    echo "Error: Could not find the main worktree"
+    return 1
+  fi
 
   # Confirm deletion
   if [[ "$force" == false ]]; then
@@ -189,8 +195,8 @@ function gwd() {
     fi
   fi
 
-  # Move to parent directory first
-  cd "$parent_dir"
+  # Move to the main worktree before removing the current one
+  cd "$main_root"
 
   # Remove the worktree
   echo "Removing worktree..."
