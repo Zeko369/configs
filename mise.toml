@@ -44,6 +44,7 @@ uv = "latest"
 # CLI tools (prebuilt binaries)
 # ============================================
 "github:Zeko369/overmind" = "2.5.2"              # Procfile manager — patched fork (tmux socket-name-length + .overmind.sock cleanup); DarthSim/overmind#204 unmerged
+kubeseal = "latest"                              # Sealed Secrets CLI (was an undeclared ad-hoc install on the stale bitnami-labs backend)
 
 # ============================================
 # Settings
