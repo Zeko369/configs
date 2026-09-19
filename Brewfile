@@ -49,6 +49,7 @@ brew 'jq'
 brew 'yq'                    # YAML processor
 brew 'yj'                    # Convert YAML/JSON/TOML
 brew 'trash'                 # Safe rm (macOS)
+brew 'displayplacer'         # Display arrangement presets for Raycast
 brew 'vim'
 brew 'neovim'                # Better vim
 
