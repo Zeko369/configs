@@ -13,9 +13,9 @@ _configs_eza() {
 
 # Basic listing
 alias _ls="ls"
-alias ls='eza --icons'
-alias ll='_configs_eza -l --icons'
-alias la='_configs_eza -la --icons'
+alias ls='eza --icons=auto'
+alias ll='_configs_eza -l --icons=auto'
+alias la='_configs_eza -la --icons=auto'
 
 # Tree view
-alias lt='_configs_eza --tree --level=2 --icons -I "node_modules|.git|vendor"'
+alias lt='_configs_eza --tree --level=2 --icons=auto -I "node_modules|.git|vendor"'
