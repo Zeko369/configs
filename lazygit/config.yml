@@ -28,9 +28,9 @@ gui:
   showCommandLog: false
 git:
   # Use delta for diffs (auto-detects light/dark theme)
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta-auto --paging=never
+      command: delta-auto --paging=never
   # Auto-fetch every 60 seconds
   autoFetch: true
   autoRefresh: true
