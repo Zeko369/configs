@@ -268,10 +268,11 @@ fi
 # Step 7: mise — install runtimes (dev tier and up only)
 # ============================================
 if [ "$INSTALL_DEV" = true ]; then
-  info "Activating mise and installing runtimes from mise.toml..."
-  eval "$(mise activate bash)"
+  info "Installing runtimes from mise.toml..."
   mise trust "$CONFIGS_DIR"
-  mise install
+  # Resolve the checkout's config before install.sh links it globally, even
+  # when this script is launched by absolute path from another directory.
+  mise -C "$CONFIGS_DIR" install
 fi
 
 # ============================================
