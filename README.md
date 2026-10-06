@@ -112,6 +112,8 @@ There are two stages:
 ./bootstrap.sh                                       # Xcode CLT + Homebrew
 brew bundle install --file=~/repos/configs/Brewfile
 ./install.sh
+mise trust ~/repos/configs
+mise -C ~/repos/configs install                      # runtimes + developer CLIs
 ./macos-defaults.sh                                  # dock/trackpad/keyboard + postgres bootstrap
 ```
 

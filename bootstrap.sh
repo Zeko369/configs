@@ -67,6 +67,8 @@ Next steps:
   cd $CONFIGS_DIR
   brew bundle install --file=Brewfile   # installs everything in Brewfile
   ./install.sh                          # symlinks dotfiles
+  mise trust "$CONFIGS_DIR"
+  mise -C "$CONFIGS_DIR" install         # runtimes + developer CLIs
   ./macos-defaults.sh                   # dock/trackpad/keyboard + postgres bootstrap
 
 EOF

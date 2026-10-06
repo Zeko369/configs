@@ -5,10 +5,10 @@
 # Companion to install-debian.sh (--cli-dev tier and up). Aim is to bring
 # Debian closer to Arch's native package coverage.
 #
-# Usage:
-#   cd ~/repos/configs
-#   mise trust debian-mise-tools.toml
-#   mise install --file debian-mise-tools.toml
+# install-debian.sh links this file to ~/.config/mise/config.local.toml.
+# To reinstall the shared runtimes and Debian tools after that setup:
+#   mise trust ~/repos/configs
+#   mise -C ~/repos/configs install
 
 [tools]
 # ============================================

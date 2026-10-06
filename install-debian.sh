@@ -206,11 +206,12 @@ if [ "$INSTALL_DEV" = true ]; then
   ln -s "$CONFIGS_DIR/debian-mise-tools.toml" "$MISE_DIR/config.local.toml"
   info "Symlinked: $MISE_DIR/config.local.toml → $CONFIGS_DIR/debian-mise-tools.toml"
 
-  eval "$(mise activate bash)"
-  mise trust "$MISE_DIR"
-  info "Installing and activating tools globally..."
-  mise install
-  mise use --global --file "$CONFIGS_DIR/debian-mise-tools.toml"
+  # The Debian tools are already selected by the global config.local.toml link.
+  # Load the checkout's shared runtimes too, even when this script is launched
+  # from another directory before install.sh has linked the global config.
+  mise trust "$CONFIGS_DIR"
+  info "Installing shared runtimes and Debian CLI tools..."
+  mise -C "$CONFIGS_DIR" install
 fi
 
 # ============================================
