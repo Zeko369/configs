@@ -12,6 +12,11 @@
 
 [tools]
 # ============================================
+# Editor (the shared plugins require Neovim 0.11.3 or newer)
+# ============================================
+"aqua:neovim/neovim" = "latest"                # Debian/Ubuntu apt packages can be too old
+
+# ============================================
 # Shell prompt + history (bare-tier UX, but apt has neither)
 # ============================================
 "aqua:starship/starship" = "latest"
