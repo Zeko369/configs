@@ -3,6 +3,10 @@
 -- With custom keybindings from vimrc
 -- ============================================
 
+if vim.fn.has('nvim-0.11.3') == 0 then
+  error('This config requires Neovim 0.11.3 or newer. Update nvim before loading it.', 0)
+end
+
 -- Set leader key (must be before plugins)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -135,25 +139,25 @@ require('lazy').setup({
   -- Syntax highlighting (treesitter)
   {
     'nvim-treesitter/nvim-treesitter',
+    -- Keep the configs.setup API used below on its compatible, frozen branch.
+    branch = 'master',
     build = ':TSUpdate',
     config = function()
-      pcall(function()
-        require('nvim-treesitter.configs').setup {
-          ensure_installed = {
-            'bash', 'c', 'css', 'go', 'html', 'javascript', 'json',
-            'lua', 'markdown', 'python', 'ruby', 'rust', 'tsx',
-            'typescript', 'vimdoc', 'yaml',
-          },
-          auto_install = true,
-          highlight = {
-            enable = true,
-            additional_vim_regex_highlighting = false,
-          },
-          indent = {
-            enable = true,
-          },
-        }
-      end)
+      require('nvim-treesitter.configs').setup {
+        ensure_installed = {
+          'bash', 'c', 'css', 'go', 'html', 'javascript', 'json',
+          'lua', 'markdown', 'python', 'ruby', 'rust', 'tsx',
+          'typescript', 'vimdoc', 'yaml',
+        },
+        auto_install = true,
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false,
+        },
+        indent = {
+          enable = true,
+        },
+      }
     end,
   },
 
@@ -161,13 +165,11 @@ require('lazy').setup({
   {
     'neovim/nvim-lspconfig',
     dependencies = {
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
+      'mason-org/mason.nvim',
+      'mason-org/mason-lspconfig.nvim',
       { 'j-hui/fidget.nvim', opts = {} },
-      'folke/neodev.nvim',
     },
     config = function()
-      require('neodev').setup()
       require('mason').setup()
 
       local servers = {
@@ -178,7 +180,11 @@ require('lazy').setup({
         jsonls = {},
         lua_ls = {
           Lua = {
-            workspace = { checkThirdParty = false },
+            diagnostics = { globals = { 'vim' } },
+            workspace = {
+              checkThirdParty = false,
+              library = vim.api.nvim_get_runtime_file('', true),
+            },
             telemetry = { enable = false },
           },
         },
@@ -207,17 +213,18 @@ require('lazy').setup({
         nmap('<leader>F', function() vim.lsp.buf.format { async = true } end, 'Format buffer')
       end
 
+      -- Configure each server before Mason enables it through Neovim's LSP API.
+      for server_name, settings in pairs(servers) do
+        vim.lsp.config(server_name, {
+          capabilities = capabilities,
+          on_attach = on_attach,
+          settings = settings,
+        })
+      end
+
       require('mason-lspconfig').setup {
         ensure_installed = vim.tbl_keys(servers),
-        handlers = {
-          function(server_name)
-            require('lspconfig')[server_name].setup {
-              capabilities = capabilities,
-              on_attach = on_attach,
-              settings = servers[server_name],
-            }
-          end,
-        },
+        automatic_enable = vim.tbl_keys(servers),
       }
     end,
   },

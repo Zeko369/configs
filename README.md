@@ -85,6 +85,11 @@ configs/
 
 ## Customization
 
+The Neovim config requires **Neovim 0.11.3 or newer** (`nvim --version`). If a
+Debian/Ubuntu release ships an older package, use a newer Neovim package or a
+mise-managed Neovim before loading this config. Treesitter is pinned to its
+compatible `master` branch; update the plugin and configuration together.
+
 Edit files in `local/` for machine-specific settings:
 
 ```bash
