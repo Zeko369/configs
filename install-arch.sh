@@ -48,10 +48,12 @@ command -v sudo  >/dev/null 2>&1 || error "sudo required"
 CONFIGS_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # ============================================
-# Step 1: Refresh package databases
+# Step 1: Refresh package databases and upgrade the system
 # ============================================
-info "Syncing pacman databases..."
-sudo pacman -Sy --noconfirm
+# Arch does not support refreshing the databases without a full upgrade.
+# Finish the upgrade before installing packages or building anything from AUR.
+info "Syncing pacman databases and upgrading installed packages..."
+sudo pacman -Syu --noconfirm
 
 # ============================================
 # Step 2: Bootstrap an AUR helper (only if a tier needs AUR)
