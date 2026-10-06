@@ -87,6 +87,7 @@ fi
 PACMAN_BARE=(
   base-devel
   git
+  openssh
   tmux
   zsh
   neovim

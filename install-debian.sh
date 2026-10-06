@@ -87,6 +87,7 @@ sudo apt-get update -qq
 APT_BARE=(
   # Core
   git
+  openssh-client
   tmux
   zsh
   neovim
