@@ -22,29 +22,35 @@ rust = "stable"
 # ============================================
 # Global npm packages
 # ============================================
-"npm:@antfu/ni" = "latest"                       # Unified package manager (ni, nr, nx)
-"npm:opencode-ai" = "latest"                     # OpenCode CLI
+# The tool-update service below checks these global tools (mise >= 2026.10.9).
+# Coding agents check every 6h; supporting CLIs check daily.
+"npm:@antfu/ni" = { version = "latest", auto_update = "24h" } # Unified package manager (ni, nr, nx)
+"npm:opencode-ai" = { version = "latest", auto_update = "6h" } # OpenCode CLI
 "npm:vercel" = "latest"                          # Vercel CLI
-"npm:btca" = "latest"                            # BTCA CLI
-"npm:@earendil-works/pi-coding-agent" = "latest" # pi
-"npm:@openai/codex" = "latest"                   # OpenAI Codex CLI (npm tracks releases ahead of the brew cask)
+"npm:btca" = { version = "latest", auto_update = "24h" } # BTCA CLI
+"npm:@earendil-works/pi-coding-agent" = { version = "latest", auto_update = "6h" } # pi
+"npm:@openai/codex" = { version = "latest", auto_update = "6h" } # OpenAI Codex CLI (npm tracks releases ahead of the brew cask)
 "npm:@railway/cli" = "latest"                    # Railway.app CLI
 "npm:@withgraphite/graphite-cli" = "stable"      # Graphite CLI (gt) — stacked PRs
-"npm:agent-browser" = "latest"                   # Chrome automation
+"npm:agent-browser" = { version = "latest", auto_update = "24h" } # Chrome automation
 
 # ============================================
 # Python tools via uv/pipx
 # ============================================
 uv = "latest"
-"pipx:claude-monitor" = "latest"
-"pipx:wakatime" = "latest"                       # Coding time tracker
-"pipx:yt-dlp" = { version = "latest", extras = "default" } # Includes yt-dlp-ejs; mise installs it with uv
+"pipx:claude-monitor" = { version = "latest", auto_update = "24h" }
+"pipx:wakatime" = { version = "latest", auto_update = "24h" } # Coding time tracker
+"pipx:yt-dlp" = { version = "latest", extras = "default", auto_update = "24h" } # Includes yt-dlp-ejs; mise installs it with uv
 
 # ============================================
 # CLI tools (prebuilt binaries)
 # ============================================
 "github:Zeko369/overmind" = "2.5.2"              # Procfile manager — patched fork (tmux socket-name-length + .overmind.sock cleanup); DarthSim/overmind#204 unmerged
 kubeseal = "latest"                              # Sealed Secrets CLI (was an undeclared ad-hoc install on the stale bitnami-labs backend)
+
+# Check opted-in tools in the background, without delaying command launches.
+[bootstrap.services.mise-tool-update]
+builtin = "tool-update"
 
 # ============================================
 # Settings

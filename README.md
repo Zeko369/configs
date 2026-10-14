@@ -40,7 +40,8 @@ configs/
 │
 ├── install.d/               # Service setup fragments sourced by install.sh
 │   ├── valkey.sh            # Wires Homebrew valkey.conf (macOS)
-│   └── postgres.sh          # Wires each installed postgresql@N (macOS)
+│   ├── postgres.sh          # Wires each installed postgresql@N (macOS)
+│   └── mise-tool-update.sh  # Starts the mise updater (macOS/Linux, version checked)
 │
 ├── vim/
 │   ├── vimrc                # Modern vim config (no plugins needed)
@@ -152,6 +153,34 @@ git submodule update --init -- work-tailnet
 **Arch** uses `pacman` + `paru` (auto-bootstrapped if missing, skipped entirely on `--cli-bare`). AUR package names are best-effort; comment out anything that fails and report.
 
 **Debian** GUI coverage is intentionally minimal — most casks need vendor PPAs / `.deb`s. On `--cli-bare`, atuin/starship/lazygit are *not* installed (they only arrive via the mise gap-filler in the dev tier), so bare Debian is a degraded shell experience compared to bare Arch.
+
+### Automatic CLI updates
+
+With mise **2026.10.9 or newer**, the globally symlinked `mise.toml` opts Codex,
+OpenCode, and pi into update checks every 6 hours, and BTCA, agent-browser,
+yt-dlp, ni, wakatime, and claude-monitor every 24 hours. `./install.sh` sets up
+the declared user service automatically on macOS and Linux after linking the
+global config. If mise is missing or older than 2026.10.9, the installer skips
+the service with a warning; upgrade mise and rerun `./install.sh`.
+
+On Linux, the service requires a working systemd user manager. If the user
+service manager is unavailable or setup fails, installation continues. To
+apply the service again after resolving the problem:
+
+```bash
+mise bootstrap services apply --yes
+```
+
+The service checks hourly and upgrades each opted-in tool when its interval is
+due, including when no shell is open. This keeps downloads out of command
+launches and avoids an updater dispatch failure observed with macOS symlink
+shims in mise 2026.10.9. Without the service, mise falls back to checking at
+shell prompts and shim/exec launches.
+
+Updates respect the configured release-age delay and its existing agent CLI
+exceptions. Project-pinned versions take precedence, and a failed update falls
+back to the installed version. Run `mise doctor` to inspect update failures.
+See [mise's automatic tool updates](https://mise.jdx.dev/dev-tools/#automatic-tool-updates).
 
 ### Authenticating GitHub
 
