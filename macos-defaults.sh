@@ -14,6 +14,14 @@ info() { echo -e "${GREEN}[INFO]${NC} $1"; }
 warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 
 # ============================================
+# Default applications for Markdown, scripts, YAML/XML, and C/C++
+# ============================================
+info "Applying configured file associations"
+if ! "$(dirname "$0")/bin/macos-file-associations" --apply; then
+  warn "File associations were not fully applied. Resolve the error above and rerun bin/macos-file-associations --apply."
+fi
+
+# ============================================
 # Trackpad
 # ============================================
 info "Trackpad: tap-to-click, 3-finger swipe down → App Exposé"

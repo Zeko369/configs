@@ -1,0 +1,25 @@
+{
+  "dev.zed.Zed": {
+    "net.daringfireball.markdown": ["md", "markdown"],
+    "public.python-script": ["py"],
+    "public.ruby-script": ["rb", "rbw"],
+    "public.php-script": ["php", "php3", "php4", "ph3", "ph4", "phtml"],
+    "public.perl-script": ["pl", "pm"],
+    "public.shell-script": ["sh"],
+    "public.bash-script": ["bash"],
+    "public.csh-script": ["csh"],
+    "public.ksh-script": ["ksh"],
+    "public.tcsh-script": ["tcsh"],
+    "public.zsh-script": ["zsh"],
+    "public.yaml": ["yaml", "yml"],
+    "public.xml": ["xml"],
+    "public.c-source": ["c"],
+    "public.c-source.preprocessed": ["i"],
+    "public.c-plus-plus-source": ["cc", "cp", "cpp", "cxx", "c++"],
+    "public.c-plus-plus-source.preprocessed": ["ii"],
+    "public.c-header": ["h"],
+    "public.c-plus-plus-header": ["hh", "hp", "hpp", "hxx", "h++", "ipp"],
+    "public.precompiled-c-header": ["pch"],
+    "public.precompiled-c-plus-plus-header": ["pch++"]
+  }
+}

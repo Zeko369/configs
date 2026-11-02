@@ -32,6 +32,10 @@ configs/
 ├── codex/
 │   └── config.toml          # Codex settings → ~/.codex/config.toml
 ├── Brewfile                 # macOS packages
+├── macos/
+│   ├── file-associations.json  # Default apps by macOS content type
+│   └── file-associations.swift # Native apply/check helper
+├── bin/macos-file-associations # Apply or verify just the file associations
 ├── work-tailnet/            # Public submodule: 2nd tailnet CLI, macOS services, Raycast v2
 ├── valkey/
 │   └── overrides.conf       # Repo-wide Valkey overrides (macOS)
@@ -123,6 +127,33 @@ mise trust ~/repos/configs
 mise -C ~/repos/configs install                      # runtimes + developer CLIs
 ./macos-defaults.sh                                  # dock/trackpad/keyboard + postgres bootstrap
 ```
+
+### macOS file associations
+
+[`macos/file-associations.json`](macos/file-associations.json) maps application
+bundle IDs to macOS content types and their filename extensions. It assigns
+Markdown, scripts, YAML/XML, and C/C++ source/header files to Zed (39 extensions).
+`.plist`, Swift, and Objective-C are intentionally unmanaged and keep their
+existing defaults.
+
+Install Zed and the Xcode Command Line Tools, then run:
+
+```bash
+./bin/macos-file-associations --check  # inspect current defaults; also the default mode
+./bin/macos-file-associations --apply  # restore the config, then verify
+```
+
+`macos-defaults.sh` also applies this config. The helper uses the native macOS
+API and waits for each change to complete; no `duti` dependency is needed.
+It validates the full config before applying changes, skips defaults that
+already match, and verifies both content types and temporary sample files in a
+fresh process. A missing app, invalid config, or failed verification exits
+nonzero; the broader defaults script warns and continues.
+
+macOS associates content types, so a mapping also covers other extensions that
+resolve to the same type. The extension lists are verification samples, not an
+exclusive filter. Individual files with custom “Open with” overrides may still
+open in a different app.
 
 ### Linux — three tiers
 
