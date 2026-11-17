@@ -1,4 +1,5 @@
-model = "gpt-6-astra"
+model_provider = "openai"
+model = "gpt-6.1-sol"
 personality = "friendly"
 check_for_update_on_startup = false
 notify = [
@@ -10,7 +11,7 @@ plan_mode_reasoning_effort = "xhigh"
 approval_policy = "never"
 approvals_reviewer = "user"
 default_permissions = ":workspace"
-model_reasoning_effort = "medium"
+model_reasoning_effort = "xhigh"
 suppress_unstable_features_warning = true
 
 [agents]
@@ -223,6 +224,45 @@ trust_level = "trusted"
 [projects."/Users/fran/work/testing-mcp"]
 trust_level = "trusted"
 
+[projects."/Users/fran/brain-dump"]
+trust_level = "trusted"
+
+[projects."/Users/fran/med/med-app"]
+trust_level = "trusted"
+
+[projects."/Users/fran/code/ivor-treninzi"]
+trust_level = "trusted"
+
+[projects."/Users/fran/code/life-os"]
+trust_level = "trusted"
+
+[projects."/Users/fran/work/passkey-demo"]
+trust_level = "trusted"
+
+[projects."/Users/fran/all/trainings/training-tracker"]
+trust_level = "trusted"
+
+[projects."/Users/fran/code/skills"]
+trust_level = "trusted"
+
+[projects."/Users/fran/work/unidy-api-docs"]
+trust_level = "trusted"
+
+[projects."/Users/fran/code/meta-sdk-test"]
+trust_level = "trusted"
+
+[projects."/Users/fran/work/demo-landing-page"]
+trust_level = "trusted"
+
+[projects."/Users/fran/work/demo-pafc"]
+trust_level = "trusted"
+
+[projects."/Users/fran/code/junction"]
+trust_level = "trusted"
+
+[projects."/Users/fran/code/work-tailnet"]
+trust_level = "trusted"
+
 [notice]
 "hide_gpt-5.1-codex-max_migration_prompt" = true
 
@@ -230,26 +270,26 @@ trust_level = "trusted"
   "gpt-5.1-codex-max" = "gpt-5.2-codex"
 
 [mcp_servers.node_repl]
-args = []
 command = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node_repl"
-startup_timeout_sec = 120
+env_vars = ["BROWSER_USE_ACCESS_EXECUTOR_ID", "BROWSER_USE_ACCESS_PIPE_PATH", "BROWSER_USE_ACCESS_VERIFYING_IDENTITY"]
+startup_timeout_sec = 120.0
 
 [mcp_servers.node_repl.env]
+BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab,mcpapps"
+BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
+BROWSER_USE_CODEX_APP_VERSION = "26.1027.30824"
+BROWSER_USE_TINYSKY_ENABLED = "1"
+CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex"
+CODEX_HOME = "/Users/fran/.codex"
+NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = ""
+NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = ""
+NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = ""
 NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS = "1000"
 NODE_REPL_NODE_MODULE_DIRS = "/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
 NODE_REPL_NODE_PATH = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node"
 NODE_REPL_TRUSTED_CODE_PATHS = "/Users/fran/.codex:/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
-CODEX_HOME = "/Users/fran/.codex"
-BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
-BROWSER_USE_TINYSKY_ENABLED = "1"
-NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = ""
-NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = ""
-NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = ""
-BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.924.51851"
-NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/fran/.codex/plugins/cache/openai-bundled/browser/26.924.51851/scripts/browser-service.mjs","sky":"@oai/sky/service"}'
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/fran/.codex/plugins/cache/openai-bundled/browser/26.1027.30824/scripts/browser-service.mjs","sky":"@oai/sky/service"}'
 SKY_CUA_SERVICE_PATH = "/Users/fran/.codex/computer-use/Codex Computer Use.app"
-CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex"
 
 [mcp_servers.computer-use]
 command = "./Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient"
@@ -263,6 +303,16 @@ url = "https://developers.openai.com/mcp"
 [mcp_servers.executor]
 url = "https://executor.zeko.run/mcp"
 
+[mcp_servers.unidy-dashboard]
+url = "http://127.0.0.1:54239/mcp-proxy/unidy-dashboard"
+
+[mcp_servers.unidy-dashboard.http_headers]
+Authorization = "Bearer udt_CnD5J2Xbma3k1bCrTynH1ChGxfiLmo2MJtwDmUKU"
+
+[mcp_servers.medapp]
+url = "https://stdigital.app/mcp"
+oauth_resource = "https://stdigital.app/mcp"
+
 [features]
 multi_agent = true
 prevent_idle_sleep = true
@@ -273,18 +323,34 @@ memories = true
 chronicle = false
 
 [tui]
-status_line = ["model-with-reasoning", "fast-mode", "current-dir", "git-branch", "context-remaining", "pull-request-number", "branch-changes", "weekly-limit"]
-theme = "github"
+status_line = [
+  "model-with-reasoning",
+  "fast-mode",
+  "current-dir",
+  "git-branch",
+  "context-remaining",
+  "pull-request-number",
+  "branch-changes",
+  "weekly-limit"
+]
 status_line_use_colors = true
 screen_reader_detection_done = true
 
-[tui.model_availability_nux]
-"gpt-5.5" = 4
-"gpt-5.6-sol" = 4
-gpt-6-astra = 4
-"gpt-6.1-sol" = 2
+  [tui.model_availability_nux]
+  "gpt-5.5" = 4
+  "gpt-5.6-sol" = 4
+  gpt-6-astra = 4
+  "gpt-6.1-sol" = 4
 
 [apps.atlassian]
+enabled = false
+
+# Route Linear through Executor, including when another plugin exposes Linear.
+[apps.asdk_app_69a089a326dc8191b32a3f2553f5be2c]
+enabled = false
+
+# Route Slack through Executor.
+[apps.asdk_app_69a1d78e929881919bba0dbda1f6436d]
 enabled = false
 
 [plugins."github@openai-curated"]
@@ -433,3 +499,41 @@ enabled = true
 
 [hooks.state."chrome@openai-bundled:plugin.json#hooks[0]:stop:0:0"]
 trusted_hash = "sha256:317a07045dfc95aef2e80c55428a2f817e2768be867e3b1ef29a73da8636ae7f"
+
+[hooks.state."/Users/fran/.codex/hooks.json:session_start:0:0"]
+trusted_hash = "sha256:7ac16f27c7b29bec5952047d0a2193dc7595d731faca5a12c3c476194bd2d532"
+
+[hooks.state."/Users/fran/.codex/hooks.json:pre_tool_use:0:0"]
+trusted_hash = "sha256:05bd57dd0345c40c049c4a8dba4743ef737282b2f8c5b41774dc2a5041f42e0a"
+
+[hooks.state."/Users/fran/.codex/hooks.json:permission_request:0:0"]
+trusted_hash = "sha256:f08d31e9233952243fee463d712328e1768e181eac1bf8736e60a48785844787"
+
+[hooks.state."/Users/fran/.codex/hooks.json:post_tool_use:0:0"]
+trusted_hash = "sha256:2c1ee360029c25656be30ad3c13b61abef07a2d8e68667806fc5b17be16bc646"
+
+[hooks.state."/Users/fran/.codex/hooks.json:session_start:1:0"]
+trusted_hash = "sha256:9adb1d5ba3cd0c4b175c62f19e9581bd3cb06006afb43d19a6b3bd5fda72d0c0"
+
+[hooks.state."/Users/fran/.codex/hooks.json:user_prompt_submit:0:0"]
+trusted_hash = "sha256:8199d23b6016fe722cddf0eab6065bea619ca96e19d6499b27a304b16abcc2fc"
+
+[hooks.state."/Users/fran/.codex/hooks.json:stop:0:0"]
+trusted_hash = "sha256:ffa278bd11a97cb543064a554f5023475392461134c3d1e5acbd27b9f9eced0c"
+
+[projects."/Users/fran/sandbox/artiso"]
+trust_level = "trusted"
+
+[projects."/Users/fran/home-assistant"]
+trust_level = "trusted"
+
+[model_providers.cliproxy]
+name = "Home CLIProxyAPI"
+base_url = "https://cliproxy.taila797.ts.net/v1"
+wire_api = "responses"
+requires_openai_auth = false
+supports_websockets = true
+[model_providers.cliproxy.auth]
+command = "/Users/fran/.config/cliproxy/token"
+timeout_ms = 5000
+refresh_interval_ms = 300000
