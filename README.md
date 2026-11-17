@@ -90,6 +90,30 @@ configs/
 
 ## Customization
 
+### AI CLI shortcuts
+
+| Command | Authentication |
+|---------|----------------|
+| `cx` | CPA Codex through `codex-cliproxy` |
+| `cxd` | Native Codex login through `codex-direct` |
+| `cc` | CPA Claude pool: personal + work, with sticky sessions |
+| `ccw` | CPA Claude Work only through `claude-work` |
+| `ccwd` | Native Claude Work login through `claude-work-direct` |
+| `ccp` | CPA Claude Personal only through `claude-personal` |
+| `codex` / `claude` | Regular subscription authentication |
+
+`cx`, `cxd`, `cc`, `ccw`, `ccwd`, and `ccp` retain the existing permission-bypass flags. The CPA wrappers
+must be provisioned separately on each host, with that host's private API key;
+no keys belong in this repository. They select proxy authentication per process
+with host-specific keys. Work/personal-only keys restrict the upstream account;
+the personal profile uses `~/.claude-personal` and the pool keeps the normal home.
+Plain Codex defaults to the
+`openai` provider; plain Claude settings should have no CPA base URL or API key
+helper. T3's CPA provider profiles use the wrappers directly.
+
+After changing aliases, run `source ~/repos/configs/shell/functions/editors.sh`
+or open a new shell.
+
 The Neovim config requires **Neovim 0.11.3 or newer** (`nvim --version`). The
 Debian/Ubuntu dev tier installs Neovim through mise to cover older apt packages.
 For `--cli-bare`, use a newer Neovim package or install it through mise before

@@ -68,8 +68,13 @@ zc() {
 # ============================================
 # AI tools
 # ============================================
-alias cc='claude --dangerously-skip-permissions'
-# alias ccw='CLAUDE_CONFIG_DIR=~/.claude-work cc'  # retired 2026-07-08: merged into ~/.claude
+# CPA shortcuts: cc pools accounts, ccw is Work-only, ccp is Personal-only.
+# Plain codex/claude keep their native subscription authentication.
+alias cc='claude-cliproxy --dangerously-skip-permissions'
+alias ccw='claude-work --dangerously-skip-permissions'
+alias ccwd='claude-work-direct --dangerously-skip-permissions'
 alias ca='cursor-agent'
-alias cx='codex --dangerously-bypass-approvals-and-sandbox'
+alias cx='codex-cliproxy --dangerously-bypass-approvals-and-sandbox'
+alias cxd='codex-direct --dangerously-bypass-approvals-and-sandbox'
 alias oc='opencode'
+alias ccp='claude-personal --dangerously-skip-permissions'
