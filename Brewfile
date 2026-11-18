@@ -185,7 +185,7 @@ cask 'tableplus'
 cask 'yaak'
 cask 'zed'
 cask 'cmux'
-cask 't3-code@nightly'
+cask 't3-code@nightly', pin: true # Use T3's built-in updater.
 cask 'codexbar'
 
 # CAD / 3D
