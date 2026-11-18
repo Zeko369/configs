@@ -1,5 +1,5 @@
 model_provider = "openai"
-model = "gpt-6.1-sol"
+model = "gpt-6.2-sol"
 personality = "friendly"
 check_for_update_on_startup = false
 notify = [

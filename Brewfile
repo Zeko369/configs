@@ -60,7 +60,6 @@ brew 'btop'                  # Better top/htop
 brew 'duf'                   # Better df
 brew 'dust'                  # Better du
 brew 'procs'                 # Better ps
-brew 'tldr'                  # Simplified man pages
 brew 'glow'                  # Markdown viewer
 brew 'xh'                    # Better curl (HTTPie-like)
 brew 'sd'                    # Better sed (simpler syntax)
