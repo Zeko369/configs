@@ -1,0 +1,30 @@
+{
+  "dev.zed.Zed": {
+    "extensions": [
+      "ascx", "asp", "aspx", "bash_login", "bash_logout", "bash_profile", "bashrc", "bat",
+      "bowerrc", "cfg", "cjs", "clj", "cljs", "cljx", "clojure", "cls", "cmake", "cmd",
+      "code-workspace", "coffee", "config", "containerfile", "cs", "cshtml", "csproj", "csx",
+      "ctp", "dart", "diff", "dockerfile", "dtd", "editorconfig", "edn", "erb", "eyaml", "eyml",
+      "fsi", "fsscript", "fsx", "gemspec", "gitattributes", "gitconfig", "gitignore", "go",
+      "gradle", "groovy", "handlebars", "hbs", "ini", "ipynb", "jade", "jav", "java",
+      "javascript", "js", "jscript", "jscsrc", "jshintrc", "jshtm", "json", "jsp", "jsx",
+      "less", "lock", "lua", "makefile", "mdoc", "mdtext", "mdtxt", "mdwn", "mjs", "ml", "mli",
+      "patch", "pl6", "pm6", "pod", "pp", "profile", "properties", "ps1", "psd1", "psgi",
+      "psm1", "pug", "pyi", "rhistory", "rprofile", "rs", "rst", "sass", "scss", "sql", "svg",
+      "svgz", "t", "tex", "toml", "ts", "tsx", "vb", "vue", "wxi", "wxl", "wxs", "xaml", "zlogin",
+      "zlogout", "zprofile", "zshenv", "zshrc"
+    ]
+  },
+  "com.aone.keka": {
+    "extensions": ["rar"]
+  },
+  "com.colliderli.iina": {
+    "extensions": [
+      "anx", "aob", "ape", "asf", "axa", "axv", "bik", "cdg", "cue", "dav", "divx", "dts",
+      "evo", "f4a", "f4b", "f4p", "f4v", "flac", "flv", "gxf", "m2p", "m2t", "m2ts", "mka",
+      "mkv", "mlp", "mp4", "mpc", "mpg4", "mt2s", "mts", "mxf", "nsv", "nuv", "ogx", "oma",
+      "ra", "ram", "rec", "rm", "rmvb", "tod", "tp", "tta", "vob", "voc", "vqf", "vro", "wm",
+      "wma", "wmv", "wv", "xa", "xesc"
+    ]
+  }
+}

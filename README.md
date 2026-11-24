@@ -34,6 +34,8 @@ configs/
 ├── Brewfile                 # macOS packages
 ├── macos/
 │   ├── file-associations.json  # Default apps by macOS content type
+│   ├── file-associations-setup.json # Additional file defaults
+│   ├── file-associations-setup.md   # One-time Codex setup with dialog handling
 │   └── file-associations.swift # Native apply/check helper
 ├── bin/macos-file-associations # Apply or verify just the file associations
 ├── work-tailnet/            # Public submodule: 2nd tailnet CLI, macOS services, Raycast v2
@@ -154,30 +156,28 @@ mise -C ~/repos/configs install                      # runtimes + developer CLIs
 
 ### macOS file associations
 
-[`macos/file-associations.json`](macos/file-associations.json) maps application
-bundle IDs to macOS content types and their filename extensions. It assigns
-Markdown, scripts, YAML/XML, and C/C++ source/header files to Zed (39 extensions).
-`.plist`, Swift, and Objective-C are intentionally unmanaged and keep their
-existing defaults.
+**On a new Mac**, after `brew bundle install`, ask Codex to run the
+[one-time file association setup](macos/file-associations-setup.md). Codex can
+click the macOS confirmation dialogs. The full setup adds JSON, JavaScript,
+SVG, and other source files for Zed, MKV, MP4, and other media for IINA,
+and RAR archives for Keka.
 
-Install Zed and the Xcode Command Line Tools, then run:
+[`macos/file-associations.json`](macos/file-associations.json) contains the
+baseline Zed defaults for Markdown, scripts, YAML/XML, and C/C++. The
+[`--setup` profile](macos/file-associations-setup.json) adds the rest.
 
 ```bash
-./bin/macos-file-associations --check  # inspect current defaults; also the default mode
-./bin/macos-file-associations --apply  # restore the config, then verify
+./bin/macos-file-associations --check          # check the baseline
+./bin/macos-file-associations --check --setup  # check the full setup
+./bin/macos-file-associations --apply --setup  # apply and verify the full setup
 ```
 
-`macos-defaults.sh` also applies this config. The helper uses the native macOS
-API and waits for each change to complete; no `duti` dependency is needed.
-It validates the full config before applying changes, skips defaults that
-already match, and verifies both content types and temporary sample files in a
-fresh process. A missing app, invalid config, or failed verification exits
-nonzero; the broader defaults script warns and continues.
+`macos-defaults.sh` applies the baseline. The helper uses the native macOS
+API, validates the selected configuration up front, skips matching defaults,
+and verifies temporary sample files in a fresh process.
 
-macOS associates content types, so a mapping also covers other extensions that
-resolve to the same type. The extension lists are verification samples, not an
-exclusive filter. Individual files with custom “Open with” overrides may still
-open in a different app.
+macOS groups extensions by content type, so `.svg` and `.svgz`, for example,
+share a default. Individual files can have their own “Open With” override.
 
 ### Linux — three tiers
 

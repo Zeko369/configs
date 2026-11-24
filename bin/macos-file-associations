@@ -2,17 +2,21 @@
 # Apply or check the declarative macOS file associations from this checkout.
 set -euo pipefail
 
+usage() {
+  echo "Usage: $0 [--check|--apply] [--setup]"
+}
+
 case "${1:---check}" in
   --check|--apply) mode="${1:---check}" ;;
   --help|-h)
-    echo "Usage: $0 [--check|--apply]"
-    echo "Defaults to --check. Edit macos/file-associations.json to change mappings."
+    usage
+    echo "Defaults to --check. Use --setup for the full file-association setup."
     exit 0
     ;;
-  *) echo "Usage: $0 [--check|--apply]" >&2; exit 2 ;;
+  *) usage >&2; exit 2 ;;
 esac
-if [ "$#" -gt 1 ]; then
-  echo "Expected at most one argument." >&2
+if [ "$#" -gt 2 ] || { [ "$#" -eq 2 ] && [ "$2" != "--setup" ]; }; then
+  usage >&2
   exit 2
 fi
 if [ "$(uname -s)" != "Darwin" ]; then
@@ -26,9 +30,12 @@ fi
 
 configs_dir="$(cd "$(dirname "$0")/.." && pwd)"
 runner="$configs_dir/macos/file-associations.swift"
-config="$configs_dir/macos/file-associations.json"
+configs=("$configs_dir/macos/file-associations.json")
+if [ "${2:-}" = "--setup" ]; then
+  configs+=("$configs_dir/macos/file-associations-setup.json")
+fi
 if [ "$mode" = "--apply" ]; then
-  /usr/bin/xcrun swift "$runner" "$config" --apply
+  /usr/bin/xcrun swift "$runner" --apply "${configs[@]}"
 fi
 # Check in a fresh process so Launch Services caches cannot hide a failed change.
-exec /usr/bin/xcrun swift "$runner" "$config" --check
+exec /usr/bin/xcrun swift "$runner" --check "${configs[@]}"
