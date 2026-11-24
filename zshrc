@@ -127,6 +127,8 @@ zsh-defer -c '
   else
     compinit -C
   fi
+  # ll, la, and lt expand to this wrapper when eza is installed.
+  compdef _files _configs_eza
   zstyle ":completion:*" matcher-list "m:{a-z}={A-Z}"
   zstyle ":completion:*" menu select
   zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
