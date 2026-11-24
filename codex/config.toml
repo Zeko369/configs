@@ -260,7 +260,7 @@ trust_level = "trusted"
 [projects."/Users/fran/code/junction"]
 trust_level = "trusted"
 
-[projects."/Users/fran/code/work-tailnet"]
+[projects."/Users/fran/work/work-tailnet"]
 trust_level = "trusted"
 
 [notice]
@@ -533,6 +533,7 @@ base_url = "https://cliproxy.taila797.ts.net/v1"
 wire_api = "responses"
 requires_openai_auth = false
 supports_websockets = true
+supports_standalone_web_search = true
 [model_providers.cliproxy.auth]
 command = "/Users/fran/.config/cliproxy/token"
 timeout_ms = 5000
