@@ -6,6 +6,10 @@
 [env]
 # Enable YJIT for Ruby (faster)
 RUBY_CONFIGURE_OPTS = "--enable-yjit"
+# Let the mise service handle updates for these CLI binaries.
+DISABLE_UPDATES = "1"                      # Claude Code
+GROK_DISABLE_AUTOUPDATER = "1"              # Grok Build
+AGY_CLI_DISABLE_AUTO_UPDATE = "true"        # Antigravity CLI
 
 # ============================================
 # Runtimes - always install latest
@@ -22,24 +26,15 @@ rust = "stable"
 # ============================================
 # Global npm packages
 # ============================================
-# The tool-update service below checks these global tools (mise >= 2026.10.9).
-# Coding agents check every 6h; supporting CLIs check daily.
 "npm:@antfu/ni" = { version = "latest", auto_update = "24h" } # Unified package manager (ni, nr, nx)
-# OpenCode's postinstall replaces its placeholder executable with the native binary.
-"npm:@opencode/cli" = { version = "latest", auto_update = "6h", bun_args = "--trust" } # OpenCode CLI (V2)
 "npm:vercel" = "latest"                          # Vercel CLI
-"npm:btca" = { version = "latest", auto_update = "24h" } # BTCA CLI
-"npm:@earendil-works/pi-coding-agent" = { version = "latest", auto_update = "6h" } # pi
-"npm:@openai/codex" = { version = "latest", auto_update = "6h" } # OpenAI Codex CLI (npm tracks releases ahead of the brew cask)
 "npm:@railway/cli" = "latest"                    # Railway.app CLI
 "npm:@withgraphite/graphite-cli" = "stable"      # Graphite CLI (gt) — stacked PRs
-"npm:agent-browser" = { version = "latest", auto_update = "24h" } # Chrome automation
 
 # ============================================
 # Python tools via uv/pipx
 # ============================================
 uv = "latest"
-"pipx:claude-monitor" = { version = "latest", auto_update = "24h" }
 "pipx:wakatime" = { version = "latest", auto_update = "24h" } # Coding time tracker
 "pipx:yt-dlp" = { version = "latest", extras = "default", auto_update = "24h" } # Includes yt-dlp-ejs; mise installs it with uv
 
@@ -48,6 +43,31 @@ uv = "latest"
 # ============================================
 "github:Zeko369/overmind" = "2.5.2"              # Procfile manager — patched fork (tmux socket-name-length + .overmind.sock cleanup); DarthSim/overmind#204 unmerged
 kubeseal = "latest"                              # Sealed Secrets CLI (was an undeclared ad-hoc install on the stale bitnami-labs backend)
+
+# ============================================
+# AI tools
+# ============================================
+# Coding agents check for updates every 6h; supporting CLIs check daily.
+"npm:@openai/codex" = { version = "latest", auto_update = "6h" } # OpenAI Codex CLI (npm tracks releases ahead of the brew cask)
+claude = { version = "latest", auto_update = "6h", minimum_release_age = "0s" }
+antigravity-cli = { version = "latest", auto_update = "6h" } # agy
+# OpenCode's postinstall replaces its placeholder executable with the native binary.
+"npm:@opencode/cli" = { version = "latest", auto_update = "6h", bun_args = "--trust" } # OpenCode CLI (V2)
+"npm:@earendil-works/pi-coding-agent" = { version = "latest", auto_update = "6h" } # pi
+"npm:btca" = { version = "latest", auto_update = "24h" } # BTCA CLI
+"npm:agent-browser" = { version = "latest", auto_update = "24h" } # Chrome automation
+"pipx:claude-monitor" = { version = "latest", auto_update = "24h" }
+
+# The stock mise grok entry follows the standalone 1.x feed.
+# xAI publishes the unified Cursor/Grok build with per-platform checksums.
+[tools."http:grok-build"]
+version = "latest"
+auto_update = "6h"
+os = ["macos/arm64", "macos/x64", "linux/arm64", "linux/x64"]
+bin = "grok"
+version_list_url = "https://x.ai/cli/unified/latest"
+url = 'https://x.ai/cli/unified/agent-host-{{ version }}-{{ os() }}-{{ arch(x64="x86_64", arm64="aarch64") }}'
+checksum_url = 'https://x.ai/cli/unified/agent-host-{{ version }}-{{ os() }}-{{ arch(x64="x86_64", arm64="aarch64") }}.sha256'
 
 # Check opted-in tools in the background, without delaying command launches.
 [bootstrap.services.mise-tool-update]

@@ -79,4 +79,4 @@ java = "21"
 # ============================================
 # AI coding agents
 # ============================================
-# OpenAI Codex CLI lives in mise.toml as "npm:@openai/codex" (cross-platform)
+# Codex, Claude Code, Grok Build, and Antigravity CLI are in the shared mise.toml.

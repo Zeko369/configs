@@ -224,8 +224,9 @@ On Linux, Codex uses `local/codex.toml`: an existing config is preserved there, 
 ### Automatic CLI updates
 
 With mise **2026.10.9 or newer**, the globally symlinked `mise.toml` opts Codex,
-OpenCode, and pi into update checks every 6 hours, and BTCA, agent-browser,
-yt-dlp, ni, wakatime, and claude-monitor every 24 hours. `./install.sh` sets up
+Claude Code, Grok Build, Antigravity CLI, OpenCode, and pi into update checks
+every 6 hours, and BTCA, agent-browser, yt-dlp, ni, wakatime, and
+claude-monitor every 24 hours. `./install.sh` sets up
 the declared user service automatically on macOS and Linux after linking the
 global config. If mise is missing or older than 2026.10.9, the installer skips
 the service with a warning; upgrade mise and rerun `./install.sh`.
@@ -240,14 +241,25 @@ mise bootstrap services apply --yes
 
 The service checks hourly and upgrades each opted-in tool when its interval is
 due, including when no shell is open. This keeps downloads out of command
-launches and avoids an updater dispatch failure observed with macOS symlink
-shims in mise 2026.10.9. Without the service, mise falls back to checking at
-shell prompts and shim/exec launches.
+launches. Check it with `mise bootstrap services status`. If the updater is
+stopped, reapply the service. While it is stopped, mise falls back to checking
+at shell prompts and shim/exec launches.
 
 Updates respect the configured release-age delay and its existing agent CLI
 exceptions. Project-pinned versions take precedence, and a failed update falls
 back to the installed version. Run `mise doctor` to inspect update failures.
 See [mise's automatic tool updates](https://mise.jdx.dev/dev-tools/#automatic-tool-updates).
+
+Mise installs the vendor binaries for Claude Code, Grok Build, and Antigravity
+CLI. The shared config disables their built-in updates. Grok follows xAI's
+unified release feed and uses the `grok` command. Cursor's `agent` and
+`cursor-agent` commands use the separate Cursor install.
+
+After switching from a vendor installer, use `type -a claude grok agy` to
+check which command wins. Remove the old Grok binary directory from shell
+`PATH`, and back up any old launch links under `~/.local/bin` that precede
+mise's shims. Claude wrappers that use `~/.local/bin/claude` can point that
+path at the mise shim.
 
 ### Authenticating GitHub
 

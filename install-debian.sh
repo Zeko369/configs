@@ -299,14 +299,6 @@ if [ "$INSTALL_DEV" = true ] && command -v tailscale &>/dev/null; then
 fi
 
 # ============================================
-# Step 9: Claude Code (dev tier and up)
-# ============================================
-if [ "$INSTALL_DEV" = true ] && ! command -v claude &> /dev/null; then
-  info "Installing Claude Code..."
-  curl -fsSL https://claude.ai/install.sh | bash
-fi
-
-# ============================================
 # Done!
 # ============================================
 echo ""

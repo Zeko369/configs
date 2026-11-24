@@ -183,9 +183,6 @@ PACMAN_DEV=(
   # Language runtimes (mise can also manage these)
   rust
   go
-
-  # AI coding agents
-  # openai-codex moved to mise.toml as "npm:@openai/codex" (cross-platform)
 )
 
 AUR_DEV=(
@@ -198,7 +195,6 @@ AUR_DEV=(
   cloudflared
   doctl
   kubeseal
-  claude-code           # Claude Code CLI (also installable via curl)
   # Railway.app CLI lives in mise.toml as "npm:@railway/cli" (cross-platform)
 )
 
