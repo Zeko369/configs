@@ -1,0 +1,7 @@
+# Minimal PATH setup for interactive shells and non-interactive SSH commands.
+# Keep prompt, history, and runtime activation in .zshrc.
+typeset -U path PATH
+path=("$HOME/.local/bin" "${CONFIGS_DIR:-$HOME/repos/configs}/bin" "$HOME/.local/share/mise/shims" $path)
+if [[ -r "$HOME/.config/configs/credentials.env" ]]; then
+  source "$HOME/.config/configs/credentials.env"
+fi

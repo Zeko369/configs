@@ -19,17 +19,17 @@ if command -v jq &> /dev/null; then
 fi
 
 # Modern replacements
-alias cat='bat'
+command -v bat >/dev/null 2>&1 && alias cat='bat'
 #alias grep='rg'
 #alias find='fd'
-alias top='btop'
-alias df='duf'
-alias du='dust'
+command -v btop >/dev/null 2>&1 && alias top='btop'
+command -v duf >/dev/null 2>&1 && alias df='duf'
+command -v dust >/dev/null 2>&1 && alias du='dust'
 #alias ps='procs'
 #alias dig='doggo'
 #alias curl='xh'
 #alias sed='sd'
-alias jq='jaq'
+command -v jaq >/dev/null 2>&1 && alias jq='jaq'
 
 # ============================================
 # Directory navigation
@@ -56,12 +56,22 @@ alias ff='fastfetch'
 # Cross-platform clipboard (Linux support)
 # ============================================
 if [[ "$OSTYPE" != "darwin"* ]]; then
-  if command -v xsel &> /dev/null; then
+  if [[ -n "$WAYLAND_DISPLAY" ]] && command -v wl-copy &> /dev/null; then
+    alias pbcopy='wl-copy'
+    alias pbpaste='wl-paste'
+  elif [[ -n "$DISPLAY" ]] && command -v xsel &> /dev/null; then
     alias pbcopy='xsel --clipboard --input'
     alias pbpaste='xsel --clipboard --output'
-  elif command -v xclip &> /dev/null; then
+  elif [[ -n "$DISPLAY" ]] && command -v xclip &> /dev/null; then
     alias pbcopy='xclip -selection clipboard'
     alias pbpaste='xclip -selection clipboard -o'
+  else
+    # SSH terminals can write to the local clipboard through OSC 52.
+    pbcopy() { printf '\e]52;c;%s\a' "$(base64 | tr -d '\n')" > /dev/tty; }
+    pbpaste() {
+      print -u2 'Clipboard reading requires a desktop session; paste from your local terminal.'
+      return 1
+    }
   fi
 fi
 

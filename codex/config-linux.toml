@@ -1,0 +1,39 @@
+# Linux CLI defaults. install.sh copies this to local/codex.toml once.
+# Keep machine-specific project trust and custom MCP servers in that copy.
+model = "gpt-6-astra"
+personality = "friendly"
+check_for_update_on_startup = false
+service_tier = "fast"
+plan_mode_reasoning_effort = "xhigh"
+approval_policy = "never"
+approvals_reviewer = "user"
+default_permissions = ":workspace"
+model_reasoning_effort = "medium"
+suppress_unstable_features_warning = true
+
+[agents]
+max_threads = 32
+
+[features]
+multi_agent = true
+computer_use = false
+js_repl = false
+default_mode_request_user_input = true
+memories = true
+chronicle = false
+
+[tui]
+status_line = ["model-with-reasoning", "fast-mode", "current-dir", "git-branch", "context-remaining", "pull-request-number", "branch-changes", "weekly-limit"]
+theme = "github"
+status_line_use_colors = true
+screen_reader_detection_done = true
+
+[mcp_servers.openaiDeveloperDocs]
+url = "https://developers.openai.com/mcp"
+
+[mcp_servers.executor]
+url = "https://executor.zeko.run/mcp"
+
+[memories]
+generate_memories = true
+use_memories = true

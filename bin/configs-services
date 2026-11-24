@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+configs_dir="${CONFIGS_DIR:-$HOME/repos/configs}"
+compose_file="$configs_dir/local/compose-services.yml"
+if [[ ! -f "$compose_file" ]]; then
+  printf 'No machine-local services configured at %s\n' "$compose_file" >&2
+  exit 1
+fi
+exec docker compose --file "$compose_file" "$@"

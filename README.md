@@ -138,6 +138,12 @@ colorscheme retrobox
 
 ## Setup
 
+For transferring authenticated CLI settings from a Mac to a Linux host, see
+[the credential transfer guide](docs/mac-credentials.md). The exporter inventories
+names by default; `--send` streams selected credentials over SSH to the receiver.
+Machine-local database services can be managed with `configs-services` when
+`local/compose-services.yml` is configured.
+
 There are two stages:
 
 1. A platform-specific package installer (`Brewfile` on macOS, `install-debian.sh` on Debian/Ubuntu, `install-arch.sh` on Arch/CachyOS).
@@ -207,7 +213,13 @@ git submodule update --init -- work-tailnet
 
 **Arch** uses `pacman` + `paru` (auto-bootstrapped if missing, skipped entirely on `--cli-bare`). AUR package names are best-effort; comment out anything that fails and report.
 
-**Debian** GUI coverage is intentionally minimal — most casks need vendor PPAs / `.deb`s. On `--cli-bare`, atuin/starship/lazygit are *not* installed (they only arrive via the mise gap-filler in the dev tier), so bare Debian is a degraded shell experience compared to bare Arch.
+**Debian** GUI coverage is intentionally minimal — most casks need vendor PPAs / `.deb`s. All tiers install Starship, Atuin, and lazygit through mise; the dev tier adds the shared runtimes and the remaining tools in `debian-mise-tools.toml`. The installer preserves an existing Docker engine and uses PostgreSQL client libraries when a server already listens on port 5432. It configures the login shell and links dotfiles before installing runtimes, so a failed download or build can be retried without leaving shell setup incomplete.
+
+`~/.zshrc` links to `local/zshrc`, which sources the shared `zshrc`. `~/.zshenv` links to `local/zshenv` and adds `~/.local/bin` and mise shims to PATH for non-interactive SSH commands. New logins use Zsh after installation; an existing terminal can switch with `exec zsh -l`. Headless clipboard copying uses OSC 52 and requires support in the local terminal; clipboard reading requires a desktop session.
+
+Run `configs-doctor` to check shell setup, or `configs-doctor --dev` to check the full developer tool set and configured mise versions. Run it outside a project to inspect the global environment.
+
+On Linux, Codex uses `local/codex.toml`: an existing config is preserved there, or `codex/config-linux.toml` is copied as a starting point. This avoids importing the Mac's app paths, notification executable, and machine-specific plugin marketplaces. On macOS, Codex continues to use `codex/config.toml`.
 
 ### Automatic CLI updates
 

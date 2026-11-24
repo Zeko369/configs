@@ -1,0 +1,5 @@
+# Shell tools for Debian/Ubuntu's --cli-bare tier.
+[tools]
+"aqua:starship/starship" = "latest"
+"aqua:atuinsh/atuin" = "latest"
+"aqua:jesseduffield/lazygit" = "latest"

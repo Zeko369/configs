@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+# Check shell provisioning without reading credentials or changing anything.
+set -uo pipefail
+
+failures=0
+check() {
+  local label=$1
+  shift
+  if "$@"; then
+    printf 'OK      %s\n' "$label"
+  else
+    printf 'MISSING %s\n' "$label"
+    failures=$((failures + 1))
+  fi
+}
+
+if [[ "${1:-}" != "" && "${1:-}" != "--dev" ]]; then
+  printf 'Usage: configs-doctor [--dev]\n' >&2
+  exit 2
+fi
+
+for config in "$HOME/.zshrc" "$HOME/.zshenv" "$HOME/.gitconfig" "$HOME/.tmux.conf" "$HOME/.config/mise/config.toml"; do
+  check "$config is a working symlink" test -L "$config"
+  check "$config target exists" test -e "$config"
+done
+
+if [[ "$(uname -s)" == Linux ]]; then
+  login_shell=$(getent passwd "$(id -un)" | cut -d: -f7)
+else
+  login_shell=$(dscl . -read "/Users/$(id -un)" UserShell | awk '{print $2}')
+fi
+check "login shell is Zsh ($login_shell)" test "${login_shell##*/}" = zsh
+
+tools=(zsh mise git gh tmux vim fzf rg fd bat eza zoxide starship atuin lazygit)
+if [[ "${1:-}" == --dev ]]; then
+  tools+=(nvim node npm pnpm bun ruby python rustc cargo uv delta just hyperfine
+    dust procs tokei tldr sd ouch xh zellij jaq grex jj lazydocker dive glow yj
+    doggo overmind gitleaks cloudflared kubeseal doctl helm yq fastfetch wt op
+    actionlint age argocd caddy go java k6 kubectl kustomize pulumi sops hunk
+    tree-sitter ni opencode vercel btca pi codex railway gt agent-browser
+    claude claude-monitor wakatime yt-dlp diff-so-fancy membrane yaak
+    docker psql ffmpeg transmission-cli rclone nmap git-lfs)
+fi
+for tool in "${tools[@]}"; do
+  if command -v "$tool" >/dev/null 2>&1; then
+    printf 'OK      command: %s\n' "$tool"
+  else
+    printf 'MISSING command: %s\n' "$tool"
+    failures=$((failures + 1))
+  fi
+done
+
+if command -v mise >/dev/null 2>&1 && [[ "${1:-}" == --dev ]]; then
+  check 'all configured mise versions are installed' mise -C "$HOME" install --dry-run-code
+fi
+printf '\n%s missing checks\n' "$failures"
+((failures == 0))

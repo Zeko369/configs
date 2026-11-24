@@ -55,6 +55,7 @@ copy_template() {
 }
 
 copy_template "zshrc"
+copy_template "zshenv"
 copy_template "vimrc"
 copy_template "tmux.conf"
 copy_template "gitconfig"
@@ -90,6 +91,7 @@ create_symlink() {
 }
 
 create_symlink "$LOCAL_DIR/zshrc" "$HOME/.zshrc"
+create_symlink "$LOCAL_DIR/zshenv" "$HOME/.zshenv"
 create_symlink "$LOCAL_DIR/vimrc" "$HOME/.vimrc"
 create_symlink "$LOCAL_DIR/tmux.conf" "$HOME/.tmux.conf"
 create_symlink "$LOCAL_DIR/gitconfig" "$HOME/.gitconfig"
@@ -139,7 +141,22 @@ write_managed_file() {
 if [ -f "$CONFIGS_DIR/codex/config.toml" ]; then
   CODEX_DIR="$HOME/.codex"
   mkdir -p "$CODEX_DIR"
-  create_optional_symlink "$CONFIGS_DIR/codex/config.toml" "$CODEX_DIR/config.toml"
+  if [ "$OS" = "linux" ]; then
+    # The Mac config contains app executables, marketplaces and trust paths
+    # under /Users/fran and /Applications. Keep a Linux-local config instead.
+    if [ ! -f "$LOCAL_DIR/codex.toml" ]; then
+      if [ -f "$CODEX_DIR/config.toml" ] && [ ! -L "$CODEX_DIR/config.toml" ]; then
+        info "Preserving existing Linux Codex config in local/codex.toml"
+        cp "$CODEX_DIR/config.toml" "$LOCAL_DIR/codex.toml"
+      else
+        info "Creating Linux Codex config from portable template"
+        cp "$CONFIGS_DIR/codex/config-linux.toml" "$LOCAL_DIR/codex.toml"
+      fi
+    fi
+    create_optional_symlink "$LOCAL_DIR/codex.toml" "$CODEX_DIR/config.toml"
+  else
+    create_optional_symlink "$CONFIGS_DIR/codex/config.toml" "$CODEX_DIR/config.toml"
+  fi
 fi
 
 # Ghostty config (macOS: ~/Library/Application Support/com.mitchellh.ghostty/config)
@@ -308,8 +325,11 @@ if command -v git &> /dev/null; then
 
   if git clone --depth 1 "$GIT_HUNKS_REPO" "$TEMP_DIR/git-hunks" 2>/dev/null; then
     info "Installing git-hunks..."
-    make -C "$TEMP_DIR/git-hunks" PREFIX=~/.local install >/dev/null 2>&1
-    info "git-hunks installed to ~/.local/bin"
+    if make -C "$TEMP_DIR/git-hunks" PREFIX=~/.local install >/dev/null 2>&1; then
+      info "git-hunks installed to ~/.local/bin"
+    else
+      warn "Failed to build git-hunks, skipping"
+    fi
   else
     warn "Failed to clone git-hunks, skipping"
   fi

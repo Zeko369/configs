@@ -3,6 +3,12 @@
 
 source "$CONFIGS_DIR/shell/no-git-repos.sh"
 
+if ! command -v eza >/dev/null 2>&1; then
+  alias ll='ls -lh'
+  alias la='ls -lah'
+  return
+fi
+
 _configs_eza() {
   if _configs_path_in_no_git_repo "$PWD"; then
     command eza "$@"

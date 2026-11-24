@@ -12,4 +12,4 @@ source "$CONFIGS_DIR/zshrc"
 # ============================================
 
 # 1Password account
-export OP_ACCOUNT="your-account.1password.com"
+# export OP_ACCOUNT="your-account.1password.com"

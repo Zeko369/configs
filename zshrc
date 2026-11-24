@@ -28,8 +28,10 @@ else
 fi
 
 # Configs directory
-export CONFIGS_DIR="$HOME/repos/configs"
+export CONFIGS_DIR="${CONFIGS_DIR:-$HOME/repos/configs}"
+typeset -U path PATH
 export PATH="$HOME/.local/bin:$CONFIGS_DIR/bin:$PATH"
+export SHELL="$(command -v zsh)"
 
 # Tool configs
 export RIPGREP_CONFIG_PATH="$CONFIGS_DIR/ripgreprc"
@@ -161,7 +163,9 @@ fi
 # ============================================
 # Prompt (starship)
 # ============================================
-eval "$(starship init zsh)"
+if command -v starship &> /dev/null; then
+  eval "$(starship init zsh)"
+fi
 
 # ============================================
 # Syntax highlighting
@@ -200,16 +204,23 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # pnpm
-export PNPM_HOME="$HOME/Library/pnpm"
+if [[ "$IS_MACOS" == true ]]; then
+  export PNPM_HOME="$HOME/Library/pnpm"
+else
+  export PNPM_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/pnpm"
+fi
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
 # npx -> bunx
-real_npx=$(which npx)
-alias _npx="$real_npx"
-alias npx="bunx"
+if command -v npx &> /dev/null; then
+  alias _npx="$(command -v npx)"
+fi
+if command -v bunx &> /dev/null; then
+  alias npx="bunx"
+fi
 
 # Homebrew
 export HOMEBREW_BUNDLE_FILE_GLOBAL="$CONFIGS_DIR/Brewfile"
@@ -227,10 +238,18 @@ rebrew() {
 export PATH="$HOME/.opencode/bin:$PATH"
 
 # atuin (shell history)
-eval "$(atuin init zsh)"
+# Load fzf first so Atuin retains the Ctrl-R history binding.
+if [[ -o zle && -t 0 && -r /usr/share/doc/fzf/examples/key-bindings.zsh ]]; then
+  source /usr/share/doc/fzf/examples/key-bindings.zsh
+fi
+if command -v atuin &> /dev/null; then
+  eval "$(atuin init zsh)"
+fi
 
 # zoxide (smart cd)
-eval "$(zoxide init zsh)"
+if command -v zoxide &> /dev/null; then
+  eval "$(zoxide init zsh)"
+fi
 
 # ============================================
 # Debug output

@@ -12,7 +12,7 @@
 #
 # NOTE: apt's coverage of modern Rust/Go CLI tools is poor — many tools that
 # are first-class on Arch arrive here via mise (see debian-mise-tools.toml).
-set -e
+set -euo pipefail
 
 # Colors
 RED='\033[0;31m'
@@ -46,6 +46,11 @@ command -v apt-get >/dev/null 2>&1 || error "apt-get not found - this script is 
 command -v sudo  >/dev/null 2>&1 || error "sudo required"
 
 CONFIGS_DIR="$(cd "$(dirname "$0")" && pwd)"
+APT_ARCH="$(dpkg --print-architecture)"
+INSTALL_DOCKER=false
+if [ "$INSTALL_DEV" = true ] && ! command -v docker >/dev/null 2>&1; then
+  INSTALL_DOCKER=true
+fi
 
 # ============================================
 # Step 1: Add third-party apt repos (mise + Docker if dev tier)
@@ -58,7 +63,7 @@ sudo install -dm 755 /etc/apt/keyrings
 
 # mise repo
 curl -fsSL https://mise.jdx.dev/gpg-key.pub | gpg --dearmor | sudo tee /etc/apt/keyrings/mise-archive-keyring.gpg > /dev/null
-echo "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=amd64] https://mise.jdx.dev/deb stable main" | sudo tee /etc/apt/sources.list.d/mise.list > /dev/null
+echo "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=$APT_ARCH] https://mise.jdx.dev/deb stable main" | sudo tee /etc/apt/sources.list.d/mise.list > /dev/null
 
 # Docker official repo (dev tier and up)
 if [ "$INSTALL_DEV" = true ]; then
@@ -66,10 +71,14 @@ if [ "$INSTALL_DEV" = true ]; then
   DISTRO_ID="${ID:-debian}"  # "debian" or "ubuntu"
   CODENAME="$(lsb_release -cs)"
 
-  curl -fsSL "https://download.docker.com/linux/${DISTRO_ID}/gpg" | sudo gpg --batch --yes --dearmor -o /etc/apt/keyrings/docker.gpg
-  sudo chmod a+r /etc/apt/keyrings/docker.gpg
-  echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/${DISTRO_ID} ${CODENAME} stable" | \
-    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  # Keep an existing engine and its containers running; docker-ce conflicts
+  # with Ubuntu's docker.io/containerd packages.
+  if [ "$INSTALL_DOCKER" = true ]; then
+    curl -fsSL "https://download.docker.com/linux/${DISTRO_ID}/gpg" | sudo gpg --batch --yes --dearmor -o /etc/apt/keyrings/docker.gpg
+    sudo chmod a+r /etc/apt/keyrings/docker.gpg
+    echo "deb [arch=$APT_ARCH signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/${DISTRO_ID} ${CODENAME} stable" | \
+      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  fi
 
   # Tailscale official repo
   curl -fsSL "https://pkgs.tailscale.com/stable/${DISTRO_ID}/${CODENAME}.noarmor.gpg" | \
@@ -133,23 +142,51 @@ APT_DEV=(
   xclip
   xsel
   ffmpeg
+  transmission-cli
   imagemagick
   entr
+  git-lfs
+  rclone
+  nmap
+  ipython3
+  shellcheck
 
-  # Docker (from docker.com apt repo, added in Step 1)
-  docker-ce
-  docker-ce-cli
-  containerd.io
-  docker-buildx-plugin
-  docker-compose-plugin
+  # Native Ruby/Python gems and Rails image/database dependencies
+  libyaml-dev
+  libssl-dev
+  libreadline-dev
+  zlib1g-dev
+  libffi-dev
+  libgdbm-dev
+  libncurses-dev
+  liblzma-dev
+  libsqlite3-dev
+  libpq-dev
+  libvips-dev
 
   # Mesh VPN (from pkgs.tailscale.com repo, added in Step 1)
   tailscale
 
   # Databases (parity with macOS Brewfile)
-  postgresql
+  postgresql-client
   # valkey not yet in apt — install via direct binary or skip
 )
+
+if [ "$INSTALL_DEV" = true ]; then
+  if [ "$INSTALL_DOCKER" = true ]; then
+    APT_DEV+=(docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin)
+  elif dpkg-query -W -f='${Status}' docker.io 2>/dev/null | grep -q 'install ok installed'; then
+    APT_DEV+=(docker-compose-v2 docker-buildx)
+  else
+    info "Keeping the existing Docker installation"
+  fi
+
+  if ss -ltnH 'sport = :5432' 2>/dev/null | grep -q .; then
+    info "PostgreSQL already listens on 5432; installing client/build libraries only"
+  else
+    APT_DEV+=(postgresql)
+  fi
+fi
 
 # ============================================
 # Step 4: Tier — GUI (apt)
@@ -189,40 +226,63 @@ if command -v batcat &> /dev/null && ! command -v bat &> /dev/null; then
 fi
 
 # ============================================
-# Step 7: mise gap-filler (dev tier and up only)
-# Atuin/starship/lazygit are bare-tier UX but only available via mise on
-# Debian, so a true --cli-bare install is a degraded shell experience.
+# Configure the shell before optional runtime downloads/builds. A failed
+# runtime install must not leave the account on Bash without dotfile links.
 # ============================================
+LOGIN_SHELL=$(getent passwd "$USER" | cut -d: -f7)
+ZSH_PATH=$(command -v zsh)
+if [ "$LOGIN_SHELL" != "$ZSH_PATH" ]; then
+  info "Changing default shell to zsh ($LOGIN_SHELL → $ZSH_PATH)..."
+  sudo chsh -s "$ZSH_PATH" "$USER"
+fi
+
+if [ "$RUN_SYMLINKS" = true ]; then
+  info "Running symlink step (./install.sh)..."
+  "$CONFIGS_DIR/install.sh"
+fi
+
+# ============================================
+# Step 7: mise gap-filler (all tiers)
+# ============================================
+info "Setting up mise gap-filler config..."
+
+MISE_DIR="$HOME/.config/mise"
+mkdir -p "$MISE_DIR"
+
+if [ -L "$MISE_DIR/config.local.toml" ]; then
+  rm "$MISE_DIR/config.local.toml"
+elif [ -f "$MISE_DIR/config.local.toml" ]; then
+  mv "$MISE_DIR/config.local.toml" "$MISE_DIR/config.local.toml.backup.$(date +%Y%m%d_%H%M%S)"
+fi
+MISE_TOOLS_FILE="$CONFIGS_DIR/debian-mise-bare.toml"
+[ "$INSTALL_DEV" = true ] && MISE_TOOLS_FILE="$CONFIGS_DIR/debian-mise-tools.toml"
+ln -s "$MISE_TOOLS_FILE" "$MISE_DIR/config.local.toml"
+info "Symlinked: $MISE_DIR/config.local.toml → $MISE_TOOLS_FILE"
+
+# The Debian tools are already selected by the global config.local.toml link.
+# Load the checkout's shared runtimes too, even when this script is launched
+# from another directory before install.sh has linked the global config.
+mise trust "$CONFIGS_DIR"
+mise trust "$MISE_DIR"
+MISE_INSTALL_FAILED=false
 if [ "$INSTALL_DEV" = true ]; then
-  info "Setting up mise gap-filler config..."
-
-  MISE_DIR="$HOME/.config/mise"
-  mkdir -p "$MISE_DIR"
-
-  if [ -L "$MISE_DIR/config.local.toml" ]; then
-    rm "$MISE_DIR/config.local.toml"
-  elif [ -f "$MISE_DIR/config.local.toml" ]; then
-    mv "$MISE_DIR/config.local.toml" "$MISE_DIR/config.local.toml.backup.$(date +%Y%m%d_%H%M%S)"
-  fi
-  ln -s "$CONFIGS_DIR/debian-mise-tools.toml" "$MISE_DIR/config.local.toml"
-  info "Symlinked: $MISE_DIR/config.local.toml → $CONFIGS_DIR/debian-mise-tools.toml"
-
-  # The Debian tools are already selected by the global config.local.toml link.
-  # Load the checkout's shared runtimes too, even when this script is launched
-  # from another directory before install.sh has linked the global config.
-  mise trust "$CONFIGS_DIR"
   info "Installing shared runtimes and Debian CLI tools..."
-  mise -C "$CONFIGS_DIR" install
+  if ! mise -C "$CONFIGS_DIR" install; then
+    MISE_INSTALL_FAILED=true
+  fi
+else
+  info "Installing shell prompt, history, and Git TUI..."
+  if ! mise -C "$CONFIGS_DIR" install aqua:starship/starship aqua:atuinsh/atuin aqua:jesseduffield/lazygit; then
+    MISE_INSTALL_FAILED=true
+  fi
 fi
 
 # ============================================
 # Step 7b: Docker post-install (enable service, add user to group)
 # ============================================
 if [ "$INSTALL_DEV" = true ] && command -v docker &>/dev/null; then
-  if ! systemctl is-enabled docker.service &>/dev/null; then
-    info "Enabling docker.service..."
-    sudo systemctl enable --now docker.service
-  fi
+  info "Ensuring docker.service is enabled and running..."
+  sudo systemctl enable --now docker.service
   if ! id -nG "$USER" | grep -qw docker; then
     info "Adding $USER to docker group (log out + back in to take effect)..."
     sudo usermod -aG docker "$USER"
@@ -234,24 +294,8 @@ fi
 # Run `sudo tailscale up` afterwards to authenticate.
 # ============================================
 if [ "$INSTALL_DEV" = true ] && command -v tailscale &>/dev/null; then
-  if ! systemctl is-enabled tailscaled.service &>/dev/null; then
-    info "Enabling tailscaled.service..."
-    sudo systemctl enable --now tailscaled.service
-  fi
-fi
-
-# ============================================
-# Step 8: Default shell (bare tier and up)
-# Read login shell from /etc/passwd, not $SHELL — $SHELL is the current
-# process's shell, which can be bash if the script is invoked via `bash ...`.
-# ============================================
-if [ "$INSTALL_BARE" = true ]; then
-  LOGIN_SHELL=$(getent passwd "$USER" | cut -d: -f7)
-  ZSH_PATH=$(command -v zsh)
-  if [ "$LOGIN_SHELL" != "$ZSH_PATH" ]; then
-    info "Changing default shell to zsh ($LOGIN_SHELL → $ZSH_PATH)..."
-    chsh -s "$ZSH_PATH"
-  fi
+  info "Ensuring tailscaled.service is enabled and running..."
+  sudo systemctl enable --now tailscaled.service
 fi
 
 # ============================================
@@ -266,21 +310,21 @@ fi
 # Done!
 # ============================================
 echo ""
-info "Debian/Ubuntu package installation complete!"
+info "Debian/Ubuntu package and shell setup complete!"
 echo ""
 echo "Tiers installed:"
 $INSTALL_BARE && echo "  - bare (server-grade shell)"
 $INSTALL_DEV  && echo "  - dev (mise gap-filler, runtimes)"
 $INSTALL_GUI  && echo "  - gui (small apt set)"
 echo ""
-# Chain into install.sh for symlinks unless --no-symlinks
-if [ "$RUN_SYMLINKS" = true ] && [ -x "$CONFIGS_DIR/install.sh" ]; then
-  info "Running symlink step (./install.sh)..."
-  "$CONFIGS_DIR/install.sh"
-else
+if [ "$RUN_SYMLINKS" = false ]; then
   echo "Skipped symlink step. Run: ./install.sh"
 fi
 
 echo ""
 echo "Next: log out and back in (or: exec zsh)"
 echo ""
+if [ "$MISE_INSTALL_FAILED" = true ]; then
+  warn "Some mise tools failed to install. Shell and symlinks are configured; retry: mise -C $CONFIGS_DIR install"
+  exit 1
+fi

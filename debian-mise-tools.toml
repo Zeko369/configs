@@ -51,6 +51,30 @@
 "github:cloudflare/cloudflared" = "latest"      # upstream Go module has replace directives
 "aqua:bitnami/sealed-secrets" = "latest"        # kubeseal
 "aqua:digitalocean/doctl" = "latest"
+"aqua:helm/helm" = "latest"
+"aqua:mikefarah/yq" = "latest"
+"aqua:fastfetch-cli/fastfetch" = "latest"
+"aqua:max-sixty/worktrunk" = "latest"
+# Aqua cannot discover 1Password releases; keep the Mac's known version.
+"aqua:1password/cli" = "2.32.0"
+
+# Extra developer tools present on the Mac, including project-installed CLIs.
+go = "latest"
+java = "21"
+"aqua:rhysd/actionlint" = "latest"
+"aqua:FiloSottile/age" = "latest"
+"aqua:argoproj/argo-cd" = "latest"
+"aqua:caddyserver/caddy" = "latest"
+"aqua:grafana/k6" = "latest"
+"aqua:kubernetes/kubernetes/kubectl" = "latest"
+"aqua:kubernetes-sigs/kustomize" = "latest"
+"aqua:pulumi/pulumi" = "latest"
+"aqua:getsops/sops" = "latest"
+"aqua:modem-dev/hunk" = "latest"
+"aqua:tree-sitter/tree-sitter" = "latest"
+"npm:diff-so-fancy" = "latest"
+"npm:@membranehq/cli" = "latest"
+"npm:@yaakapp/cli" = "latest"
 
 # ============================================
 # AI coding agents
