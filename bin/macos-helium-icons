@@ -1,0 +1,44 @@
+#!/bin/bash
+set -euo pipefail
+
+mode="${1:---check}"
+case "$mode" in
+  --check|--apply|--install|--repair) ;;
+  *)
+    echo "Usage: $0 [--check|--apply|--install]" >&2
+    exit 2
+    ;;
+esac
+if [ "$#" -gt 1 ] || [ "$(uname -s)" != "Darwin" ]; then
+  echo "Run this command on macOS with one option at most." >&2
+  exit 2
+fi
+
+configs="$(cd "$(dirname "$0")/.." && pwd)"
+cache="$HOME/Library/Application Support/configs/helium-icons"
+source="$configs/macos/helium-icons.swift"
+runner="$cache/helium-icons"
+mkdir -p "$cache"
+
+if [ ! -x "$runner" ] || [ ! "$runner" -nt "$source" ]; then
+  build_dir="$(mktemp -d "$cache/build.XXXXXXXX")"
+  trap 'rm -rf "$build_dir"' EXIT
+  /usr/bin/xcrun swiftc -O "$source" -o "$build_dir/helium-icons"
+  mv -f "$build_dir/helium-icons" "$runner"
+  rmdir "$build_dir"
+  trap - EXIT
+fi
+
+if [ "$mode" != "--install" ]; then
+  exec "$runner" "$mode" "$configs" "$cache"
+fi
+
+label="local.configs.helium-icons"
+domain="gui/$(id -u)"
+agent="$HOME/Library/LaunchAgents/$label.plist"
+"$runner" --write-agent "$configs" "$cache"
+if /bin/launchctl print "$domain/$label" >/dev/null 2>&1; then
+  /bin/launchctl bootout "$domain/$label"
+fi
+/bin/launchctl bootstrap "$domain" "$agent"
+echo "Loaded $label. The agent applies icons at login and checks every five minutes."

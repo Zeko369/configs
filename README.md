@@ -185,6 +185,26 @@ and verifies temporary sample files in a fresh process.
 macOS groups extensions by content type, so `.svg` and `.svgz`, for example,
 share a default. Individual files can have their own “Open With” override.
 
+### Helium app icons
+
+The artwork in [`macos/icons`](macos/icons) is for the vendor Helium app in
+`/Applications` and the separately installed Helium Work app in
+`~/Applications`. The helper applies Finder custom icons without changing the
+signed app resources. Updating or replacing an app can discard its custom icon.
+
+```bash
+./bin/macos-helium-icons --apply    # apply the icons now
+./bin/macos-helium-icons --check    # verify both installed icons
+./bin/macos-helium-icons --install  # reapply automatically at login and after updates
+```
+
+The user LaunchAgent checks every five minutes and skips apps that are absent.
+It checks each bundle ID before writing. If macOS blocks changes to the vendor
+app, automatic repair requires App Management permission for the compiled
+`~/Library/Application Support/configs/helium-icons/helium-icons` helper.
+You can also [paste the PNG onto the icon in Finder’s Get Info window](https://support.apple.com/guide/mac-help/mchlp2313/mac).
+Helium Work still needs its own browser rebuild when you update its vendor base.
+
 ### Linux — three tiers
 
 Both Linux installers expose the same flags:
