@@ -37,8 +37,11 @@ label="local.configs.helium-icons"
 domain="gui/$(id -u)"
 agent="$HOME/Library/LaunchAgents/$label.plist"
 "$runner" --write-agent "$configs" "$cache"
+# Watch the parent directories so an atomic app replacement also triggers a repair.
+/usr/bin/plutil -insert WatchPaths -json '["/Applications"]' "$agent"
+/usr/bin/plutil -insert WatchPaths.1 -string "$HOME/Applications" "$agent"
 if /bin/launchctl print "$domain/$label" >/dev/null 2>&1; then
   /bin/launchctl bootout "$domain/$label"
 fi
 /bin/launchctl bootstrap "$domain" "$agent"
-echo "Loaded $label. The agent applies icons at login and checks every five minutes."
+echo "Loaded $label. The agent checks on app-folder changes, at login, and every five minutes."
