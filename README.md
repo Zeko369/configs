@@ -188,9 +188,10 @@ share a default. Individual files can have their own “Open With” override.
 ### Helium app icons
 
 The artwork in [`macos/icons`](macos/icons) is for the vendor Helium app in
-`/Applications` and the separately installed Helium Work app in
-`~/Applications`. The helper applies Finder custom icons without changing the
-signed app resources. Updating or replacing an app can discard its custom icon.
+`/Applications` and the separately installed Helium Work app. The helper looks
+for Work in `/Applications` first, then `~/Applications`. It stores custom icons
+in Finder metadata, outside the signed app resources. Updating or replacing an
+app can discard its custom icon.
 
 ```bash
 ./bin/macos-helium-icons --apply    # apply the icons now

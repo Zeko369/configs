@@ -6,7 +6,7 @@ import Foundation
 struct Browser {
     let name: String
     let bundleIdentifier: String
-    let bundle: URL
+    let bundleLocations: [URL]
     let artwork: String
 }
 
@@ -59,25 +59,33 @@ guard lock >= 0, flock(lock, LOCK_EX) == 0 else {
 
 let browsers = [
     Browser(name: "Helium Personal", bundleIdentifier: "net.imput.helium",
-            bundle: URL(fileURLWithPath: "/Applications/Helium.app"),
+            bundleLocations: [URL(fileURLWithPath: "/Applications/Helium.app")],
             artwork: "helium-personal.png"),
     Browser(name: "Helium Work", bundleIdentifier: "local.fran.helium.work",
-            bundle: home.appendingPathComponent("Applications/Helium Work.app"),
+            bundleLocations: [
+                URL(fileURLWithPath: "/Applications/Helium Work.app"),
+                home.appendingPathComponent("Applications/Helium Work.app"),
+            ],
             artwork: "helium-work.png"),
 ]
 
 let artworkDirectory = configs.appendingPathComponent("macos/icons", isDirectory: true)
 var success = true
 for browser in browsers {
-    guard files.fileExists(atPath: browser.bundle.path) else {
+    let installedLocations = browser.bundleLocations.filter { files.fileExists(atPath: $0.path) }
+    guard !installedLocations.isEmpty else {
         if mode != "--repair" {
-            fputs("\(browser.name): app missing at \(browser.bundle.path)\n", stderr)
+            let searchedPaths = browser.bundleLocations.map(\.path).joined(separator: ", ")
+            fputs("\(browser.name): app missing at \(searchedPaths)\n", stderr)
             success = false
         }
         continue
     }
-    guard Bundle(url: browser.bundle)?.bundleIdentifier == browser.bundleIdentifier else {
-        fputs("\(browser.name): unexpected bundle ID at \(browser.bundle.path)\n", stderr)
+    guard let bundle = installedLocations.first(where: {
+        Bundle(url: $0)?.bundleIdentifier == browser.bundleIdentifier
+    }) else {
+        let foundPaths = installedLocations.map(\.path).joined(separator: ", ")
+        fputs("\(browser.name): unexpected bundle ID at \(foundPaths)\n", stderr)
         success = false
         continue
     }
@@ -85,10 +93,10 @@ for browser in browsers {
     do {
         let artwork = try Data(contentsOf: artworkDirectory.appendingPathComponent(browser.artwork))
         let receipt = cache.appendingPathComponent(browser.bundleIdentifier)
-        let current = iconFingerprint(for: browser.bundle, artwork: artwork)
+        let current = iconFingerprint(for: bundle, artwork: artwork)
         let saved = try? String(contentsOf: receipt, encoding: .utf8)
         if let current, current == saved {
-            if mode != "--repair" { print("\(browser.name): icon verified") }
+            if mode != "--repair" { print("\(browser.name): icon verified at \(bundle.path)") }
             continue
         }
         if mode == "--check" {
@@ -97,8 +105,8 @@ for browser in browsers {
             continue
         }
         guard let image = NSImage(data: artwork),
-              NSWorkspace.shared.setIcon(image, forFile: browser.bundle.path, options: []),
-              let installed = iconFingerprint(for: browser.bundle, artwork: artwork) else {
+              NSWorkspace.shared.setIcon(image, forFile: bundle.path, options: []),
+              let installed = iconFingerprint(for: bundle, artwork: artwork) else {
             fputs("\(browser.name): macOS did not apply the icon. Check App Management permissions.\n", stderr)
             success = false
             continue
