@@ -198,8 +198,8 @@ signed app resources. Updating or replacing an app can discard its custom icon.
 ./bin/macos-helium-icons --install  # reapply automatically at login and after updates
 ```
 
-The user LaunchAgent checks when the Applications folders change, at login, and
-every five minutes. It skips absent apps and checks each bundle ID before writing.
+The user LaunchAgent checks at login, when `~/Applications` changes, and every
+minute. It skips absent apps and checks each bundle ID before writing.
 If macOS blocks changes to the vendor
 app, automatic repair requires App Management permission for the compiled
 `~/Library/Application Support/configs/helium-icons/helium-icons` helper.
